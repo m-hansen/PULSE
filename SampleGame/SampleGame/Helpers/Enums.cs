@@ -15,7 +15,8 @@ namespace SampleGame
 
         public enum AttackSubType
         {
-            Default = 0
+            Default = 0,
+            TriBullet = 1
         }
 
         public enum SensorType
@@ -29,7 +30,8 @@ namespace SampleGame
         {
             Wall = 0,
             NPC = 1,
-            Patrol = 2
+            Patrol = 2,
+            Player = 3
         }
 
         public enum Deceleration

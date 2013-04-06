@@ -5,6 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SampleGame.Agents;
+using SampleGame.Attacks;
+using Microsoft.Xna.Framework.Input;
 
 namespace SampleGame
 {
@@ -88,13 +91,14 @@ namespace SampleGame
             //PlayerStartPos = new Vector2(1850, 3000);
             PlayerStartPos = new Vector2(400, 300);
 
-            //MovingAgent pAgent1 = new MovingAgent();
-            //pAgent1.LoadContent(content, "Images\\explosion1", new Rectangle(0, 0, 139, 107), 6);
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
             //pAgent1.AnimationInterval = new TimeSpan(800000);
-            //pAgent1.Position = new Vector2(200, 200);//1150, 2650);
-            //pAgent1.Rotation = 0.0f;
-            //pAgent1.Type = (int)Enums.AgentType.NPC;
-            //pAgent1.State = 200;//(int)Enums.MovingAgentState.Patrolling;
+            pAgent1.Position = new Vector2(200, 200);//1150, 2650);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = 200;//(int)Enums.MovingAgentState.Patrolling;
+            pAgent1.Health = 10000;
             ////pAgent1.PathList = new List<Vector2>();
             ////pAgent1.PathList.Add(new Vector2(50, 50));
             ////pAgent1.PathList.Add(new Vector2(100, 100));
@@ -103,7 +107,19 @@ namespace SampleGame
             //pAgent1.NPCRange = 100;
             //pAgent1.MaxFollowRange = 9000;
             //pAgent1.MeleeDistance = 1;
-            //AgentList.Add(pAgent1);
+
+            Attack attack1 = new Attack();
+            attack1.Active = true;
+            attack1.AttackType = (int)Enums.AttackType.Bullet;
+            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
+            attack1.CoolDown = 1000;
+            attack1.Texture = content.Load<Texture2D>("Images\\raindrop");
+            attack1.Frames = 1;
+            attack1.MinDamage = 10;
+            attack1.MaxDamage = 15;
+            pAgent1.attackList.Add(attack1);
+
+            AgentList.Add(pAgent1);
 
             //pAgent1.SensorList.Add(new RangeFinder()
             //{

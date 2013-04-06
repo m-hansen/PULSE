@@ -14,13 +14,18 @@ namespace SampleGame
 {
     public class Player : MovingAgent
     {
-        //public float Speed;  // forward - backward speed
+        public float Speed;  // forward - backward speed
         public bool HasControl = true;
         public List<Attack> attackList = new List<Attack>();
         public float MaxHealth = 100.0f;
-        public float Health = 50.0f;
         public float MaxPower = 100.0f;
-        public float Power = 100.0f;  // used for shooting bullets/skills
+        public float Power;  // used for shooting bullets/skills
+
+        public Player()
+        {
+            Health = 50.0f;
+            Power = 100.0f;
+        }
 
         public void InitializeSensors()
         {
@@ -185,9 +190,9 @@ namespace SampleGame
             // power recharge rate
             if (Power < MaxPower) Power += 0.05f;
             else Power = MaxPower;
-            
+
             // health recharge rate
-            if (Health < MaxHealth) Health += 0.005f;
+            if (Health < MaxHealth) Health += 0.01f;
             else Health = MaxHealth;
         }
 

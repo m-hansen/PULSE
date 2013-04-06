@@ -19,4 +19,5 @@ Content\Images\40_by_40.xnb
 Content\Images\explosion1.xnb
 Content\Images\raindrop.xnb
 Content\Images\crosshair.xnb
+Content\Images\enemy_agent1.xnb
 Content\Fonts\Font1.xnb

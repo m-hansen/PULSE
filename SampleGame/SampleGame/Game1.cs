@@ -8,12 +8,11 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Drawing;// DrawingHelper namespace
+using Drawing;
 using System.Diagnostics;
 using SampleGame.Helpers;
 using SampleGame.Effects;
-using SampleGame.Attacks;
-using SampleGame.Agents;  
+using SampleGame.Attacks;  // DrawingHelper namespace
 
 namespace SampleGame
 {
@@ -41,7 +40,6 @@ namespace SampleGame
 
         public static Game1 Current { get; private set; }
         public Player player;
-        public Enemy enemy1;
         public LevelInfo levelInfo = new LevelInfo();
         public SpriteFont font1;
 
@@ -77,13 +75,7 @@ namespace SampleGame
             player.RotationSpeed = 6.0f;                                        // rotate somewhat quick
             player.Speed = 4.0f;                                                // setting forward - backward speed
             player.InitializeSensors();                                         // initializes all sensors for the player object
-
-            levelInfo.AgentList.Add(new MovingAgent()
-            {
-                RotationSpeed = 6.0f,                                        // rotate somewhat quick
-                Speed = 4.0f,                                                // setting forward - backward speed
-                Position = new Vector2(100, 300)                            // TODO - static position
-            });
+            player.Health = 1000;
 
             // ************ CREATING THE WALLS FOR THE ASSIGNMENT ********* //
             //int defaultWalls = 2;
@@ -109,10 +101,6 @@ namespace SampleGame
             // loading the player's image
             player.LoadContent(this.Content, "Images\\ship1", new Rectangle(0, 0, 38, 41), 8);
 
-            // enemy sprite
-            foreach (MovingAgent agent in levelInfo.AgentList)
-                agent.LoadContent(this.Content, "Images\\agent");
-
             // loading the font to display text on the screen
             font1 = Content.Load<SpriteFont>("fonts/Font1");
 
@@ -123,10 +111,12 @@ namespace SampleGame
             attack1.Active = true;
             attack1.Key = Keys.Space;
             attack1.AttackType = (int)Enums.AttackType.Bullet;
-            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
+            attack1.AttackSubType = (int)Enums.AttackSubType.TriBullet;
             attack1.CoolDown = 50;
             attack1.Texture = Content.Load<Texture2D>("Images\\raindrop");
             attack1.Frames = 1;
+            attack1.MinDamage = 10;
+            attack1.MaxDamage = 15;
             player.attackList.Add(attack1); 
 
             Attack attack2 = new Attack();
@@ -211,9 +201,7 @@ namespace SampleGame
 
             // updating each moving object
             foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type != (int)Enums.AgentType.Wall).ToList())
-            {
-                ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
-            }
+                    ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
 
             // getting the updated visible rect
             levelInfo.SetVisibleArea(player.Position, windowWidth, windowHeight);
@@ -358,6 +346,8 @@ namespace SampleGame
 
             spriteBatch.DrawString(font1, "Player Pos: " + Math.Round(player.Position.X, 4) + ", " + Math.Round(player.Position.Y, 4), new Vector2(20, 20), Color.LightGreen, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font1, "Player Heading: " + Math.Round(playerHeading.X, 4) + ", " + Math.Round(playerHeading.Y, 4), new Vector2(20, 40), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font1, "Player Health: " + player.Health , new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+            
             //spriteBatch.DrawString(font1, "Press H to show navigation nodes.", new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             //spriteBatch.DrawString(font1, "Left: " + levelInfo.VisibleRect.Left + ", Top: " + levelInfo.VisibleRect.Top + ", Right: " + levelInfo.VisibleRect.Right + ", Bottom: " + levelInfo.VisibleRect.Bottom, new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             

@@ -58,7 +58,7 @@ namespace SampleGame.Effects
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
         }
 
-        public virtual void Update(GameTime gameTime, int levelWidth, int levelHeight)
+        public virtual void Update(GameTime gameTime, LevelInfo levelInfo)
         {
             
         }

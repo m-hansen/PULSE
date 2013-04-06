@@ -41,16 +41,7 @@ namespace SampleGame.Effects
 
             foreach (Effect effect in effectList)
             {
-                Type type = effect.GetType();
-
-                if (type == typeof(Bullet))
-                {
-                    ((Bullet)effect).Update(gameTime, levelInfo.Width, levelInfo.Height);
-                }
-                else
-                {
-                    effect.Update(gameTime, levelInfo.Width, levelInfo.Height);
-                }
+                effect.Update(gameTime, levelInfo);
             }
 
             foreach (Effect effect in effectList.Where(e => !e.Active).ToList())

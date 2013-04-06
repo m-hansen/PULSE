@@ -17,7 +17,7 @@ namespace SampleGame
         public Vector2 Velocity;                        // which direction the object is heading
         public bool Moving = true;                      // whether the object is moving
         public int MaxSpeed;
-        public int Health;
+        public float Health;
         public List<LevelNode> PathToTarget;
         public List<Sensor> SensorList = new List<Sensor>();
         public int State;
@@ -29,7 +29,6 @@ namespace SampleGame
         public int MaxFollowRange;
         public Vector2 PlaceBeforeFollow;
         public int MeleeDistance;
-        public float Speed;
 
         public Vector2 TargetPosition;
         public int TargetIndex = 0;
@@ -102,10 +101,10 @@ namespace SampleGame
                 // move the object by the velocity
                 //Position += Velocity;
 
-                foreach (Sensor sensor in SensorList)
-                {
-                    sensor.Update(agentList, Position, Rotation);
-                }
+                //foreach (Sensor sensor in SensorList)
+                //{
+                //    sensor.Update(agentList, Position, Rotation);
+                //}
             }
         }
 
@@ -670,6 +669,20 @@ namespace SampleGame
             float temp = (float)Math.Atan2(dist.X, -dist.Y);
             while (temp < 0) temp += MathHelper.TwoPi;
             return temp;
+        }
+
+        #endregion
+
+        #region Take Damage Methods
+
+        public void TakeDamage(int damage)
+        {
+            Health -= damage;
+
+            if (Health <= 0)
+            {
+                Game1.Current.levelInfo.AgentList.Remove(this);
+            }
         }
 
         #endregion

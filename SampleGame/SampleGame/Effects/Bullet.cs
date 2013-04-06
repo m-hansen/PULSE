@@ -10,13 +10,47 @@ namespace SampleGame.Effects
 {
     public class Bullet : Effect
     {
+        public Enums.AgentType CastedBy;
         public int MaxSpeed;
+        public int MaxDamage;
+        public int MinDamage;
 
-        public override void Update(GameTime gameTime, int levelWidth, int levelHeight)
+        public override void Update(GameTime gameTime, LevelInfo levelInfo)
         {
+            if (!Active) return;
+
             Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
 
-            Active = IsInLevelBounds(levelWidth, levelHeight);
+            Active = IsInLevelBounds(levelInfo.Width, levelInfo.Height);
+
+            if (CastedBy == Enums.AgentType.Player)
+            {
+                List<GameAgent> intersectingAgentList = levelInfo.AgentList.Where(ga => Bounds.Intersects(ga.Bounds)).ToList();
+
+                if (intersectingAgentList.Count > 0)
+                {
+                    Random rand = new Random();
+
+                    foreach (GameAgent agent in intersectingAgentList)
+                    {
+                        if (agent.Type != (int)Enums.AgentType.Wall)
+                        {
+                            ((MovingAgent)agent).TakeDamage(MinDamage + rand.Next(MaxDamage - MinDamage));
+                            Active = false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Player playerObj = Game1.Current.player;
+
+                if (Bounds.Intersects(playerObj.Bounds))
+                {
+                    playerObj.TakeDamage(MinDamage + (new Random()).Next(MaxDamage - MinDamage));
+                    Active = false;
+                }
+            }
         }
     }
 }

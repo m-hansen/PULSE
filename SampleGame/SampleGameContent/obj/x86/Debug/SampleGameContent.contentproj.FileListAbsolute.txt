@@ -5,4 +5,7 @@ C:\Users\Matthew\Desktop\SampleGame\SampleGame\SampleGameContent\obj\x86\Debug\S
 C:\Users\David\Desktop\m_hansen-samplegame-95b8638e195b\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\m_hansen-samplegame-95b8638e195b\m_hansen-samplegame-95b8638e195b\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\test\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\David\Desktop\Stufffff\samplegame\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\Matt\Desktop\samplegame\samplegame\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\Matt\Desktop\mysg\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache

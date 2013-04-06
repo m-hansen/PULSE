@@ -29,7 +29,7 @@ namespace SampleGame.Effects
             }
         }
 
-        public override void Update(GameTime gameTime, int levelWidth, int levelHeight)
+        public override void Update(GameTime gameTime, LevelInfo levelInfo)
         {
             // if the image is a sprite sheet 
             // and if enough time has passed to where we need to move to the next frame
@@ -45,7 +45,7 @@ namespace SampleGame.Effects
                 animElapsed -= AnimationInterval;
             }
 
-            base.Update(gameTime, levelWidth, levelHeight);
+            base.Update(gameTime, levelInfo);
         }
 
         public void LoadExplosion(Texture2D texture, Rectangle? firstRect = null, int frames = 1, bool horizontal = true, int space = 0)
