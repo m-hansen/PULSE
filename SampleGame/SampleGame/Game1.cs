@@ -8,11 +8,12 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Drawing;
+using Drawing;// DrawingHelper namespace
 using System.Diagnostics;
 using SampleGame.Helpers;
 using SampleGame.Effects;
-using SampleGame.Attacks;  // DrawingHelper namespace
+using SampleGame.Attacks;
+using SampleGame.Agents;  
 
 namespace SampleGame
 {
@@ -40,6 +41,7 @@ namespace SampleGame
 
         public static Game1 Current { get; private set; }
         public Player player;
+        public Enemy enemy1;
         public LevelInfo levelInfo = new LevelInfo();
         public SpriteFont font1;
 
@@ -76,6 +78,13 @@ namespace SampleGame
             player.Speed = 4.0f;                                                // setting forward - backward speed
             player.InitializeSensors();                                         // initializes all sensors for the player object
 
+            levelInfo.AgentList.Add(new MovingAgent()
+            {
+                RotationSpeed = 6.0f,                                        // rotate somewhat quick
+                Speed = 4.0f,                                                // setting forward - backward speed
+                Position = new Vector2(100, 300)                            // TODO - static position
+            });
+
             // ************ CREATING THE WALLS FOR THE ASSIGNMENT ********* //
             //int defaultWalls = 2;
 
@@ -99,6 +108,10 @@ namespace SampleGame
 
             // loading the player's image
             player.LoadContent(this.Content, "Images\\ship1", new Rectangle(0, 0, 38, 41), 8);
+
+            // enemy sprite
+            foreach (MovingAgent agent in levelInfo.AgentList)
+                agent.LoadContent(this.Content, "Images\\agent");
 
             // loading the font to display text on the screen
             font1 = Content.Load<SpriteFont>("fonts/Font1");
@@ -198,7 +211,9 @@ namespace SampleGame
 
             // updating each moving object
             foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type != (int)Enums.AgentType.Wall).ToList())
-                    ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
+            {
+                ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
+            }
 
             // getting the updated visible rect
             levelInfo.SetVisibleArea(player.Position, windowWidth, windowHeight);

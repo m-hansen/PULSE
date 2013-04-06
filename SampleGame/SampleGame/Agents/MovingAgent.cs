@@ -29,6 +29,7 @@ namespace SampleGame
         public int MaxFollowRange;
         public Vector2 PlaceBeforeFollow;
         public int MeleeDistance;
+        public float Speed;
 
         public Vector2 TargetPosition;
         public int TargetIndex = 0;

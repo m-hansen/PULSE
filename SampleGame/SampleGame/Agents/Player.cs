@@ -14,9 +14,11 @@ namespace SampleGame
 {
     public class Player : MovingAgent
     {
-        public float Speed;  // forward - backward speed
+        //public float Speed;  // forward - backward speed
         public bool HasControl = true;
         public List<Attack> attackList = new List<Attack>();
+        public float MaxPower = 100.0f;
+        public float Power = 100.0f;  // used for shooting bullets/skills
 
         public void InitializeSensors()
         {
@@ -152,7 +154,7 @@ namespace SampleGame
 
             foreach (Attack attack in attackList)
             {
-                attack.Update(gameTime, keyboardStateCurrent);
+                attack.Update(gameTime, keyboardStateCurrent, mouseStateCurrent);
             }
 
             foreach (Sensor sensor in SensorList)
@@ -177,6 +179,10 @@ namespace SampleGame
                 // move the object by the velocity
                 Position += Velocity;
             }
+            if (Power < MaxPower)
+                Power += 0.05f;
+            else
+                Power = MaxPower;
         }
 
         private bool IsValidMove(Vector2 nextPos, List<GameAgent> agentAIList, int levelWidth, int levelHeight)
@@ -206,7 +212,9 @@ namespace SampleGame
             {
                 sensor.Draw(sprites, this.Position, visibleRect, font1);
             }
-
+            sprites.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, 200, 20), Color.Purple, false);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)Power*2, 20), Color.Purple, true);
             base.Draw(sprites, font1, visibleRect);
         }
     }
