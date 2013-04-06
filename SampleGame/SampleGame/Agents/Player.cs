@@ -164,10 +164,10 @@ namespace SampleGame
                 attack.Update(gameTime, keyboardStateCurrent, mouseStateCurrent);
             }
 
-            foreach (Sensor sensor in SensorList)
-            {
-                sensor.Update(keyboardStateCurrent, agentAIList, this.Position, this.Rotation);
-            }
+            //foreach (Sensor sensor in SensorList)
+            //{
+            //    sensor.Update(keyboardStateCurrent, agentAIList, this.Position, this.Rotation);
+            //}
 
             // if the object is active on the screen
             if (Moving)
@@ -217,24 +217,24 @@ namespace SampleGame
             return (!collision && rect.Left > 0 && rect.Left + rect.Width < levelWidth && rect.Top > 0 && rect.Top + rect.Height < levelHeight);
         }
 
-        public override void Draw(SpriteBatch sprites, SpriteFont font1, Rectangle visibleRect)
+        public override void TakeDamage(int damage)
         {
-            foreach (Sensor sensor in SensorList)
+            Health -= damage;
+
+            if (Health <= 0)
             {
-                sensor.Draw(sprites, this.Position, visibleRect, font1);
+                // GAME OVER:
             }
-
-            // health bar
-            sprites.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(MaxHealth * 2), 20), Color.Green, false);
-            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(Health * 2), 20), Color.Green, true);
-
-            // power bar
-            sprites.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(MaxPower * 2), 20), Color.Purple, false);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(Power * 2), 20), Color.Purple, true);
-
-            base.Draw(sprites, font1, visibleRect);
         }
+
+        //public override void Draw(SpriteBatch sprites, SpriteFont font1, Rectangle visibleRect)
+        //{
+        //    foreach (Sensor sensor in SensorList)
+        //    {
+        //        sensor.Draw(sprites, this.Position, visibleRect, font1);
+        //    }
+
+        //    base.Draw(sprites, font1, visibleRect);
+        //}
     }
 }

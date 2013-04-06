@@ -22,6 +22,7 @@ namespace SampleGame.Attacks
         public int Frames;
         public int MinDamage;
         public int MaxDamage;
+        public int AttackCost;
 
         public int ActiveCoolDown = 0;
 
@@ -36,11 +37,13 @@ namespace SampleGame.Attacks
                 {
                     ActiveCoolDown -= gameTime.ElapsedGameTime.Milliseconds;
                 }
-                else if (keyboard.IsKeyDown(Key) || 
+                else if ((keyboard.IsKeyDown(Key) || 
                     (mouse.LeftButton == ButtonState.Pressed && AttackType == (int)Enums.AttackType.Bullet) ||
                     (mouse.RightButton == ButtonState.Pressed && AttackType == (int)Enums.AttackType.Explosion))
+                    && Game1.Current.player.Power > AttackCost)
                 {
                     AddAttackToActiveEffects(Enums.AgentType.Player, Game1.Current.player);
+                    Game1.Current.player.Power -= AttackCost;
                 }
             }
         }
@@ -66,17 +69,8 @@ namespace SampleGame.Attacks
 
                     switch (AttackSubType)
                     {
-                        case (int)Enums.AttackSubType.Default:
-                            LoadDefaultBullet(castedBy, agent);
-                            break;
-
-                        case (int)Enums.AttackSubType.TriBullet:
-                            if (Game1.Current.player.Power > 0)
-                            {
-                                LoadTriBullet(castedBy, agent);
-                                Game1.Current.player.Power--;
-                            }
-                            break;
+                        case (int)Enums.AttackSubType.Default:    LoadDefaultBullet(castedBy, agent);  break;
+                        case (int)Enums.AttackSubType.TriBullet:  LoadTriBullet(castedBy, agent);      break;
                     }
 
                     break;
@@ -208,7 +202,7 @@ namespace SampleGame.Attacks
                 Explosion explosion = new Explosion();
                 explosion.LoadExplosion(Texture, BoundingRect, Frames);
                 explosion.Position = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
-                explosion.AnimationInterval = new TimeSpan(2000000);
+                explosion.AnimationInterval = new TimeSpan(1100000);
 
                 Game1.Current.EffectComponent.AddEffect(explosion);
 
@@ -219,7 +213,7 @@ namespace SampleGame.Attacks
                 Explosion explosion = new Explosion();
                 explosion.LoadExplosion(Texture, BoundingRect, Frames);
                 explosion.Position = Game1.Current.player.Position;
-                explosion.AnimationInterval = new TimeSpan(2000000);
+                explosion.AnimationInterval = new TimeSpan(1100000);
 
                 Game1.Current.EffectComponent.AddEffect(explosion);
 

@@ -39,9 +39,9 @@ namespace SampleGame.Effects
         {
             LevelInfo levelInfo = Game1.Current.levelInfo;
 
-            foreach (Effect effect in effectList)
+            for (int i = 0; i < effectList.Count; i++)
             {
-                effect.Update(gameTime, levelInfo);
+                effectList[i].Update(gameTime, levelInfo);
             }
 
             foreach (Effect effect in effectList.Where(e => !e.Active).ToList())

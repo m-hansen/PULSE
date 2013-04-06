@@ -675,7 +675,7 @@ namespace SampleGame
 
         #region Take Damage Methods
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             Health -= damage;
 

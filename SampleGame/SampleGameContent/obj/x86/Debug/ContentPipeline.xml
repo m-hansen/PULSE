@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\agent.png</Source>
@@ -19,8 +19,8 @@
         <Data Key="ColorKeyColor">255, 255, 255, 255</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\subject.png</Source>
@@ -31,8 +31,8 @@
         <Data Key="ColorKeyColor">255, 255, 255, 255</Data>
       </Parameters>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\wall.png</Source>
@@ -40,8 +40,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\wall1.png</Source>
@@ -49,8 +49,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\100_by_100.png</Source>
@@ -58,8 +58,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\100_by_100.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\100_by_100.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\600_by_200.png</Source>
@@ -67,8 +67,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\600_by_200.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\600_by_200.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_500.png</Source>
@@ -76,8 +76,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_500.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_500.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_200.png</Source>
@@ -85,8 +85,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_200.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_200.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_900.png</Source>
@@ -94,8 +94,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_900.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_900.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\300_by_200.png</Source>
@@ -103,8 +103,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\300_by_200.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\300_by_200.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\1600_by_200.png</Source>
@@ -112,8 +112,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\1600_by_200.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\1600_by_200.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_600.png</Source>
@@ -121,8 +121,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_600.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_600.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_800.png</Source>
@@ -130,8 +130,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_800.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_800.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\200_by_1100.png</Source>
@@ -139,8 +139,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_1100.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\200_by_1100.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\1000_by_200.png</Source>
@@ -148,8 +148,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\1000_by_200.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\1000_by_200.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\10_by_10.png</Source>
@@ -157,8 +157,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\10_by_10.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\10_by_10.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\40_by_40.png</Source>
@@ -166,8 +166,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\40_by_40.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\40_by_40.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\explosion1.png</Source>
@@ -175,8 +175,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\raindrop.png</Source>
@@ -184,8 +184,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\crosshair.png</Source>
@@ -193,8 +193,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Images\enemy_agent1.png</Source>
@@ -202,8 +202,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
-      <Time>2013-04-06T14:06:50.7204653-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <Item>
       <Source>Fonts\Font1.spritefont</Source>
@@ -211,8 +211,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
-      <Time>2013-04-04T15:25:46-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
+      <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -220,10 +220,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Matt\Desktop\mysg\SampleGame\SampleGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\Desktop\Game\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

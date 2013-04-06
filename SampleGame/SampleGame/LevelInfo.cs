@@ -98,7 +98,7 @@ namespace SampleGame
             pAgent1.Rotation = 0.0f;
             pAgent1.Type = (int)Enums.AgentType.NPC;
             pAgent1.State = 200;//(int)Enums.MovingAgentState.Patrolling;
-            pAgent1.Health = 10000;
+            pAgent1.Health = 100;
             ////pAgent1.PathList = new List<Vector2>();
             ////pAgent1.PathList.Add(new Vector2(50, 50));
             ////pAgent1.PathList.Add(new Vector2(100, 100));

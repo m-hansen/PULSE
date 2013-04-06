@@ -74,8 +74,8 @@ namespace SampleGame
             player.AnimationInterval = TimeSpan.FromMilliseconds(100);          // next frame every 100 miliseconds
             player.RotationSpeed = 6.0f;                                        // rotate somewhat quick
             player.Speed = 4.0f;                                                // setting forward - backward speed
-            player.InitializeSensors();                                         // initializes all sensors for the player object
-            player.Health = 1000;
+            //player.InitializeSensors();                                         // initializes all sensors for the player object
+            player.Health = 100;
 
             // ************ CREATING THE WALLS FOR THE ASSIGNMENT ********* //
             //int defaultWalls = 2;
@@ -117,6 +117,7 @@ namespace SampleGame
             attack1.Frames = 1;
             attack1.MinDamage = 10;
             attack1.MaxDamage = 15;
+            attack1.AttackCost = 1;
             player.attackList.Add(attack1); 
 
             Attack attack2 = new Attack();
@@ -128,6 +129,7 @@ namespace SampleGame
             attack2.Texture = Content.Load<Texture2D>("Images\\explosion1");
             attack2.Frames = 6;
             attack2.BoundingRect = new Rectangle(0, 0, 139, 107);
+            attack2.AttackCost = 10;
             player.attackList.Add(attack2);
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
@@ -168,7 +170,7 @@ namespace SampleGame
 
             // ********* END LOADING THE WALLS FOR THE ASSIGNMENT ******** //
 
-            debugNodeTexture = this.Content.Load<Texture2D>("Images\\10_by_10");
+            //debugNodeTexture = this.Content.Load<Texture2D>("Images\\10_by_10");
 
             player.Position = levelInfo.PlayerStartPos;
             Mouse.SetPosition(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
@@ -293,8 +295,6 @@ namespace SampleGame
 
             spriteBatch.Begin();
 
-            //ShowLevelGrid();
-
             // draw the custom crosshair
             spriteBatch.Draw(crosshairTexture, new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y), 
                 null, Color.White, 0.0f, new Vector2(crosshairTexture.Width / 2, crosshairTexture.Height / 2), .5f, SpriteEffects.None, 1.0f);
@@ -306,9 +306,24 @@ namespace SampleGame
 
             DrawDebuggingInformation();
 
+            DrawUI();
+
             spriteBatch.End();                          
 
             base.Draw(gameTime);
+        }
+
+        private void DrawUI()
+        {
+            // health bar
+            spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), Color.Green, false);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.Health * 2), 20), Color.Green, true);
+
+            // power bar
+            spriteBatch.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), Color.Purple, false);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), Color.Purple, true);
         }
 
         private void ShowLevelGrid()

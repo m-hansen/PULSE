@@ -5,6 +5,8 @@ using System.Text;
 using SampleGame.Attacks;
 using Microsoft.Xna.Framework;
 using SampleGame.Helpers;
+using SampleGame.Effects;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SampleGame.Agents
 {
@@ -35,6 +37,23 @@ namespace SampleGame.Agents
             }
 
  	        base.Update(gametime, playerObj, agentList, nodeSize);
+        }
+
+        public override void TakeDamage(int damage)
+        {
+            Health -= damage;
+
+            if (Health <= 0)
+            {
+                Explosion explosion = new Explosion();
+                explosion.LoadExplosion(Game1.Current.Content.Load<Texture2D>("Images\\explosion1"), new Rectangle(0, 0, 139, 107), 6);
+                explosion.Position = Position;
+                explosion.AnimationInterval = new TimeSpan(1100000);
+
+                Game1.Current.EffectComponent.AddEffect(explosion);
+
+                Game1.Current.levelInfo.AgentList.Remove(this);
+            }
         }
     }
 }
