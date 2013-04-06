@@ -17,6 +17,8 @@ namespace SampleGame
         //public float Speed;  // forward - backward speed
         public bool HasControl = true;
         public List<Attack> attackList = new List<Attack>();
+        public float MaxHealth = 100.0f;
+        public float Health = 50.0f;
         public float MaxPower = 100.0f;
         public float Power = 100.0f;  // used for shooting bullets/skills
 
@@ -179,10 +181,14 @@ namespace SampleGame
                 // move the object by the velocity
                 Position += Velocity;
             }
-            if (Power < MaxPower)
-                Power += 0.05f;
-            else
-                Power = MaxPower;
+
+            // power recharge rate
+            if (Power < MaxPower) Power += 0.05f;
+            else Power = MaxPower;
+            
+            // health recharge rate
+            if (Health < MaxHealth) Health += 0.005f;
+            else Health = MaxHealth;
         }
 
         private bool IsValidMove(Vector2 nextPos, List<GameAgent> agentAIList, int levelWidth, int levelHeight)
@@ -212,9 +218,17 @@ namespace SampleGame
             {
                 sensor.Draw(sprites, this.Position, visibleRect, font1);
             }
+
+            // health bar
+            sprites.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(MaxHealth * 2), 20), Color.Green, false);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(Health * 2), 20), Color.Green, true);
+
+            // power bar
             sprites.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, 200, 20), Color.Purple, false);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)Power*2, 20), Color.Purple, true);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(MaxPower * 2), 20), Color.Purple, false);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(Power * 2), 20), Color.Purple, true);
+
             base.Draw(sprites, font1, visibleRect);
         }
     }
