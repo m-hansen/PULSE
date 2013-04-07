@@ -10,10 +10,24 @@ namespace SampleGame.Effects
 {
     public class Bullet : Effect
     {
-        public Enums.AgentType CastedBy;
         public int MaxSpeed;
         public int MaxDamage;
         public int MinDamage;
+
+        public override Effect CloneToDirection(float offset)
+        {
+            Bullet bullet = new Bullet();
+            bullet.LoadEffect(Texture);
+            bullet.Position = Position;
+            bullet.Rotation = (Rotation + offset) % (float)(2 * Math.PI);
+            bullet.MaxSpeed = MaxSpeed;
+            bullet.Color = Color;
+            bullet.MinDamage = MinDamage;
+            bullet.MaxDamage = MaxDamage;
+            bullet.CastedBy = CastedBy;
+
+            return bullet;
+        }
 
         public override void Update(GameTime gameTime, LevelInfo levelInfo)
         {

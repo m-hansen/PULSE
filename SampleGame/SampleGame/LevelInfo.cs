@@ -32,9 +32,16 @@ namespace SampleGame
 
         public void SetVisibleArea(Vector2 playerPos, int windowWidth, int windowHeight)
         {
+            //VisibleRect = new Rectangle(
+            //    GetVisibleRectX(playerPos, windowWidth, windowHeight),
+            //    GetVisibleRectY(playerPos, windowWidth, windowHeight),
+            //    windowWidth,
+            //    windowHeight
+            //);
+
             VisibleRect = new Rectangle(
-                GetVisibleRectX(playerPos, windowWidth, windowHeight),
-                GetVisibleRectY(playerPos, windowWidth, windowHeight),
+                0,
+                0,
                 windowWidth,
                 windowHeight
             );
@@ -80,6 +87,105 @@ namespace SampleGame
             }
         }
 
+        private void LoadEnemyKamikazeTowardsPlayer()
+        {
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(Game1.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = Enums.EnemyState.KamikazeTowardsPlayer;
+            pAgent1.TargetPosition = new Vector2(400, -100);
+            pAgent1.Health = 40;
+            pAgent1.MaxSpeed = 5;
+
+            AgentList.Add(pAgent1);
+        }
+
+        private void LoadEnemyKamikazeTowardsTarget()
+        {
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(Game1.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = Enums.EnemyState.KamikazeAcrossScreen;
+            pAgent1.TargetPosition = new Vector2(400, -100);
+            pAgent1.Health = 40;
+            pAgent1.MaxSpeed = 5;
+
+            AgentList.Add(pAgent1);
+        }
+
+        private void LoadEnemyAggressiveCloseToPlayer()
+        {
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(Game1.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = Enums.EnemyState.AggressiveCloseToPlayer;
+            pAgent1.MeleeDistance = 200;
+            pAgent1.Health = 150;
+            pAgent1.MaxSpeed = 3;
+
+            Attack attack1 = new Attack();
+            attack1.Active = true;
+            attack1.AttackType = (int)Enums.AttackType.Bullet;
+            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
+            attack1.CoolDown = 1000;
+            attack1.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attack1.Frames = 1;
+            attack1.MinDamage = 10;
+            attack1.MaxDamage = 15;
+            pAgent1.attackList.Add(attack1);
+
+            AgentList.Add(pAgent1);
+        }
+
+        private void LoadEnemyRoamRandomNoAttack()
+        {
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(Game1.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            pAgent1.TargetPosition = new Vector2(400, 600);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = Enums.EnemyState.RoamRandomNoAttack;
+            pAgent1.MeleeDistance = 40;
+            pAgent1.Health = 150;
+            pAgent1.MaxSpeed = 3;
+
+            AgentList.Add(pAgent1);
+        }
+
+        private void LoadEnemyRanged()
+        {
+            Enemy pAgent1 = new Enemy();
+            pAgent1.LoadContent(Game1.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            pAgent1.TargetPosition = new Vector2(400, 650);//1150, 2650);
+            pAgent1.Rotation = 0.0f;
+            pAgent1.Type = (int)Enums.AgentType.NPC;
+            pAgent1.State = Enums.EnemyState.Ranged;
+            pAgent1.MeleeDistance = 2;
+            pAgent1.Health = 150;
+            pAgent1.MaxSpeed = 2;
+
+            Attack attack1 = new Attack();
+            attack1.Active = true;
+            attack1.AttackType = (int)Enums.AttackType.Bullet;
+            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
+            attack1.CoolDown = 1000;
+            attack1.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attack1.Frames = 1;
+            attack1.MinDamage = 10;
+            attack1.MaxDamage = 15;
+            pAgent1.attackList.Add(attack1);
+
+            AgentList.Add(pAgent1);
+        }
+
         private void LoadLevel0(ContentManager content, int windowWidth, int windowHeight)
         {
             Level = 0;
@@ -88,38 +194,43 @@ namespace SampleGame
             Name = "Level 1";
             LevelNodeSize = 50;
 
+            //SetVisibleArea(new Vector2(), Width, Height);
+
             //PlayerStartPos = new Vector2(1850, 3000);
             PlayerStartPos = new Vector2(400, 300);
 
-            Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
-            //pAgent1.AnimationInterval = new TimeSpan(800000);
-            pAgent1.Position = new Vector2(200, 200);//1150, 2650);
-            pAgent1.Rotation = 0.0f;
-            pAgent1.Type = (int)Enums.AgentType.NPC;
-            pAgent1.State = 200;//(int)Enums.MovingAgentState.Patrolling;
-            pAgent1.Health = 100;
-            ////pAgent1.PathList = new List<Vector2>();
-            ////pAgent1.PathList.Add(new Vector2(50, 50));
-            ////pAgent1.PathList.Add(new Vector2(100, 100));
-            //pAgent1.MaxSpeed = 1;
+            LoadEnemyRanged();
+
+            //Enemy pAgent1 = new Enemy();
+            //pAgent1.LoadContent(content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            ////pAgent1.AnimationInterval = new TimeSpan(800000);
+            //pAgent1.Position = new Vector2(400, 800);//1150, 2650);
+            //pAgent1.Rotation = 0.0f;
+            //pAgent1.Type = (int)Enums.AgentType.NPC;
+            //pAgent1.State = Enums.EnemyState.KamikazeTowardsPlayer;
+            //pAgent1.TargetPosition = new Vector2(400, -100);
+            //pAgent1.Health = 40;
+            //////pAgent1.PathList = new List<Vector2>();
+            //////pAgent1.PathList.Add(new Vector2(50, 50));
+            //////pAgent1.PathList.Add(new Vector2(100, 100));
+            //pAgent1.MaxSpeed = 5;
             //pAgent1.TimeAtEachPoint = 50;
             //pAgent1.NPCRange = 100;
             //pAgent1.MaxFollowRange = 9000;
             //pAgent1.MeleeDistance = 1;
 
-            Attack attack1 = new Attack();
-            attack1.Active = true;
-            attack1.AttackType = (int)Enums.AttackType.Bullet;
-            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
-            attack1.CoolDown = 1000;
-            attack1.Texture = content.Load<Texture2D>("Images\\raindrop");
-            attack1.Frames = 1;
-            attack1.MinDamage = 10;
-            attack1.MaxDamage = 15;
-            pAgent1.attackList.Add(attack1);
+            //Attack attack1 = new Attack();
+            //attack1.Active = true;
+            //attack1.AttackType = (int)Enums.AttackType.Bullet;
+            //attack1.AttackSubType = (int)Enums.AttackSubType.Default;
+            //attack1.CoolDown = 1000;
+            //attack1.Texture = content.Load<Texture2D>("Images\\raindrop");
+            //attack1.Frames = 1;
+            //attack1.MinDamage = 10;
+            //attack1.MaxDamage = 15;
+            //pAgent1.attackList.Add(attack1);
 
-            AgentList.Add(pAgent1);
+            
 
             //pAgent1.SensorList.Add(new RangeFinder()
             //{
@@ -358,7 +469,6 @@ namespace SampleGame
             AgentList.Add(agent24);
 
             // playerPos, windowWidth, windowHeight
-            SetVisibleArea(PlayerStartPos, windowWidth, windowHeight);
 
             //LevelNode l1 = new LevelNode();
             //l1.ID = 1;

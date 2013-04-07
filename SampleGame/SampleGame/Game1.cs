@@ -26,14 +26,14 @@ namespace SampleGame
         MouseState mouseStatePrevious;
         Texture2D crosshairTexture;
          
-        Vector2? startPos = null;
-        Vector2? endPos = null;
+        //Vector2? startPos = null;
+        //Vector2? endPos = null;
         List<LevelNode> pathToTarget = new List<LevelNode>();
-        Texture2D debugNodeTexture;
+        //Texture2D debugNodeTexture;
 
         public EffectComponent EffectComponent;
 
-        int debugIndex = -1;
+        //int debugIndex = -1;
         
         int windowWidth = 0;
         int windowHeight = 0;
@@ -110,8 +110,8 @@ namespace SampleGame
             Attack attack1 = new Attack();
             attack1.Active = true;
             attack1.Key = Keys.Space;
-            attack1.AttackType = (int)Enums.AttackType.Bullet;
-            attack1.AttackSubType = (int)Enums.AttackSubType.TriBullet;
+            attack1.AttackType = Enums.AttackType.Bullet;
+            attack1.AttackSubType = Enums.AttackSubType.TriBullet;
             attack1.CoolDown = 50;
             attack1.Texture = Content.Load<Texture2D>("Images\\raindrop");
             attack1.Frames = 1;
@@ -123,14 +123,26 @@ namespace SampleGame
             Attack attack2 = new Attack();
             attack2.Active = true;
             attack2.Key = Keys.D2;
-            attack2.AttackType = (int)Enums.AttackType.Explosion;
-            attack2.AttackSubType = (int)Enums.AttackSubType.Default;
+            attack2.AttackType = Enums.AttackType.Explosion;
+            attack2.AttackSubType = Enums.AttackSubType.Default;
             attack2.CoolDown = 1000;
             attack2.Texture = Content.Load<Texture2D>("Images\\explosion1");
             attack2.Frames = 6;
             attack2.BoundingRect = new Rectangle(0, 0, 139, 107);
             attack2.AttackCost = 10;
             player.attackList.Add(attack2);
+
+            Attack attack4 = new Attack();
+            attack4.Active = true;
+            attack4.Key = Keys.D4;
+            attack4.AttackType = Enums.AttackType.Bullet;
+            attack4.AttackSubType = Enums.AttackSubType.SplitBullets;
+            attack4.CoolDown = 50;
+            //attack3.Texture = Content.Load<Texture2D>("Images\\explosion1");
+            //attack3.Frames = 6;
+            //attack3.BoundingRect = new Rectangle(0, 0, 139, 107);
+            attack4.AttackCost = 0;
+            player.attackList.Add(attack4);
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
@@ -366,75 +378,75 @@ namespace SampleGame
             //spriteBatch.DrawString(font1, "Press H to show navigation nodes.", new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             //spriteBatch.DrawString(font1, "Left: " + levelInfo.VisibleRect.Left + ", Top: " + levelInfo.VisibleRect.Top + ", Right: " + levelInfo.VisibleRect.Right + ", Bottom: " + levelInfo.VisibleRect.Bottom, new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             
-            if (debugIndex > -1)
-            {
-                GameAgent agent = levelInfo.AgentList[debugIndex];
+            //if (debugIndex > -1)
+            //{
+            //    GameAgent agent = levelInfo.AgentList[debugIndex];
 
-                spriteBatch.DrawString(font1, agent.GetAgentInfo(), new Vector2(20, 100), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
-            }
+            //    spriteBatch.DrawString(font1, agent.GetAgentInfo(), new Vector2(20, 100), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+            //}
 
-            if (pathToTarget.Count == 1)
-            {
-                Vector2 startVec = new Vector2(startPos.Value.X - levelInfo.VisibleRect.Left, startPos.Value.Y - levelInfo.VisibleRect.Top);
-                Vector2 endVec = new Vector2(endPos.Value.X - levelInfo.VisibleRect.Left, endPos.Value.Y - levelInfo.VisibleRect.Top);
+            //if (pathToTarget.Count == 1)
+            //{
+            //    Vector2 startVec = new Vector2(startPos.Value.X - levelInfo.VisibleRect.Left, startPos.Value.Y - levelInfo.VisibleRect.Top);
+            //    Vector2 endVec = new Vector2(endPos.Value.X - levelInfo.VisibleRect.Left, endPos.Value.Y - levelInfo.VisibleRect.Top);
 
-                DrawingHelper.DrawFastLine
-                (
-                    startVec,
-                    endVec,
-                    Color.White
-                );
-            }
-            else if (pathToTarget.Count > 0)
-            {
-                for (int i = 0; i < pathToTarget.Count + 1; i++)
-                {
-                    Vector2 startVec = i == 0 ? new Vector2(startPos.Value.X - levelInfo.VisibleRect.Left, startPos.Value.Y - levelInfo.VisibleRect.Top) : new Vector2(pathToTarget[i - 1].Bounds.Center.X - levelInfo.VisibleRect.Left, pathToTarget[i - 1].Bounds.Center.Y - levelInfo.VisibleRect.Top);
-                    Vector2 endVec = i == pathToTarget.Count ? new Vector2(endPos.Value.X - levelInfo.VisibleRect.Left, endPos.Value.Y - levelInfo.VisibleRect.Top) : new Vector2(pathToTarget[i].Bounds.Center.X - levelInfo.VisibleRect.Left, pathToTarget[i].Bounds.Center.Y - levelInfo.VisibleRect.Top);
+            //    DrawingHelper.DrawFastLine
+            //    (
+            //        startVec,
+            //        endVec,
+            //        Color.White
+            //    );
+            //}
+            //else if (pathToTarget.Count > 0)
+            //{
+            //    for (int i = 0; i < pathToTarget.Count + 1; i++)
+            //    {
+            //        Vector2 startVec = i == 0 ? new Vector2(startPos.Value.X - levelInfo.VisibleRect.Left, startPos.Value.Y - levelInfo.VisibleRect.Top) : new Vector2(pathToTarget[i - 1].Bounds.Center.X - levelInfo.VisibleRect.Left, pathToTarget[i - 1].Bounds.Center.Y - levelInfo.VisibleRect.Top);
+            //        Vector2 endVec = i == pathToTarget.Count ? new Vector2(endPos.Value.X - levelInfo.VisibleRect.Left, endPos.Value.Y - levelInfo.VisibleRect.Top) : new Vector2(pathToTarget[i].Bounds.Center.X - levelInfo.VisibleRect.Left, pathToTarget[i].Bounds.Center.Y - levelInfo.VisibleRect.Top);
 
-                    DrawingHelper.DrawFastLine
-                    (
-                        startVec,
-                        endVec,
-                        Color.White
-                    );
+            //        DrawingHelper.DrawFastLine
+            //        (
+            //            startVec,
+            //            endVec,
+            //            Color.White
+            //        );
 
-                    if (i < pathToTarget.Count)
-                        spriteBatch.Draw(debugNodeTexture, new Vector2(pathToTarget[i].Bounds.Center.X - levelInfo.VisibleRect.Left - 5, pathToTarget[i].Bounds.Center.Y - levelInfo.VisibleRect.Top - 5), Color.White);
-                }
-            }
-            else
-            {
-                foreach (GameAgent agent in levelInfo.AgentList)
-                {
-                    if (agent.GetType() == typeof(MovingAgent))
-                    {
-                        MovingAgent movingAgent = (MovingAgent)agent;
+            //        if (i < pathToTarget.Count)
+            //            spriteBatch.Draw(debugNodeTexture, new Vector2(pathToTarget[i].Bounds.Center.X - levelInfo.VisibleRect.Left - 5, pathToTarget[i].Bounds.Center.Y - levelInfo.VisibleRect.Top - 5), Color.White);
+            //    }
+            //}
+            //else
+            //{
+            //    foreach (GameAgent agent in levelInfo.AgentList)
+            //    {
+            //        if (agent.GetType() == typeof(MovingAgent))
+            //        {
+            //            MovingAgent movingAgent = (MovingAgent)agent;
 
-                        if (movingAgent.State == (int)Enums.MovingAgentState.RunningToPoint)
-                        {
-                            List<LevelNode> levelNodeList = movingAgent.PathToTarget;
-                            int index = movingAgent.TargetIndex;
+            //            if (movingAgent.State == Enums.EnemyState.RunningToPoint)
+            //            {
+            //                List<LevelNode> levelNodeList = movingAgent.PathToTarget;
+            //                int index = movingAgent.TargetIndex;
 
-                            for (int i = index; i < levelNodeList.Count + 1; i++)
-                            {
-                                Vector2 startVec = i == 0 ? new Vector2(movingAgent.PlaceBeforeFollow.X - levelInfo.VisibleRect.Left, movingAgent.PlaceBeforeFollow.Y - levelInfo.VisibleRect.Top) : new Vector2(levelNodeList[i - 1].Bounds.Center.X - levelInfo.VisibleRect.Left, levelNodeList[i - 1].Bounds.Center.Y - levelInfo.VisibleRect.Top);
-                                Vector2 endVec = i == levelNodeList.Count ? new Vector2(movingAgent.TargetPosition.X - levelInfo.VisibleRect.Left, movingAgent.TargetPosition.Y - levelInfo.VisibleRect.Top) : new Vector2(levelNodeList[i].Bounds.Center.X - levelInfo.VisibleRect.Left, levelNodeList[i].Bounds.Center.Y - levelInfo.VisibleRect.Top);
+            //                for (int i = index; i < levelNodeList.Count + 1; i++)
+            //                {
+            //                    Vector2 startVec = i == 0 ? new Vector2(movingAgent.PlaceBeforeFollow.X - levelInfo.VisibleRect.Left, movingAgent.PlaceBeforeFollow.Y - levelInfo.VisibleRect.Top) : new Vector2(levelNodeList[i - 1].Bounds.Center.X - levelInfo.VisibleRect.Left, levelNodeList[i - 1].Bounds.Center.Y - levelInfo.VisibleRect.Top);
+            //                    Vector2 endVec = i == levelNodeList.Count ? new Vector2(movingAgent.TargetPosition.X - levelInfo.VisibleRect.Left, movingAgent.TargetPosition.Y - levelInfo.VisibleRect.Top) : new Vector2(levelNodeList[i].Bounds.Center.X - levelInfo.VisibleRect.Left, levelNodeList[i].Bounds.Center.Y - levelInfo.VisibleRect.Top);
 
-                                DrawingHelper.DrawFastLine
-                                (
-                                    startVec,
-                                    endVec,
-                                    Color.White
-                                );
+            //                    DrawingHelper.DrawFastLine
+            //                    (
+            //                        startVec,
+            //                        endVec,
+            //                        Color.White
+            //                    );
 
-                                if (i < levelNodeList.Count)
-                                    spriteBatch.Draw(debugNodeTexture, new Vector2(levelNodeList[i].Bounds.Center.X - levelInfo.VisibleRect.Left - 5, levelNodeList[i].Bounds.Center.Y - levelInfo.VisibleRect.Top - 5), Color.White);
-                            }
-                        }
-                    }
-                }
-            }
+            //                    if (i < levelNodeList.Count)
+            //                        spriteBatch.Draw(debugNodeTexture, new Vector2(levelNodeList[i].Bounds.Center.X - levelInfo.VisibleRect.Left - 5, levelNodeList[i].Bounds.Center.Y - levelInfo.VisibleRect.Top - 5), Color.White);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 }

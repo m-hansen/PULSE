@@ -13,10 +13,11 @@ namespace SampleGame.Effects
         public Vector2 Origin;
         public Vector2 Position;
         public float Rotation = 0.0f;
-        public int EffectType;
         public bool Active = true;
         public TimeSpan AnimationInterval;
         public Color Color = Color.White;
+        public Enums.AgentType CastedBy;
+        public Enums.AttackType EffectType;
 
         protected int currentFrame;
         protected TimeSpan animElapsed;
@@ -36,6 +37,11 @@ namespace SampleGame.Effects
                     (Texture.Height)
                 );
             }
+        }
+
+        public virtual Effect CloneToDirection(float offset)
+        {
+            return new Effect() { Active = false };
         }
 
         public bool ContainsRect(Rectangle targetRect)

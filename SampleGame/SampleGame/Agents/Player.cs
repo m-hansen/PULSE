@@ -182,12 +182,10 @@ namespace SampleGame
                     // move back by the animation interval (in miliseconds)
                     animElapsed -= AnimationInterval;
                 }
-
-                // move the object by the velocity
-                Position += Velocity;
             }
 
             // power recharge rate
+            //Power = MaxPower;
             if (Power < MaxPower) Power += 0.05f;
             else Power = MaxPower;
 
@@ -217,7 +215,7 @@ namespace SampleGame
             return (!collision && rect.Left > 0 && rect.Left + rect.Width < levelWidth && rect.Top > 0 && rect.Top + rect.Height < levelHeight);
         }
 
-        public override void TakeDamage(int damage)
+        public override void TakeDamage(float damage)
         {
             Health -= damage;
 

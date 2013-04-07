@@ -14,15 +14,15 @@ namespace SampleGame
     {
         #region Public Constants
 
-        public Vector2 Velocity;                        // which direction the object is heading
+        //public Vector2 Velocity;                        // which direction the object is heading
         public bool Moving = true;                      // whether the object is moving
         public int MaxSpeed;
         public float Health;
         public List<LevelNode> PathToTarget;
         public List<Sensor> SensorList = new List<Sensor>();
-        public int State;
         public List<Vector2> PathList;
         public int PathIndex = 0;
+        public float TargetRotation;
 
         public int TimeAtEachPoint;
         public int NPCRange;
@@ -35,9 +35,9 @@ namespace SampleGame
 
         #endregion
 
-        #region Private Constants
+        #region Protected Constants
 
-        private int timeAtCurrentNode = 0;
+        protected int timeAtCurrentNode = 0;
 
         #endregion
 
@@ -50,40 +50,6 @@ namespace SampleGame
 
         public virtual void Update(GameTime gametime, Player playerObj, List<GameAgent> agentList, int nodeSize)
         {
-            switch (State)
-            {
-                case (int)Enums.MovingAgentState.Patrolling:
-
-                    CheckPathState();
-                    MoveAlongPath();
-                    break;
-
-                case (int)Enums.MovingAgentState.Paused:
-
-                    CheckTimeToNextMove();
-                    break;
-
-                case (int)Enums.MovingAgentState.Following:
-
-                    FollowPlayer(playerObj, agentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList(), nodeSize);
-                    break;
-
-                case (int)Enums.MovingAgentState.Evading:
-
-                    EvadeToPath();
-                    break;
-
-                case (int)Enums.MovingAgentState.RunningToPoint:
-
-                    GoToPoint(agentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList());
-                    break;
-
-                case (int)Enums.MovingAgentState.GoingTowardsDirection:
-
-                    Position += Utils.CalculateRotatedMovement(Velocity, Rotation) * MaxSpeed;
-                    break;
-            }
-            
             // if the object is active on the screen
             if (Moving)
             {
@@ -109,6 +75,8 @@ namespace SampleGame
         }
 
         #endregion
+
+        #region Unused
 
         #region Running To Point State Methods
 
@@ -208,7 +176,7 @@ namespace SampleGame
                 TargetPosition = targetPos;
                 PlaceBeforeFollow = Position;
                 TargetIndex = 0;
-                State = (int)Enums.MovingAgentState.RunningToPoint;
+                ////State = Enums.EnemyState.RunningToPoint;
             }
         }
 
@@ -225,7 +193,7 @@ namespace SampleGame
             //{
             //    // pause at the node for a second
             //    timeAtCurrentNode = TimeAtEachPoint;
-            //    State = (int)Enums.MovingAgentState.Paused;
+            //    //State = Enums.EnemyState.Paused;
             //    return;
             //}
 
@@ -241,7 +209,7 @@ namespace SampleGame
         {
             if (Vector2.Distance(Position, PlaceBeforeFollow) > MaxFollowRange)
             {
-                State = (int)Enums.MovingAgentState.Evading;
+                ////State = Enums.EnemyState.Evading;
                 return;
             }
 
@@ -249,7 +217,7 @@ namespace SampleGame
 
             if (PathToTarget == null || PathToTarget.Count < 1)
             {
-                State = (int)Enums.MovingAgentState.Evading;
+                ////State = Enums.EnemyState.Evading;
                 return;
             }
 
@@ -279,7 +247,7 @@ namespace SampleGame
             if (timeAtCurrentNode < 1)
             {
                 // moving to the next path
-                State = (int)Enums.MovingAgentState.Patrolling;
+                //State = Enums.EnemyState.Patrolling;
             }
         }
 
@@ -296,7 +264,7 @@ namespace SampleGame
             {
                 // pause at the node for a second
                 timeAtCurrentNode = TimeAtEachPoint;
-                State = (int)Enums.MovingAgentState.Paused;
+                //State = Enums.EnemyState.Paused;
                 PathIndex = (PathIndex + 1) % PathList.Count();
             }
         }
@@ -580,51 +548,51 @@ namespace SampleGame
 
         // NOTE: These are all currently unused.
 
-        public Vector2 Seek(Vector2 targetPos)
-        {
-            Vector2 desiredVelocity = Vector2.Normalize(targetPos - Position) * MaxSpeed;
+        //public Vector2 Seek(Vector2 targetPos)
+        //{
+        //    Vector2 desiredVelocity = Vector2.Normalize(targetPos - Position) * MaxSpeed;
 
-            return desiredVelocity - Velocity;
-        }
+        //    return desiredVelocity - Velocity;
+        //}
 
-        public Vector2 Flee(Vector2 targetPos)
-        {
-            double fleeArea = 100 * 100;
+        //public Vector2 Flee(Vector2 targetPos)
+        //{
+        //    double fleeArea = 100 * 100;
 
-            if (Vector2.DistanceSquared(Position, targetPos) > fleeArea)
-            {
-                return Vector2.Zero;
-            }
+        //    if (Vector2.DistanceSquared(Position, targetPos) > fleeArea)
+        //    {
+        //        return Vector2.Zero;
+        //    }
 
-            Vector2 desiredVelocity = Vector2.Normalize(Position - targetPos);
+        //    Vector2 desiredVelocity = Vector2.Normalize(Position - targetPos);
 
-            return desiredVelocity - Velocity;
-        }
+        //    return desiredVelocity - Velocity;
+        //}
 
-        public Vector2 Arrive(Vector2 targetPos, Enums.Deceleration deceleration)
-        {
-            Vector2 toTarget = targetPos - Position;
+        //public Vector2 Arrive(Vector2 targetPos, Enums.Deceleration deceleration)
+        //{
+        //    Vector2 toTarget = targetPos - Position;
 
-            float distanceToTarget = toTarget.Length();
+        //    float distanceToTarget = toTarget.Length();
 
-            // if we're not yet at the target position
-            if (distanceToTarget > 0)
-            {
-                // fine tweaking of the deceleration
-                double decelerationTweaker = 0.3;
+        //    // if we're not yet at the target position
+        //    if (distanceToTarget > 0)
+        //    {
+        //        // fine tweaking of the deceleration
+        //        double decelerationTweaker = 0.3;
 
-                // speed required to reach the target given the desired deceleration
-                double speed = distanceToTarget / ((double)deceleration * decelerationTweaker);
+        //        // speed required to reach the target given the desired deceleration
+        //        double speed = distanceToTarget / ((double)deceleration * decelerationTweaker);
 
-                // make sure velocity does not exceed the max
-                speed = Math.Min(speed, MaxSpeed);
+        //        // make sure velocity does not exceed the max
+        //        speed = Math.Min(speed, MaxSpeed);
 
-                // proceed to target without normalizing
-                Vector2 desiredVelocity = toTarget * (float)(speed / distanceToTarget);
-            }
+        //        // proceed to target without normalizing
+        //        Vector2 desiredVelocity = toTarget * (float)(speed / distanceToTarget);
+        //    }
 
-            return Vector2.Zero;
-        }
+        //    return Vector2.Zero;
+        //}
 
         //public Vector2 Pursuit(GameAgent evader)
         //{
@@ -640,15 +608,17 @@ namespace SampleGame
 
         #endregion
 
+        #endregion
+
         #region Private Helper Methods
 
         private void CheckIfPlayerInRange(Player playerObj)
         {
-            if (State == (int)Enums.MovingAgentState.Following || State == (int)Enums.MovingAgentState.Evading) return;
+            //if (State == Enums.EnemyState.Following || State == Enums.EnemyState.Evading) return;
 
             if (Vector2.Distance(Position, playerObj.Position) <= NPCRange)
             {
-                State = (int)Enums.MovingAgentState.Following;
+                //State = Enums.EnemyState.Following;
                 PlaceBeforeFollow = Position;
             }
         }
@@ -675,7 +645,7 @@ namespace SampleGame
 
         #region Take Damage Methods
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(float damage)
         {
             Health -= damage;
 

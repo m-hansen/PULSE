@@ -16,7 +16,8 @@ namespace SampleGame
         public enum AttackSubType
         {
             Default = 0,
-            TriBullet = 1
+            TriBullet = 1,
+            SplitBullets = 2
         }
 
         public enum SensorType
@@ -41,14 +42,23 @@ namespace SampleGame
             Slow = 3,
         }
 
-        public enum MovingAgentState
+        public enum EnemyState
         {
             Patrolling = 1,
             Following = 2,
             Evading = 3,
             Paused = 4,
             RunningToPoint = 5,
-            GoingTowardsDirection = 6
+            GoingTowardsDirection = 6,
+            KamikazeTowardsPlayer = 7,
+            KamikazeAcrossScreen = 8,
+            AggressiveCloseToPlayer = 9,
+            AggressiveCirclePlayer = 10,
+            RoamPathFollowing = 11,
+            RoamRandom = 12,
+            RoamRandomNoAttack = 13,
+            Ranged = 14,
+            Boss = 15
         }
     }
 }

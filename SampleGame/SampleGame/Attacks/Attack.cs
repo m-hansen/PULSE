@@ -12,8 +12,8 @@ namespace SampleGame.Attacks
 {
     public class Attack
     {
-        public int AttackType;
-        public int AttackSubType;
+        public Enums.AttackType AttackType;
+        public Enums.AttackSubType AttackSubType;
         public Keys Key;
         public int CoolDown;        // in miliseconds
         public bool Active = true;
@@ -38,8 +38,8 @@ namespace SampleGame.Attacks
                     ActiveCoolDown -= gameTime.ElapsedGameTime.Milliseconds;
                 }
                 else if ((keyboard.IsKeyDown(Key) || 
-                    (mouse.LeftButton == ButtonState.Pressed && AttackType == (int)Enums.AttackType.Bullet) ||
-                    (mouse.RightButton == ButtonState.Pressed && AttackType == (int)Enums.AttackType.Explosion))
+                    (mouse.LeftButton == ButtonState.Pressed && AttackType == Enums.AttackType.Bullet) ||
+                    (mouse.RightButton == ButtonState.Pressed && AttackType == Enums.AttackType.Explosion))
                     && Game1.Current.player.Power > AttackCost)
                 {
                     AddAttackToActiveEffects(Enums.AgentType.Player, Game1.Current.player);
@@ -65,21 +65,22 @@ namespace SampleGame.Attacks
         {
             switch (AttackType)
             {
-                case (int)Enums.AttackType.Bullet:
+                case Enums.AttackType.Bullet:
 
                     switch (AttackSubType)
                     {
-                        case (int)Enums.AttackSubType.Default:    LoadDefaultBullet(castedBy, agent);  break;
-                        case (int)Enums.AttackSubType.TriBullet:  LoadTriBullet(castedBy, agent);      break;
+                        case Enums.AttackSubType.Default:       LoadDefaultBullet(castedBy, agent);  break;
+                        case Enums.AttackSubType.TriBullet:     LoadTriBullet(castedBy, agent);      break;
+                        case Enums.AttackSubType.SplitBullets:  LoadSplitBullets(castedBy, agent);   break;
                     }
 
                     break;
 
-                case (int)Enums.AttackType.Explosion:
+                case Enums.AttackType.Explosion:
 
                     switch (AttackSubType)
                     {
-                        case (int)Enums.AttackSubType.Default: LoadDefaultExplosion(castedBy, agent); break;
+                        case Enums.AttackSubType.Default: LoadDefaultExplosion(castedBy, agent); break;
                     }
 
                     break;
@@ -96,6 +97,7 @@ namespace SampleGame.Attacks
             bullet.Color = Color.White;
             bullet.MinDamage = MinDamage;
             bullet.MaxDamage = MaxDamage;
+            bullet.EffectType = AttackType;
             bullet.CastedBy = castedBy;
 
             Game1.Current.EffectComponent.AddEffect(bullet);
@@ -187,8 +189,13 @@ namespace SampleGame.Attacks
 
             // change the color set of the bullets
             bulletCount++;
-            
 
+            ActiveCoolDown = CoolDown;
+        }
+
+        private void LoadSplitBullets(Enums.AgentType castedBy, MovingAgent agent)
+        {
+            Game1.Current.EffectComponent.SplitBulletsFromPlayer();
 
             ActiveCoolDown = CoolDown;
         }
@@ -203,6 +210,8 @@ namespace SampleGame.Attacks
                 explosion.LoadExplosion(Texture, BoundingRect, Frames);
                 explosion.Position = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
                 explosion.AnimationInterval = new TimeSpan(1100000);
+                explosion.EffectType = AttackType;
+                explosion.CastedBy = castedBy;
 
                 Game1.Current.EffectComponent.AddEffect(explosion);
 

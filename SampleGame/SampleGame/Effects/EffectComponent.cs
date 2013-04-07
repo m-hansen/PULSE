@@ -35,6 +35,19 @@ namespace SampleGame.Effects
             effectList.Add(effect);
         }
 
+        public void SplitBulletsFromPlayer()
+        {
+            List<Effect> bulletList = effectList.Where(e => e.CastedBy == Enums.AgentType.Player && e.EffectType == Enums.AttackType.Bullet).ToList();
+
+            foreach (Effect effect in bulletList)
+            {
+                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4)));
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             LevelInfo levelInfo = Game1.Current.levelInfo;
