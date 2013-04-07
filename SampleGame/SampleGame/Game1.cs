@@ -25,6 +25,9 @@ namespace SampleGame
         MouseState mouseStateCurrent;
         MouseState mouseStatePrevious;
         Texture2D crosshairTexture;
+        Song backgroundMusic;
+        bool songStart = false;
+        double timer;
          
         //Vector2? startPos = null;
         //Vector2? endPos = null;
@@ -42,6 +45,7 @@ namespace SampleGame
         public Player player;
         public LevelInfo levelInfo = new LevelInfo();
         public SpriteFont font1;
+        public SoundEffect PlayerHitSound;
 
         public Game1()
         {
@@ -98,11 +102,18 @@ namespace SampleGame
             // create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // load in the background music
+            backgroundMusic = Content.Load<Song>("Audio\\voxis_pour_elle");
+            MediaPlayer.IsRepeating = false;    // everything is set up for sound to loop - just change this value
+
             // loading the player's image
             player.LoadContent(this.Content, "Images\\ship1", new Rectangle(0, 0, 38, 41), 8);
 
             // loading the font to display text on the screen
             font1 = Content.Load<SpriteFont>("fonts/Font1");
+
+            // load player hit sound
+            PlayerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
 
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
@@ -195,6 +206,13 @@ namespace SampleGame
 
         protected override void Update(GameTime gameTime)
         {
+            // begin playing background music
+            if (!songStart)
+            {
+                MediaPlayer.Play(backgroundMusic);
+                songStart = true;
+            }
+
             // Allows the game to exit
             if ((keyboardStateCurrent.IsKeyUp(Keys.Escape) && keyboardStatePrevious.IsKeyDown(Keys.Escape)) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -207,6 +225,10 @@ namespace SampleGame
             mouseStatePrevious = mouseStateCurrent;
             mouseStateCurrent = Mouse.GetState();
 
+            // update timer
+            timer += gameTime.ElapsedGameTime.TotalSeconds;
+
+            // update player
             player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
                           levelInfo.AgentList, levelInfo.Width, levelInfo.Height);
 
@@ -327,15 +349,75 @@ namespace SampleGame
 
         private void DrawUI()
         {
+            // timer
+            double timeRemaining = levelInfo.TimeAllocated - timer;
+            int seconds = remainingSeconds(timeRemaining);
+            if (seconds < 10)
+                spriteBatch.DrawString(font1, "Time Remaining: " + timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(400, 80), Color.White);
+            else
+                spriteBatch.DrawString(font1, "Time Remaining: " + timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(400, 80), Color.White);
+
+            // the elapsed timer for debugging purposes
+            seconds = remainingSeconds(timer);
+            if (seconds < 10)
+                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + "0" + seconds, new Vector2(850, 80), Color.White);
+            else
+                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + seconds, new Vector2(850, 80), Color.White);
+            spriteBatch.DrawString(font1, "Potential Transition Times (approx.)", new Vector2(850, 100), Color.Orange);
+            spriteBatch.DrawString(font1, "0:49", new Vector2(900, 120), Color.Orange);
+            spriteBatch.DrawString(font1, "1:06", new Vector2(900, 140), Color.Orange);
+            spriteBatch.DrawString(font1, "1:24", new Vector2(900, 160), Color.Orange);
+            spriteBatch.DrawString(font1, "1:41", new Vector2(900, 180), Color.Orange);
+            spriteBatch.DrawString(font1, "1:57", new Vector2(900, 200), Color.Orange);
+            spriteBatch.DrawString(font1, "2:10", new Vector2(900, 220), Color.Orange);
+            spriteBatch.DrawString(font1, "2:18", new Vector2(900, 240), Color.Orange);
+            spriteBatch.DrawString(font1, "2:35", new Vector2(900, 260), Color.Orange);
+            spriteBatch.DrawString(font1, "2:43", new Vector2(900, 280), Color.Orange);
+            spriteBatch.DrawString(font1, "2:59", new Vector2(900, 300), Color.Orange);
+            spriteBatch.DrawString(font1, "3:16", new Vector2(900, 320), Color.Orange);
+            spriteBatch.DrawString(font1, "3:24", new Vector2(900, 340), Color.Orange);
+            spriteBatch.DrawString(font1, "3:42", new Vector2(900, 360), Color.Orange);
+            spriteBatch.DrawString(font1, "4:17", new Vector2(900, 380), Color.Orange);
+
             // health bar
+            Color healthBarColor;
+            if (player.Health >= 80)
+                healthBarColor = Color.Green;
+            else if (player.Health >= 60)
+                healthBarColor = Color.YellowGreen;
+            else if (player.Health >= 40)
+                healthBarColor = Color.Yellow;
+            else if (player.Health >= 20)
+                healthBarColor = Color.Orange;
+            else
+                healthBarColor = Color.Red;
+
             spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), Color.Green, false);
-            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.Health * 2), 20), Color.Green, true);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), healthBarColor, false);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.Health * 2), 20), healthBarColor, true);
 
             // power bar
             spriteBatch.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), Color.Purple, false);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), Color.Purple, true);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, true);
+        }
+
+        private int timeInMinutes(double timeRemaining)
+        {
+            double temp = timeRemaining;
+            int minutes = 0;
+
+            if (temp > 60)
+            {
+                minutes = (int)(temp / 60);
+            }
+            return minutes;
+        }
+
+        private int remainingSeconds(double timeRemaining)
+        {
+            double temp = timeRemaining;
+            return ((int)(temp % 60));
         }
 
         private void ShowLevelGrid()

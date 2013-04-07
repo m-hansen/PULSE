@@ -317,3 +317,8 @@ C:\Users\Matt\Desktop\Game1\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGa
 C:\Users\Matt\Desktop\Game1\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\obj\x86\Debug\SampleGame.exe
 C:\Users\Matt\Desktop\Game1\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGame\obj\x86\Debug\SampleGame.pdb
 C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb
+C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb
+C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb
+C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.xnb
+C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma
+C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.wma

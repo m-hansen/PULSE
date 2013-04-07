@@ -22,6 +22,7 @@ namespace SampleGame
         public Vector2 PlayerStartPos;
         public int LevelNodeSize;
        // public List<LevelNode> WalkableNodes = new List<LevelNode>();
+        public double TimeAllocated;
 
         public LevelInfo()
         {
@@ -193,6 +194,7 @@ namespace SampleGame
             Height = 700;//3200;
             Name = "Level 1";
             LevelNodeSize = 50;
+            TimeAllocated = 270; // in seconds (4.5 minutes)
 
             //SetVisibleArea(new Vector2(), Width, Height);
 

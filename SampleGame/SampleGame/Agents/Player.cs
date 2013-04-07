@@ -186,11 +186,11 @@ namespace SampleGame
 
             // power recharge rate
             //Power = MaxPower;
-            if (Power < MaxPower) Power += 0.05f;
+            if (Power < MaxPower) Power += 0.08f;
             else Power = MaxPower;
 
             // health recharge rate
-            if (Health < MaxHealth) Health += 0.01f;
+            if (Health < MaxHealth) Health += 0.015f;
             else Health = MaxHealth;
         }
 
@@ -217,6 +217,7 @@ namespace SampleGame
 
         public override void TakeDamage(float damage)
         {
+            Game1.Current.PlayerHitSound.Play();
             Health -= damage;
 
             if (Health <= 0)

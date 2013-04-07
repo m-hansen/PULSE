@@ -214,6 +214,35 @@
       <Output>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
       <Time>2013-04-06T15:42:26-04:00</Time>
     </Item>
+    <Item>
+      <Source>Audio\voxis_pour_elle.mp3</Source>
+      <Name>Audio\voxis_pour_elle</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb</Output>
+      <Extra>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
+      <Time>2010-12-26T00:24:22-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\voxis_shattered.mp3</Source>
+      <Name>Audio\voxis_shattered</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.xnb</Output>
+      <Extra>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.wma</Extra>
+      <Time>2013-04-06T18:53:38.0235718-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\player_hit.mp3</Source>
+      <Name>Audio\player_hit</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\test\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb</Output>
+      <Time>2013-04-06T18:39:34.2533109-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
