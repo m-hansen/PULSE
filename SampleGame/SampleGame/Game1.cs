@@ -27,7 +27,9 @@ namespace SampleGame
         Texture2D crosshairTexture;
         Song backgroundMusic;
         bool songStart = false;
-        double timer;
+        double timer;           // for time elapsed
+        double deltaT;          // for time elapsed
+        Stopwatch stopwatch;    // for time elapsed
          
         //Vector2? startPos = null;
         //Vector2? endPos = null;
@@ -73,6 +75,9 @@ namespace SampleGame
 
             // Initialize DrawingHelper
             DrawingHelper.Initialize(GraphicsDevice);
+
+            // Initialize stopwatch for consistent times across machines
+            stopwatch = new Stopwatch();
 
             player = new Player();
             player.AnimationInterval = TimeSpan.FromMilliseconds(100);          // next frame every 100 miliseconds
@@ -226,7 +231,14 @@ namespace SampleGame
             mouseStateCurrent = Mouse.GetState();
 
             // update timer
-            timer += gameTime.ElapsedGameTime.TotalSeconds;
+            if (!stopwatch.IsRunning)
+                stopwatch.Start();
+
+            else
+            {
+                deltaT = stopwatch.Elapsed.TotalSeconds - timer;
+                timer += deltaT;
+            }
 
             // update player
             player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
