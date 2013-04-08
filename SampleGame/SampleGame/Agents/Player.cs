@@ -185,7 +185,7 @@ namespace SampleGame
             }
 
             // power recharge rate
-            Power = MaxPower;
+            //Power = MaxPower;
             if (Power < MaxPower) Power += 0.08f;
             else Power = MaxPower;
 

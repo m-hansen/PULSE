@@ -164,9 +164,9 @@ namespace SampleGame
             attack3.AttackSubType = Enums.AttackSubType.BulletShield;
             attack3.CoolDown = 1500;
             attack3.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack3.AttackCost = 0;
-            attack3.MinDamage = 1;
-            attack3.MaxDamage = 5;
+            attack3.AttackCost = 10;
+            attack3.MinDamage = 5;
+            attack3.MaxDamage = 10;
             player.attackList.Add(attack3);
 
             // ***** BULLET SPLITTING ***** //
@@ -189,7 +189,7 @@ namespace SampleGame
             attack5.AttackSubType = Enums.AttackSubType.Nuke;
             attack5.CoolDown = 3000;
             attack5.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack5.AttackCost = 0;
+            attack5.AttackCost = 40;
             attack5.MinDamage = 1;
             attack5.MaxDamage = 5;
             player.attackList.Add(attack5);
@@ -248,7 +248,7 @@ namespace SampleGame
             // begin playing background music
             if (!songStart)
             {
-                //MediaPlayer.Play(backgroundMusic);
+                MediaPlayer.Play(backgroundMusic);
                 songStart = true;
             }
 
