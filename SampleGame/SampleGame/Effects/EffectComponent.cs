@@ -41,23 +41,23 @@ namespace SampleGame.Effects
 
             foreach (Effect effect in bulletList)
             {
-                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4), (int)Enums.AttackType.Bullet));
+                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4), (int)Enums.AttackType.Bullet));
+                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4), (int)Enums.AttackType.Bullet));
+                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4), (int)Enums.AttackType.Bullet));
             }
         }
 
         public void NukeSplit()
         {
-            List<Effect> bulletList = effectList.Where(e => e.CastedBy == Enums.AgentType.Player && e.EffectSubType == Enums.AttackSubType.Nuke).ToList();
+            List<Effect> bulletList = effectList.Where(e => e.CastedBy == Enums.AgentType.Player && (e.EffectSubType == Enums.AttackSubType.Nuke || e.EffectSubType == Enums.AttackSubType.NukeSpawn)).ToList();
 
             foreach (Effect effect in bulletList)
             {
-                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4)));
-                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4), (int)Enums.AttackSubType.NukeSpawn));
+                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4), (int)Enums.AttackSubType.NukeSpawn));
+                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4), (int)Enums.AttackSubType.NukeSpawn));
+                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4), (int)Enums.AttackSubType.NukeSpawn));
             }
         }
 

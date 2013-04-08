@@ -16,7 +16,7 @@ namespace SampleGame.Effects
         public int TimeElapsed;
         public int SplitsRemaining = 2;
 
-        public override Effect CloneToDirection(float offset)
+        public override Effect CloneToDirection(float offset, int type)
         {
             Bullet bullet = new Bullet();
             bullet.LoadEffect(Texture);
@@ -27,6 +27,10 @@ namespace SampleGame.Effects
             bullet.MinDamage = MinDamage;
             bullet.MaxDamage = MaxDamage;
             bullet.CastedBy = CastedBy;
+            if (type == (int)Enums.AttackSubType.Nuke || type == (int)Enums.AttackSubType.NukeSpawn)
+            {
+                bullet.EffectSubType = Enums.AttackSubType.NukeSpawn;
+            }
 
             return bullet;
         }
@@ -38,7 +42,7 @@ namespace SampleGame.Effects
             TimeElapsed += gameTime.ElapsedGameTime.Milliseconds;
             if (SplitsRemaining > 0 && EffectSubType == Enums.AttackSubType.Nuke && TimeElapsed > 200)
             {
-                Game1.Current.EffectComponent.SplitBulletsFromPlayer();
+                Game1.Current.EffectComponent.NukeSplit();//SplitBulletsFromPlayer();
                 TimeElapsed = 0;
                 SplitsRemaining--;
             }

@@ -19,7 +19,8 @@ namespace SampleGame
             TriBullet = 1,
             SplitBullets = 2,
             Nuke = 3,
-            BulletShield = 4
+            NukeSpawn = 4,
+            BulletShield = 5
         }
 
         public enum SensorType

@@ -40,7 +40,7 @@ namespace SampleGame.Effects
             }
         }
 
-        public virtual Effect CloneToDirection(float offset)
+        public virtual Effect CloneToDirection(float offset, int type)
         {
             return new Effect() { Active = false };
         }

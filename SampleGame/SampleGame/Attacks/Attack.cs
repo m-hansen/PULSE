@@ -118,7 +118,6 @@ namespace SampleGame.Attacks
             for (int i = 0; i < 2; i++)
             {
                 Random rand = new Random();
-
                 Color color = (i % 2 == 0) ? new Color(rand.Next(180, 255), rand.Next(180, 255), rand.Next(180, 255), 255) : new Color(rand.Next(0, 100), rand.Next(0, 100), rand.Next(0, 100), 255);
                 
                 Bullet bullet = new Bullet();
@@ -134,6 +133,7 @@ namespace SampleGame.Attacks
 
                 Game1.Current.EffectComponent.AddEffect(bullet);
             }
+
             Game1.Current.EffectComponent.NukeSplit();
             ActiveCoolDown = CoolDown;
         }
