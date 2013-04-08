@@ -48,6 +48,19 @@ namespace SampleGame.Effects
             }
         }
 
+        public void NukeSplit()
+        {
+            List<Effect> bulletList = effectList.Where(e => e.CastedBy == Enums.AgentType.Player && e.EffectSubType == Enums.AttackSubType.Nuke).ToList();
+
+            foreach (Effect effect in bulletList)
+            {
+                effectList.Add(effect.CloneToDirection((float)(Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(3 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(5 * Math.PI / 4)));
+                effectList.Add(effect.CloneToDirection((float)(7 * Math.PI / 4)));
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             LevelInfo levelInfo = Game1.Current.levelInfo;

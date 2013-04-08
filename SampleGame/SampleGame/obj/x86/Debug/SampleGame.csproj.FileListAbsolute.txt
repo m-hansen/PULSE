@@ -357,3 +357,6 @@ C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\obj\x86\Debug\SampleGame.csproj
 C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\obj\x86\Debug\SampleGame.exe
 C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\obj\x86\Debug\SampleGame.pdb
+C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb
+C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb
+C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb

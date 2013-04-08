@@ -11,30 +11,6 @@
       <Time>2013-04-07T03:22:38.5593906-04:00</Time>
     </Item>
     <Item>
-      <Source>Images\agent.png</Source>
-      <Name>Images\agent</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor">255, 255, 255, 255</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
-      <Time>2013-04-07T03:22:38.5563904-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\subject.png</Source>
-      <Name>Images\subject</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Parameters>
-        <Data Key="ColorKeyColor">255, 255, 255, 255</Data>
-      </Parameters>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
-      <Time>2013-04-07T03:22:38.5593906-04:00</Time>
-    </Item>
-    <Item>
       <Source>Images\wall.png</Source>
       <Name>Images\wall</Name>
       <Importer>TextureImporter</Importer>
@@ -242,6 +218,51 @@
       <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.xnb</Output>
       <Extra>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.wma</Extra>
       <Time>2013-04-07T03:22:38.5463898-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\agent.png</Source>
+      <Name>Images\agent</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
+      <Time>2013-04-07T03:22:38.5563904-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\subject.png</Source>
+      <Name>Images\subject</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
+      <Time>2013-04-07T03:22:38.5593906-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\skill1.png</Source>
+      <Name>Images\skill1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb</Output>
+      <Time>2013-04-07T19:13:56.2309353-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\skill2.png</Source>
+      <Name>Images\skill2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb</Output>
+      <Time>2013-04-07T19:25:38.346094-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\skill4.png</Source>
+      <Name>Images\skill4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\meow\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb</Output>
+      <Time>2013-04-07T23:20:24.6087821-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

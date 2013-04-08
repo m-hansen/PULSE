@@ -13,6 +13,8 @@ namespace SampleGame.Effects
         public int MaxSpeed;
         public int MaxDamage;
         public int MinDamage;
+        public int TimeElapsed;
+        public int SplitsRemaining = 2;
 
         public override Effect CloneToDirection(float offset)
         {
@@ -32,6 +34,14 @@ namespace SampleGame.Effects
         public override void Update(GameTime gameTime, LevelInfo levelInfo)
         {
             if (!Active) return;
+
+            TimeElapsed += gameTime.ElapsedGameTime.Milliseconds;
+            if (SplitsRemaining > 0 && EffectSubType == Enums.AttackSubType.Nuke && TimeElapsed > 200)
+            {
+                Game1.Current.EffectComponent.SplitBulletsFromPlayer();
+                TimeElapsed = 0;
+                SplitsRemaining--;
+            }
 
             Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
 

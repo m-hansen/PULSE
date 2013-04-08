@@ -194,7 +194,7 @@ namespace SampleGame
             Height = 700;//3200;
             Name = "Level 1";
             LevelNodeSize = 50;
-            TimeAllocated = 270; // in seconds (4.5 minutes)
+            TimeAllocated = 280; // in seconds (4:40)
 
             //SetVisibleArea(new Vector2(), Width, Height);
 

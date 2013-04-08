@@ -30,6 +30,10 @@ namespace SampleGame
         double timer;           // for time elapsed
         double deltaT;          // for time elapsed
         Stopwatch stopwatch;    // for time elapsed
+
+        Texture2D skill1Texture;
+        Texture2D skill2Texture;
+        Texture2D skill4Texture;
          
         //Vector2? startPos = null;
         //Vector2? endPos = null;
@@ -123,6 +127,11 @@ namespace SampleGame
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
 
+            // load skill textures
+            skill1Texture = Content.Load<Texture2D>("Images\\skill1");
+            skill2Texture = Content.Load<Texture2D>("Images\\skill2");
+            skill4Texture = Content.Load<Texture2D>("Images\\skill4");
+
             Attack attack1 = new Attack();
             attack1.Active = true;
             attack1.Key = Keys.Space;
@@ -148,17 +157,42 @@ namespace SampleGame
             attack2.AttackCost = 10;
             player.attackList.Add(attack2);
 
-            Attack attack4 = new Attack();
-            attack4.Active = true;
-            attack4.Key = Keys.D4;
-            attack4.AttackType = Enums.AttackType.Bullet;
-            attack4.AttackSubType = Enums.AttackSubType.SplitBullets;
-            attack4.CoolDown = 50;
-            //attack3.Texture = Content.Load<Texture2D>("Images\\explosion1");
-            //attack3.Frames = 6;
-            //attack3.BoundingRect = new Rectangle(0, 0, 139, 107);
-            attack4.AttackCost = 0;
-            player.attackList.Add(attack4);
+            Attack attack3 = new Attack();
+            attack3.Active = true;
+            attack3.Key = Keys.D1;
+            attack3.AttackType = Enums.AttackType.Bullet;
+            attack3.AttackSubType = Enums.AttackSubType.BulletShield;
+            attack3.CoolDown = 1500;
+            attack3.Texture = Content.Load<Texture2D>("Images\\raindrop");
+            attack3.AttackCost = 0;
+            attack3.MinDamage = 1;
+            attack3.MaxDamage = 5;
+            player.attackList.Add(attack3);
+
+            // ***** BULLET SPLITTING ***** //
+            //Attack attack4 = new Attack();
+            //attack4.Active = true;
+            //attack4.Key = Keys.D3;
+            //attack4.AttackType = Enums.AttackType.Bullet;
+            //attack4.AttackSubType = Enums.AttackSubType.SplitBullets;
+            //attack4.CoolDown = 1500;
+            ////attack3.Texture = Content.Load<Texture2D>("Images\\explosion1");
+            ////attack3.Frames = 6;
+            ////attack3.BoundingRect = new Rectangle(0, 0, 139, 107);
+            //attack4.AttackCost = 0;
+            //player.attackList.Add(attack4);
+
+            Attack attack5 = new Attack();
+            attack5.Active = true;
+            attack5.Key = Keys.D4;
+            attack5.AttackType = Enums.AttackType.Bullet;
+            attack5.AttackSubType = Enums.AttackSubType.Nuke;
+            attack5.CoolDown = 3000;
+            attack5.Texture = Content.Load<Texture2D>("Images\\raindrop");
+            attack5.AttackCost = 0;
+            attack5.MinDamage = 1;
+            attack5.MaxDamage = 5;
+            player.attackList.Add(attack5);
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
@@ -214,7 +248,7 @@ namespace SampleGame
             // begin playing background music
             if (!songStart)
             {
-                MediaPlayer.Play(backgroundMusic);
+                //MediaPlayer.Play(backgroundMusic);
                 songStart = true;
             }
 
@@ -233,7 +267,6 @@ namespace SampleGame
             // update timer
             if (!stopwatch.IsRunning)
                 stopwatch.Start();
-
             else
             {
                 deltaT = stopwatch.Elapsed.TotalSeconds - timer;
@@ -352,6 +385,15 @@ namespace SampleGame
 
             DrawDebuggingInformation();
 
+            // draw skill sprites
+            spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
+            spriteBatch.Draw(skill2Texture, new Rectangle(500, 550, 50, 50), Color.White);
+            spriteBatch.Draw(skill4Texture, new Rectangle(600, 550, 50, 50), Color.White);
+
+
+            spriteBatch.End();   
+
+            spriteBatch.Begin();
             DrawUI();
 
             spriteBatch.End();                          
@@ -412,6 +454,21 @@ namespace SampleGame
             spriteBatch.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
             DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
             DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, true);
+
+            Color cooldownColor = new Color(140, 0, 0, 80);
+
+            // skills bar
+            DrawingHelper.DrawRectangle(new Rectangle(450, 600 - (int)player.attackList[2].ActiveCoolDown / 30, 50, (player.attackList[2].ActiveCoolDown > 0) ? (int)player.attackList[2].ActiveCoolDown / 30 : 0), cooldownColor, true);
+            DrawingHelper.DrawRectangle(new Rectangle(450, 550, 49, 50), Color.White, false);
+
+            DrawingHelper.DrawRectangle(new Rectangle(500, 600 - (int)player.attackList[1].ActiveCoolDown / 20, 50, (player.attackList[1].ActiveCoolDown > 0) ? (int)player.attackList[1].ActiveCoolDown / 20 : 0), cooldownColor, true);
+            DrawingHelper.DrawRectangle(new Rectangle(500, 550, 49, 50), Color.White, false);
+
+            DrawingHelper.DrawRectangle(new Rectangle(550, 550, 50, 50), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
+            DrawingHelper.DrawRectangle(new Rectangle(550, 550, 49, 50), Color.White, false);
+
+            DrawingHelper.DrawRectangle(new Rectangle(600, 600 - (int)player.attackList[3].ActiveCoolDown / 60, 50, (player.attackList[3].ActiveCoolDown > 0) ? (int)player.attackList[3].ActiveCoolDown / 60 : 0), cooldownColor, true);
+            DrawingHelper.DrawRectangle(new Rectangle(600, 550, 49, 50), Color.White, false);
         }
 
         private int timeInMinutes(double timeRemaining)

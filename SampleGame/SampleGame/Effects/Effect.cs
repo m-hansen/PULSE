@@ -18,6 +18,7 @@ namespace SampleGame.Effects
         public Color Color = Color.White;
         public Enums.AgentType CastedBy;
         public Enums.AttackType EffectType;
+        public Enums.AttackSubType EffectSubType;
 
         protected int currentFrame;
         protected TimeSpan animElapsed;
