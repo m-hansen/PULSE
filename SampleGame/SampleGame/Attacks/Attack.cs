@@ -246,6 +246,7 @@ namespace SampleGame.Attacks
                     bullet.CastedBy = castedBy;
                     bullet.EffectSubType = Enums.AttackSubType.TriBullet;
                     bullet.EffectType = Enums.AttackType.Bullet;
+                    bullet.Color = (i % 2 == 0) ? new Color(50, 100, 240) : new Color(245, 50, 55); // light blue / light red
 
                     Game1.Current.EffectComponent.AddEffect(bullet);
                 }

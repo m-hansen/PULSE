@@ -11,7 +11,7 @@ namespace SampleGame.Helpers
         public string TextureString;
         public int Frames;
         public Rectangle TextureRect;
-        public int Scale = 1;
+        public float Scale = 1.0f;
 
         public TextureInfo(string textureString)
         {

@@ -407,9 +407,9 @@ namespace SampleGame
             int seconds = remainingSeconds(timeRemaining);
             spriteBatch.DrawString(font1, "Time Remaining", new Vector2(windowWidth / 2 - 70, 5), Color.White);
             if (timeRemaining <= 0)
-                spriteBatch.DrawString(font1, "0:00", new Vector2(windowWidth / 2 - 17, 20), Color.White);
+                spriteBatch.DrawString(font1, "0:00", new Vector2(windowWidth / 2 - 17, 30), Color.White);
             else if (seconds < 10)
-                spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(windowWidth / 2 - 17, 20), Color.White);
+                spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
             else
                 spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
 

@@ -65,7 +65,7 @@ namespace SampleGame
 
             nukeDropTime = rand.Next(30000, 45000);
             teleportDropTime = rand.Next(0, 5000);
-            bossSpawnTime = 15000;
+            bossSpawnTime = 100;// 15000;
         }
 
         #region Get Visible Area
@@ -124,6 +124,7 @@ namespace SampleGame
             int health = 500000;
 
             TextureInfo ti = new TextureInfo("boss1");
+            ti.Scale = 0.75f;
 
             Enemy boss = new Enemy();
             boss.LoadContent(Game1.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
@@ -147,8 +148,8 @@ namespace SampleGame
             attackObj.AttackCost = 100;
             attackObj.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
             attackObj.Frames = 1;
-            attackObj.MinDamage = 10;
-            attackObj.MaxDamage = 15;
+            attackObj.MinDamage = 1;
+            attackObj.MaxDamage = 1;
             attackObj.Color = Color.Red;
             attackObj.MaxSequence = 10000;
             boss.attackList.Add(attackObj);
