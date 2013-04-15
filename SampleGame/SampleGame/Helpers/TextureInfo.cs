@@ -11,6 +11,7 @@ namespace SampleGame.Helpers
         public string TextureString;
         public int Frames;
         public Rectangle TextureRect;
+        public int Scale = 1;
 
         public TextureInfo(string textureString)
         {
@@ -45,6 +46,22 @@ namespace SampleGame.Helpers
                     TextureString = "Images\\big_ship1";
                     TextureRect = new Rectangle(0, 0, 120, 85);
                     Frames = 4;
+
+                    break;
+
+                case "boss1":
+
+                    TextureString = "Images\\boss1";
+                    TextureRect = new Rectangle(0, 0, 528, 358);
+                    Frames = 4;
+
+                    break;
+
+                case "star_effect2":
+
+                    TextureString = "Images\\star_effect2";
+                    TextureRect = new Rectangle(0, 0, 100, 100);
+                    Frames = 16;
 
                     break;
             }

@@ -22,7 +22,9 @@ namespace SampleGame
             Nuke = 3,
             NukeSpawn = 4,
             BulletShield = 5,
-            Teleport = 6
+            Teleport = 6,
+            DoubleTriBullet = 7,
+            ReflectingStar = 8
         }
 
         public enum SensorType

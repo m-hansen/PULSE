@@ -139,7 +139,7 @@ namespace SampleGame.Agents
             attackObj.Key = GetNextAvaliableKey(game.player.attackList.Count);
             attackObj.AttackType = Enums.AttackType.MovementEffect;
             attackObj.AttackSubType = Enums.AttackSubType.Teleport;
-            attackObj.CoolDown = 10000;
+            attackObj.CoolDown = 15000;
             attackObj.IconTexture = game.Content.Load<Texture2D>("Images\\teleport_image");
             attackObj.HasIcon = true;
             attackObj.AttackCost = 20;

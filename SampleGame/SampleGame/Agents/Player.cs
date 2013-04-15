@@ -24,7 +24,7 @@ namespace SampleGame
 
         public Player()
         {
-            Health = 100.0f;
+            Health = 50.0f;
             Power = 100.0f;
         }
 
@@ -176,8 +176,15 @@ namespace SampleGame
                 {
                     MovingAgent movingAgent = (MovingAgent)intersectingAgent;
 
-                    TakeDamage(movingAgent.Health);
-                    movingAgent.TakeDamage(movingAgent.Health);
+                    if (MaxHealth > movingAgent.Health)
+                    {
+                        TakeDamage(movingAgent.Health);
+                        movingAgent.TakeDamage(movingAgent.Health);
+                    }
+                    else
+                    {
+                        TakeDamage(movingAgent.Health);
+                    }
                 }
                 else if (intersectingAgent.Type == (int)Enums.AgentType.Wall)
                 {
@@ -218,7 +225,7 @@ namespace SampleGame
 
             // power recharge rate
             //Power = MaxPower;
-            if (Power < MaxPower) Power += 0.10f;
+            if (Power < MaxPower) Power += 0.10f;//0.08f;
             else Power = MaxPower;
 
             // health recharge rate

@@ -16,7 +16,7 @@ namespace SampleGame.Effects
     public class EffectComponent : DrawableGameComponent
     {
         SpriteBatch batch;
-        List<Effect> effectList = new List<Effect>();
+        public List<Effect> effectList = new List<Effect>();
 
         public EffectComponent(Game game)
             : base(game)

@@ -8,6 +8,7 @@ using SampleGame.Effects;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
 using SampleGame.Helpers;
+using SampleGame.Agents;
 
 namespace SampleGame.Attacks
 {
@@ -27,6 +28,8 @@ namespace SampleGame.Attacks
         public int MaxDamage;
         public int AttackCost;
         public Color Color = Color.White;
+        public int MaxSequence;
+        private int currentSequence;
 
         public int ActiveCoolDown = 0;
 
@@ -74,11 +77,12 @@ namespace SampleGame.Attacks
 
                     switch (AttackSubType)
                     {
-                        case Enums.AttackSubType.Default:       LoadDefaultBullet(castedBy, agent);    break;
-                        case Enums.AttackSubType.TriBullet:     LoadTriBullet(castedBy, agent);        break;
-                        case Enums.AttackSubType.SplitBullets:  LoadSplitBullets(castedBy, agent);     break;
-                        case Enums.AttackSubType.Nuke:          LoadNuke(castedBy, agent);             break;
-                        case Enums.AttackSubType.BulletShield:  LoadBulletShield(castedBy, agent);     break;
+                        case Enums.AttackSubType.Default:         LoadDefaultBullet(castedBy, agent);    break;
+                        case Enums.AttackSubType.TriBullet:       LoadTriBullet(castedBy, agent);        break;
+                        case Enums.AttackSubType.SplitBullets:    LoadSplitBullets(castedBy, agent);     break;
+                        case Enums.AttackSubType.Nuke:            LoadNuke(castedBy, agent);             break;
+                        case Enums.AttackSubType.BulletShield:    LoadBulletShield(castedBy, agent);     break;
+                        case Enums.AttackSubType.DoubleTriBullet: LoadDoubleTriBullet(castedBy, agent);  break;
                     }
 
                     break;
@@ -87,7 +91,8 @@ namespace SampleGame.Attacks
 
                     switch (AttackSubType)
                     {
-                        case Enums.AttackSubType.Default:       LoadDefaultExplosion(castedBy, agent); break;
+                        case Enums.AttackSubType.Default:         LoadDefaultExplosion(castedBy, agent); break;
+                        case Enums.AttackSubType.ReflectingStar:  LoadReflectingStar(castedBy, agent);   break;
                     }
 
                     break;
@@ -215,6 +220,46 @@ namespace SampleGame.Attacks
             }
         }
 
+        private void LoadDoubleTriBullet(Enums.AgentType castedBy, MovingAgent agent)
+        {
+            innerColor = Color.Red;
+            outerColor = Color.Orange;
+
+            int bulletSpeed = 8;
+            float angleModifier = 0.25f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
+
+            Vector2 playerPos = Game1.Current.player.Position;
+
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 3; j++)
+                {
+                    Vector2 pos = new Vector2(agent.Position.X, agent.Position.Y + (i == 0 ? -50 : 50)) + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 2)), agent.Rotation);
+
+                    Bullet bullet = new Bullet();
+                    bullet.LoadEffect(Texture);
+                    bullet.Position = pos;
+                    bullet.Rotation = (Utils.GetRotationToTarget(playerPos, pos) - (0.5f * angleModifier)) + (float)random.NextDouble() * angleModifier;
+                    bullet.MaxSpeed = bulletSpeed;
+                    bullet.Color = innerColor;
+                    bullet.MinDamage = MinDamage;
+                    bullet.MaxDamage = MaxDamage;
+                    bullet.CastedBy = castedBy;
+                    bullet.EffectSubType = Enums.AttackSubType.TriBullet;
+                    bullet.EffectType = Enums.AttackType.Bullet;
+
+                    Game1.Current.EffectComponent.AddEffect(bullet);
+                }
+
+            currentSequence += AttackCost;
+
+            if (currentSequence > MaxSequence)
+            {
+                Random rand = new Random();
+                ActiveCoolDown = rand.Next(CoolDown);
+                currentSequence = 0;
+            }
+        }
+
         private void LoadTriBullet(Enums.AgentType castedBy, MovingAgent agent)
         {
             List<Color> colorList = GetBulletColorListByAgentType(castedBy);
@@ -281,6 +326,25 @@ namespace SampleGame.Attacks
             ActiveCoolDown = CoolDown;
         }
 
+        private void LoadReflectingStar(Enums.AgentType castedBy, MovingAgent agent)
+        {
+            Random rand  = new Random();
+
+            int padding = 100;
+            LevelInfo levelInfo = Game1.Current.levelInfo;
+
+            Explosion explosion = new Explosion();
+            explosion.LoadExplosion(Texture, BoundingRect, Frames);
+            explosion.Position = new Vector2(rand.Next(padding, 3 * padding), rand.Next(padding, levelInfo.Height - padding));
+            explosion.AnimationInterval = new TimeSpan(1100000);
+            explosion.EffectSubType = Enums.AttackSubType.ReflectingStar;
+            explosion.CastedBy = castedBy;
+
+            Game1.Current.EffectComponent.AddEffect(explosion);
+
+            ActiveCoolDown = CoolDown;
+        }
+
         private void LoadDefaultExplosion(Enums.AgentType castedBy, MovingAgent agent)
         {
             if (castedBy == Enums.AgentType.Player)
@@ -293,6 +357,7 @@ namespace SampleGame.Attacks
                 explosion.AnimationInterval = new TimeSpan(1100000);
                 explosion.EffectType = AttackType;
                 explosion.CastedBy = castedBy;
+                explosion.EffectSubType = Enums.AttackSubType.Default;
 
                 Game1.Current.EffectComponent.AddEffect(explosion);
 
@@ -304,6 +369,7 @@ namespace SampleGame.Attacks
                 explosion.LoadExplosion(Texture, BoundingRect, Frames);
                 explosion.Position = Game1.Current.player.Position;
                 explosion.AnimationInterval = new TimeSpan(1100000);
+                explosion.EffectSubType = Enums.AttackSubType.Default;
 
                 Game1.Current.EffectComponent.AddEffect(explosion);
 
@@ -315,36 +381,65 @@ namespace SampleGame.Attacks
         {
             Game1 game = Game1.Current;
 
-            int teleportDistance = 100;
+            Vector2 targetPos = new Vector2(game.mouseStateCurrent.X, game.mouseStateCurrent.Y);
 
-            Vector2 targetPos = agent.Position + Utils.CalculateRotatedMovement(new Vector2(0, -1), agent.Rotation) * teleportDistance;
-
-            if (!game.levelInfo.VisibleRect.Contains(new Point((int)targetPos.X, (int)targetPos.Y)))
-            {
-                targetPos = FixTargetMovePositionForLevelBounds(targetPos, agent.Bounds.Width, agent.Bounds.Height, game.levelInfo.VisibleRect);
-            }
-        }
-
-        private Vector2 FixTargetMovePositionForLevelBounds(Vector2 targetPos, int agentWidth, int agentHeight, Rectangle visibleRect)
-        {
             Rectangle targetBounds = new Rectangle
             (
-                (int)(targetPos.X - (agentWidth / 2)),
-                (int)(targetPos.Y - (agentHeight / 2)),
-                agentWidth,
-                agentHeight
+                (int)(targetPos.X - (agent.Bounds.Width / 2)),
+                (int)(targetPos.Y - (agent.Bounds.Height / 2)),
+                agent.Bounds.Width,
+                agent.Bounds.Height
             );
 
-            if (targetPos.X < visibleRect.Left)
+            //if (!game.levelInfo.VisibleRect.Contains(new Point((int)targetPos.X, (int)targetPos.Y)))
+            //{
+            //    targetPos = FixTargetMovePositionForLevelBounds(targetPos, targetBounds, game.levelInfo.VisibleRect);
+
+            //    targetBounds = new Rectangle
+            //    (
+            //        (int)(targetPos.X - (agent.Bounds.Width / 2)),
+            //        (int)(targetPos.Y - (agent.Bounds.Height / 2)),
+            //        agent.Bounds.Width,
+            //        agent.Bounds.Height
+            //    );
+            //}
+
+            if (castedBy == Enums.AgentType.Player)
             {
+                List<GameAgent> intersectingAgentList = game.levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Enemy && ga.Bounds.Intersects(targetBounds) && ((Enemy)ga).Health < agent.Health).ToList();
 
+                foreach (GameAgent intersectingAgent in intersectingAgentList)
+                {
+                    Enemy enemyObj = ((Enemy)intersectingAgent);
+
+                    enemyObj.TakeDamage(enemyObj.Health);
+                }
             }
-            else if (targetPos.X > visibleRect.Right)
-            {
 
-            }
+            agent.Position = targetPos;
 
-            return targetPos;
+            ActiveCoolDown = CoolDown;
+        }
+
+        private Vector2 FixTargetMovePositionForLevelBounds(Vector2 targetPos, Rectangle targetBounds, Rectangle visibleRect)
+        {
+            int xOffset = 0, yOffset = 0;
+            
+            if (targetBounds.Left < visibleRect.Left)
+                xOffset = visibleRect.Left - targetBounds.Left;
+
+            else if (targetBounds.Right > visibleRect.Right)
+                xOffset = visibleRect.Right - targetBounds.Right;
+
+            if (targetBounds.Top < visibleRect.Top)
+                yOffset = visibleRect.Top - targetBounds.Top;
+
+            else if (targetBounds.Bottom > visibleRect.Bottom)
+                yOffset = visibleRect.Bottom - targetBounds.Bottom;
+
+            targetBounds.Offset(xOffset, yOffset);
+
+            return new Vector2(targetBounds.X, targetBounds.Y);
         }
     }
 }

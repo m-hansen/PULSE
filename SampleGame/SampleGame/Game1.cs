@@ -22,7 +22,7 @@ namespace SampleGame
         SpriteBatch spriteBatch;
         KeyboardState keyboardStateCurrent;
         KeyboardState keyboardStatePrevious;
-        MouseState mouseStateCurrent;
+        public MouseState mouseStateCurrent;
         MouseState mouseStatePrevious;
         Texture2D crosshairTexture;
         Song backgroundMusic;
@@ -436,22 +436,17 @@ namespace SampleGame
             //spriteBatch.DrawString(font1, "4:17", new Vector2(900, 380), Color.Orange);
 
             // health bar
-            float hpColorMultiplier = (player.Health / 100);
             Color healthBarColor;
-            if (player.Health >= 50)
-                healthBarColor = new Color(0, 255 * hpColorMultiplier, 0);
+            if (player.Health >= 80)
+                healthBarColor = Color.Green;
+            else if (player.Health >= 60)
+                healthBarColor = Color.YellowGreen;
+            else if (player.Health >= 40)
+                healthBarColor = Color.Yellow;
+            else if (player.Health >= 20)
+                healthBarColor = Color.Orange;
             else
-                healthBarColor = new Color(255 * hpColorMultiplier, 0, 0);
-            //if (player.Health >= 80)
-            //    healthBarColor = Color.Green;
-            //else if (player.Health >= 60)
-            //    healthBarColor = Color.YellowGreen;
-            //else if (player.Health >= 40)
-            //    healthBarColor = Color.Yellow;
-            //else if (player.Health >= 20)
-            //    healthBarColor = Color.Orange;
-            //else
-            //    healthBarColor = Color.Red;
+                healthBarColor = Color.Red;
 
             spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
             DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), healthBarColor, false);

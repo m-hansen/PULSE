@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SampleGame.Helpers;
 
 namespace SampleGame.Effects
 {
@@ -37,12 +38,33 @@ namespace SampleGame.Effects
             {
                 if (++currentFrame == TotalFrames)
                 {
-                    Active = false;
+                    if (EffectSubType != Enums.AttackSubType.ReflectingStar) Active = false;
                     currentFrame = 0;
                 }
 
                 // move back by the animation interval (in miliseconds)
                 animElapsed -= AnimationInterval;
+
+                if (EffectSubType == Enums.AttackSubType.ReflectingStar)
+                {
+                    EffectComponent ef = Game1.Current.EffectComponent;
+                    Vector2 playerPos = Game1.Current.player.Position;
+
+                    foreach (Effect effect in ef.effectList.Where(e => e.GetType() == typeof(Bullet) && e.CastedBy == Enums.AgentType.Enemy && e.Bounds.Intersects(Bounds)).ToList())
+                    {
+                        Bullet bullet = (Bullet)effect;
+
+                        bullet.Rotation = Utils.GetRotationToTarget(playerPos, bullet.Position);
+                        bullet.Position += Utils.CalculateRotatedMovement(new Vector2(0, -2), bullet.Rotation);
+                    }
+
+                    Player playerObj = Game1.Current.player;
+
+                    if (playerObj.Bounds.Intersects(Bounds))
+                    {
+                        playerObj.TakeDamage(playerObj.Health);
+                    }
+                }
             }
 
             base.Update(gameTime, levelInfo);

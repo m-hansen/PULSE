@@ -32,6 +32,7 @@ namespace SampleGame
         private int aggressiveWeight = 10;
         private List<LevelTimeSpan> levelTimeSpanList = new List<LevelTimeSpan>();
         private Random rand = new Random();
+        private long bossSpawnTime;
         private long lastSpawnTime = 0;
         private long lastPowerUp = 0;
         private long teleportDropTime;
@@ -44,7 +45,7 @@ namespace SampleGame
             levelTimeSpanList.Add(new LevelTimeSpan(0, 1000, 0));
             // swap between 0 and 1 difficulty for the song intro
             for (int i = 1000; i < 46000; i += 1999)
-                levelTimeSpanList.Add(new LevelTimeSpan(i, i+1999, ((i % 2 == 0) ? 1 : 0)));
+                levelTimeSpanList.Add(new LevelTimeSpan(i, i + 1999, ((i % 2 == 0) ? 1 : 0)));
             levelTimeSpanList.Add(new LevelTimeSpan(46000, 57000, 2));
             levelTimeSpanList.Add(new LevelTimeSpan(57000, 66000, 3));
             levelTimeSpanList.Add(new LevelTimeSpan(66000, 101000, 2));
@@ -63,7 +64,8 @@ namespace SampleGame
             levelTimeSpanList.Add(new LevelTimeSpan(274000, 279000, 0));
 
             nukeDropTime = rand.Next(30000, 45000);
-            teleportDropTime = rand.Next(0, 20000);
+            teleportDropTime = rand.Next(0, 5000);
+            bossSpawnTime = 15000;
         }
 
         #region Get Visible Area
@@ -116,6 +118,59 @@ namespace SampleGame
         #endregion
 
         #region Load Enemy Type
+
+        private void SpawnBoss()
+        {
+            int health = 500000;
+
+            TextureInfo ti = new TextureInfo("boss1");
+
+            Enemy boss = new Enemy();
+            boss.LoadContent(Game1.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
+            boss.Position = new Vector2(VisibleRect.Right + 50, VisibleRect.Center.Y);
+            boss.TargetPosition = new Vector2(VisibleRect.Right - 150, VisibleRect.Center.Y);
+            boss.Rotation = (float)(7 * Math.PI / 2);
+            boss.Type = (int)Enums.AgentType.Enemy;
+            boss.State = Enums.EnemyState.Boss;
+            boss.Health = health;
+            boss.Scale = ti.Scale;
+            boss.MaxSpeed = 2;
+            boss.MeleeDistance = 5;
+            boss.ID = nextID;
+
+            Attack attackObj = new Attack();
+            attackObj.Active = true;
+            attackObj.AttackType = Enums.AttackType.Bullet;
+            attackObj.AttackSubType = Enums.AttackSubType.DoubleTriBullet;
+            attackObj.CoolDown = 15000;
+            attackObj.ActiveCoolDown = 1000;
+            attackObj.AttackCost = 100;
+            attackObj.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attackObj.Frames = 1;
+            attackObj.MinDamage = 10;
+            attackObj.MaxDamage = 15;
+            attackObj.Color = Color.Red;
+            attackObj.MaxSequence = 10000;
+            boss.attackList.Add(attackObj);
+
+            TextureInfo ti1 = new TextureInfo("star_effect2");
+
+            Attack attackObj1 = new Attack();
+            attackObj1.Active = true;
+            attackObj1.AttackType = Enums.AttackType.Explosion;
+            attackObj1.AttackSubType = Enums.AttackSubType.ReflectingStar;
+            attackObj1.CoolDown = 30000;
+            attackObj1.ActiveCoolDown = 1000;
+            attackObj1.Texture = Game1.Current.Content.Load<Texture2D>(ti1.TextureString);
+            attackObj1.BoundingRect = ti1.TextureRect;
+            attackObj1.Frames = ti1.Frames;
+            attackObj1.MinDamage = 100;
+            attackObj1.MaxDamage = 200;
+            attackObj1.Color = Color.White;
+            boss.attackList.Add(attackObj1);
+
+            AgentList.Add(boss);
+        }
 
         private void LoadEnemyKamikazeTowardsPlayer()
         {
@@ -449,6 +504,12 @@ namespace SampleGame
 
         private void GetCurrentDifficulty(Stopwatch stopwatch)
         {
+            if (stopwatch.ElapsedMilliseconds > bossSpawnTime && bossSpawnTime > 0)
+            {
+                SpawnBoss();
+                bossSpawnTime = 0;
+            }
+
             if (stopwatch.ElapsedMilliseconds - lastSpawnTime < 1000) return;
 
             LevelTimeSpan levelTimeSpanObj = levelTimeSpanList.Where(lts => lts.StartTime < stopwatch.ElapsedMilliseconds && stopwatch.ElapsedMilliseconds < lts.EndTime).FirstOrDefault();
@@ -480,11 +541,11 @@ namespace SampleGame
                     ((Enemy)agent).DropType = (int)Enums.ItemType.NukeAttack;
                     nukeDropTime = 0;
                 }
-                //else if (teleportDropTime > 0 && stopwatch.ElapsedMilliseconds > teleportDropTime)
-                //{
-                //    ((Enemy)agent).DropType = (int)Enums.ItemType.TeleportSpell;
-                //    teleportDropTime = 0;
-                //}
+                else if (teleportDropTime > 0 && stopwatch.ElapsedMilliseconds > teleportDropTime)
+                {
+                    ((Enemy)agent).DropType = (int)Enums.ItemType.TeleportSpell;
+                    teleportDropTime = 0;
+                }
                 else if ( (difficulty != 0) && (stopwatch.ElapsedMilliseconds - lastPowerUp > powerUpInterval / difficulty) )
                 {
                     Player playerObj = Game1.Current.player;

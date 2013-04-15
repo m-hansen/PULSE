@@ -7,8 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6701183-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\agent.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
-      <Time>2013-04-14T21:54:01.6711183-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\crosshair.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
-      <Time>2013-04-14T21:54:01.6731184-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\enemy_agent1.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6731184-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\explosion1.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6751185-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\raindrop.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
-      <Time>2013-04-14T21:54:01.6781187-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\ship1.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6791188-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\subject.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
-      <Time>2013-04-14T21:54:01.6811189-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\wall.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb</Output>
-      <Time>2013-04-14T21:54:01.6821189-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\wall1.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb</Output>
-      <Time>2013-04-14T21:54:01.683119-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill1.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6791188-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill2.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb</Output>
-      <Time>2013-04-14T21:54:01.6801188-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill4.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb</Output>
-      <Time>2013-04-14T21:54:01.6801188-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Images\kamikaze1.png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\kamikaze1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6771187-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\kamikaze1.xnb</Output>
+      <Time>2013-04-11T18:39:18.6394467-04:00</Time>
     </Item>
     <Item>
       <Source>Images\follower1.png</Source>
@@ -133,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\follower1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6761186-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\follower1.xnb</Output>
+      <Time>2013-04-11T18:47:57.573128-04:00</Time>
     </Item>
     <Item>
       <Source>Images\nuke_icon.png</Source>
@@ -142,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\nuke_icon.xnb</Output>
-      <Time>2013-04-14T21:54:01.6781187-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\nuke_icon.xnb</Output>
+      <Time>2013-04-14T17:31:52.1223435-04:00</Time>
     </Item>
     <Item>
       <Source>Images\explosion7.png</Source>
@@ -151,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion7.xnb</Output>
-      <Time>2013-04-14T21:54:01.6761186-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion7.xnb</Output>
+      <Time>2013-04-14T18:16:00.2268065-04:00</Time>
     </Item>
     <Item>
       <Source>Images\big_ship1.png</Source>
@@ -160,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship1.xnb</Output>
-      <Time>2013-04-14T21:54:01.6721184-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship1.xnb</Output>
+      <Time>2013-04-14T18:29:37.136531-04:00</Time>
     </Item>
     <Item>
       <Source>Images\big_ship2.png</Source>
@@ -169,8 +169,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship2.xnb</Output>
-      <Time>2013-04-14T21:54:01.6721184-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship2.xnb</Output>
+      <Time>2013-04-14T18:29:37.1425314-04:00</Time>
     </Item>
     <Item>
       <Source>Images\health_icon.png</Source>
@@ -178,8 +178,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\health_icon.xnb</Output>
-      <Time>2013-04-14T21:54:01.6771187-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\health_icon.xnb</Output>
+      <Time>2013-04-14T19:56:26.8005068-04:00</Time>
     </Item>
     <Item>
       <Source>Images\energy_icon.png</Source>
@@ -187,8 +187,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\energy_icon.xnb</Output>
-      <Time>2013-04-14T21:54:01.6741185-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\energy_icon.xnb</Output>
+      <Time>2013-04-14T20:10:15.733919-04:00</Time>
     </Item>
     <Item>
       <Source>Images\teleport_icon.png</Source>
@@ -196,8 +196,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_icon.xnb</Output>
-      <Time>2013-04-14T21:54:01.6811189-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_icon.xnb</Output>
+      <Time>2013-04-14T20:35:19.2529154-04:00</Time>
     </Item>
     <Item>
       <Source>Images\teleport_image.png</Source>
@@ -205,8 +205,26 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_image.xnb</Output>
-      <Time>2013-04-14T21:54:01.6821189-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_image.xnb</Output>
+      <Time>2013-04-14T20:35:19.2569156-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\star_effect2.png</Source>
+      <Name>Images\star_effect2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\star_effect2.xnb</Output>
+      <Time>2013-04-14T21:24:42.5894086-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\boss1.png</Source>
+      <Name>Images\boss1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\boss1.xnb</Output>
+      <Time>2013-04-14T22:15:55.5391712-04:00</Time>
     </Item>
     <Item>
       <Source>Audio\player_hit.mp3</Source>
@@ -214,8 +232,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb</Output>
-      <Time>2013-04-14T21:54:01.5141093-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb</Output>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <Item>
       <Source>Audio\voxis_pour_elle.mp3</Source>
@@ -223,9 +241,9 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb</Output>
-      <Extra>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
-      <Time>2013-04-14T21:54:01.666118-04:00</Time>
+      <Output>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb</Output>
+      <Extra>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
+      <Time>2013-04-08T10:54:20-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -233,10 +251,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

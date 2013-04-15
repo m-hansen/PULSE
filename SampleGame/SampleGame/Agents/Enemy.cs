@@ -20,6 +20,7 @@ namespace SampleGame.Agents
         public int Wave;
         public int Spacing; // padding outside of the bounds so that agent's aren't grouped too closely
         public int DropType;
+        private int WaitTime = 0;
 
         #endregion
 
@@ -36,9 +37,38 @@ namespace SampleGame.Agents
                 case Enums.EnemyState.RoamRandom:              RoamRandomUpdate(gametime);              break;
                 case Enums.EnemyState.Ranged:                  RangedUpdate(gametime);                  break;  
                 case Enums.EnemyState.RangedNoAttack:          RangedNoAttackUpdate(gametime);          break;
+                case Enums.EnemyState.Boss:                    BossUpdate(gametime);                    break;
             }
 
  	        base.Update(gametime, playerObj, agentList, nodeSize);
+        }
+
+        #endregion
+
+        #region AI State: Boss Update Method
+
+        private void BossUpdate(GameTime gametime)
+        {
+            if (WaitTime > 0)
+            {
+                WaitTime--;
+                UseAttack(gametime);
+                return;
+            }
+
+            Rectangle visibleRect = Game1.Current.levelInfo.VisibleRect;
+
+            if (Vector2.Distance(Position, TargetPosition) < MeleeDistance)
+            {
+                Random rand = new Random();
+                TargetPosition = new Vector2(Position.X, rand.Next(Bounds.Width / 2, visibleRect.Height - (Bounds.Width / 2)));
+                WaitTime = rand.Next(0, 20);
+            }
+
+            float rot = Utils.GetRotationToTarget(TargetPosition, Position);
+            Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), rot) * MaxSpeed;
+
+            UseAttack(gametime);
         }
 
         #endregion
@@ -353,11 +383,11 @@ namespace SampleGame.Agents
 
             foreach (Attack attack in attackList.OrderByDescending(a => a.MaxDamage).ToList())
             {
-                if (!usedAttack && attack.ActiveCoolDown <= 0)
+                if (!usedAttack && attack.ActiveCoolDown < 1)
                 {
                     attack.UseAttack(Enums.AgentType.Enemy, this);
 
-                    attack.ActiveCoolDown = attack.CoolDown + (new Random()).Next((int)(attack.CoolDown * 0.2));
+                   //attack.ActiveCoolDown = attack.CoolDown + (new Random()).Next((int)(attack.CoolDown * 0.2));
 
                     usedAttack = true;
                 }
