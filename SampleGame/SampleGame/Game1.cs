@@ -405,45 +405,53 @@ namespace SampleGame
             // timer
             double timeRemaining = levelInfo.TimeAllocated - timer;
             int seconds = remainingSeconds(timeRemaining);
-            if (seconds < 10)
-                spriteBatch.DrawString(font1, "Time Remaining: " + timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(400, 80), Color.White);
+            spriteBatch.DrawString(font1, "Time Remaining", new Vector2(windowWidth / 2 - 70, 5), Color.White);
+            if (timeRemaining <= 0)
+                spriteBatch.DrawString(font1, "0:00", new Vector2(windowWidth / 2 - 17, 20), Color.White);
+            else if (seconds < 10)
+                spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(windowWidth / 2 - 17, 20), Color.White);
             else
-                spriteBatch.DrawString(font1, "Time Remaining: " + timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(400, 80), Color.White);
+                spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
 
             // the elapsed timer for debugging purposes
             seconds = remainingSeconds(timer);
             if (seconds < 10)
-                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + "0" + seconds, new Vector2(850, 80), Color.White);
+                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + "0" + seconds, new Vector2(850, 5), Color.White);
             else
-                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + seconds, new Vector2(850, 80), Color.White);
-            spriteBatch.DrawString(font1, "Potential Transition Times (approx.)", new Vector2(850, 100), Color.Orange);
-            spriteBatch.DrawString(font1, "0:49", new Vector2(900, 120), Color.Orange);
-            spriteBatch.DrawString(font1, "1:06", new Vector2(900, 140), Color.Orange);
-            spriteBatch.DrawString(font1, "1:24", new Vector2(900, 160), Color.Orange);
-            spriteBatch.DrawString(font1, "1:41", new Vector2(900, 180), Color.Orange);
-            spriteBatch.DrawString(font1, "1:57", new Vector2(900, 200), Color.Orange);
-            spriteBatch.DrawString(font1, "2:10", new Vector2(900, 220), Color.Orange);
-            spriteBatch.DrawString(font1, "2:18", new Vector2(900, 240), Color.Orange);
-            spriteBatch.DrawString(font1, "2:35", new Vector2(900, 260), Color.Orange);
-            spriteBatch.DrawString(font1, "2:43", new Vector2(900, 280), Color.Orange);
-            spriteBatch.DrawString(font1, "2:59", new Vector2(900, 300), Color.Orange);
-            spriteBatch.DrawString(font1, "3:16", new Vector2(900, 320), Color.Orange);
-            spriteBatch.DrawString(font1, "3:24", new Vector2(900, 340), Color.Orange);
-            spriteBatch.DrawString(font1, "3:42", new Vector2(900, 360), Color.Orange);
-            spriteBatch.DrawString(font1, "4:17", new Vector2(900, 380), Color.Orange);
+                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + seconds, new Vector2(850, 5), Color.White);
+            //spriteBatch.DrawString(font1, "Potential Transition Times (approx.)", new Vector2(850, 100), Color.Orange);
+            //spriteBatch.DrawString(font1, "0:49", new Vector2(900, 120), Color.Orange);
+            //spriteBatch.DrawString(font1, "1:06", new Vector2(900, 140), Color.Orange);
+            //spriteBatch.DrawString(font1, "1:24", new Vector2(900, 160), Color.Orange);
+            //spriteBatch.DrawString(font1, "1:41", new Vector2(900, 180), Color.Orange);
+            //spriteBatch.DrawString(font1, "1:57", new Vector2(900, 200), Color.Orange);
+            //spriteBatch.DrawString(font1, "2:10", new Vector2(900, 220), Color.Orange);
+            //spriteBatch.DrawString(font1, "2:18", new Vector2(900, 240), Color.Orange);
+            //spriteBatch.DrawString(font1, "2:35", new Vector2(900, 260), Color.Orange);
+            //spriteBatch.DrawString(font1, "2:43", new Vector2(900, 280), Color.Orange);
+            //spriteBatch.DrawString(font1, "2:59", new Vector2(900, 300), Color.Orange);
+            //spriteBatch.DrawString(font1, "3:16", new Vector2(900, 320), Color.Orange);
+            //spriteBatch.DrawString(font1, "3:24", new Vector2(900, 340), Color.Orange);
+            //spriteBatch.DrawString(font1, "3:42", new Vector2(900, 360), Color.Orange);
+            //spriteBatch.DrawString(font1, "4:17", new Vector2(900, 380), Color.Orange);
 
             // health bar
+            float hpColorMultiplier = (player.Health / 100);
             Color healthBarColor;
-            if (player.Health >= 80)
-                healthBarColor = Color.Green;
-            else if (player.Health >= 60)
-                healthBarColor = Color.YellowGreen;
-            else if (player.Health >= 40)
-                healthBarColor = Color.Yellow;
-            else if (player.Health >= 20)
-                healthBarColor = Color.Orange;
+            if (player.Health >= 50)
+                healthBarColor = new Color(0, 255 * hpColorMultiplier, 0);
             else
-                healthBarColor = Color.Red;
+                healthBarColor = new Color(255 * hpColorMultiplier, 0, 0);
+            //if (player.Health >= 80)
+            //    healthBarColor = Color.Green;
+            //else if (player.Health >= 60)
+            //    healthBarColor = Color.YellowGreen;
+            //else if (player.Health >= 40)
+            //    healthBarColor = Color.Yellow;
+            //else if (player.Health >= 20)
+            //    healthBarColor = Color.Orange;
+            //else
+            //    healthBarColor = Color.Red;
 
             spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
             DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), healthBarColor, false);

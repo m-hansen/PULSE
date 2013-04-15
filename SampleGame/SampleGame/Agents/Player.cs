@@ -24,7 +24,7 @@ namespace SampleGame
 
         public Player()
         {
-            Health = 50.0f;
+            Health = 100.0f;
             Power = 100.0f;
         }
 
@@ -218,11 +218,11 @@ namespace SampleGame
 
             // power recharge rate
             //Power = MaxPower;
-            if (Power < MaxPower) Power += 0.10f;//0.08f;
+            if (Power < MaxPower) Power += 0.10f;
             else Power = MaxPower;
 
             // health recharge rate
-            if (Health < MaxHealth) Health += 0.015f;
+            if (Health < MaxHealth) Health += 0.02f;
             else Health = MaxHealth;
         }
 

@@ -367,7 +367,7 @@ namespace SampleGame
             //SetVisibleArea(new Vector2(), Width, Height);
 
             //PlayerStartPos = new Vector2(1850, 3000);
-            PlayerStartPos = new Vector2(550, 350);
+            PlayerStartPos = new Vector2(600, 350);
 
             //// inside left
             //LoadEnemyRanged(new Vector2(350, 150), new Vector2(350, 150), (float)(Math.PI / 2));
