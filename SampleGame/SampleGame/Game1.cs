@@ -30,10 +30,6 @@ namespace SampleGame
         double timer;           // for time elapsed
         double deltaT;          // for time elapsed
         Stopwatch stopwatch;    // for time elapsed
-
-        Texture2D skill1Texture;
-        Texture2D skill2Texture;
-        Texture2D skill4Texture;
          
         //Vector2? startPos = null;
         //Vector2? endPos = null;
@@ -89,6 +85,7 @@ namespace SampleGame
             player.Speed = 4.0f;                                                // setting forward - backward speed
             //player.InitializeSensors();                                         // initializes all sensors for the player object
             player.Health = 100;
+            player.HasControl = true;
 
             // ************ CREATING THE WALLS FOR THE ASSIGNMENT ********* //
             //int defaultWalls = 2;
@@ -127,11 +124,6 @@ namespace SampleGame
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
 
-            // load skill textures
-            skill1Texture = Content.Load<Texture2D>("Images\\skill1");
-            skill2Texture = Content.Load<Texture2D>("Images\\skill2");
-            skill4Texture = Content.Load<Texture2D>("Images\\skill4");
-
             Attack attack1 = new Attack();
             attack1.Active = true;
             attack1.Key = Keys.Space;
@@ -140,22 +132,24 @@ namespace SampleGame
             attack1.CoolDown = 50;
             attack1.Texture = Content.Load<Texture2D>("Images\\raindrop");
             attack1.Frames = 1;
-            attack1.MinDamage = 10;
-            attack1.MaxDamage = 15;
+            attack1.MinDamage = 5;
+            attack1.MaxDamage = 10;
             attack1.AttackCost = 1;
-            player.attackList.Add(attack1); 
+            player.attackList.Add(attack1);
 
-            Attack attack2 = new Attack();
-            attack2.Active = true;
-            attack2.Key = Keys.D2;
-            attack2.AttackType = Enums.AttackType.Explosion;
-            attack2.AttackSubType = Enums.AttackSubType.Default;
-            attack2.CoolDown = 1000;
-            attack2.Texture = Content.Load<Texture2D>("Images\\explosion1");
-            attack2.Frames = 6;
-            attack2.BoundingRect = new Rectangle(0, 0, 139, 107);
-            attack2.AttackCost = 10;
-            player.attackList.Add(attack2);
+            //Attack attack2 = new Attack();
+            //attack2.Active = true;
+            //attack2.Key = Keys.D2;
+            //attack2.AttackType = Enums.AttackType.Explosion;
+            //attack2.AttackSubType = Enums.AttackSubType.Default;
+            //attack2.CoolDown = 1000;
+            //attack2.Texture = Content.Load<Texture2D>("Images\\explosion1");
+            //attack2.IconTexture = Content.Load<Texture2D>("Images\\skill2");
+            //attack2.HasIcon = true;
+            //attack2.Frames = 6;
+            //attack2.BoundingRect = new Rectangle(0, 0, 139, 107);
+            //attack2.AttackCost = 10;
+            //player.attackList.Add(attack2);
 
             Attack attack3 = new Attack();
             attack3.Active = true;
@@ -164,9 +158,11 @@ namespace SampleGame
             attack3.AttackSubType = Enums.AttackSubType.BulletShield;
             attack3.CoolDown = 1500;
             attack3.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack3.AttackCost = 10;
-            attack3.MinDamage = 5;
-            attack3.MaxDamage = 10;
+            attack3.IconTexture = Content.Load<Texture2D>("Images\\skill1");
+            attack3.HasIcon = true;
+            attack3.AttackCost = 30;
+            attack3.MinDamage = 10;
+            attack3.MaxDamage = 15;
             player.attackList.Add(attack3);
 
             // ***** BULLET SPLITTING ***** //
@@ -182,17 +178,18 @@ namespace SampleGame
             //attack4.AttackCost = 0;
             //player.attackList.Add(attack4);
 
-            Attack attack5 = new Attack();
-            attack5.Active = true;
-            attack5.Key = Keys.D4;
-            attack5.AttackType = Enums.AttackType.Bullet;
-            attack5.AttackSubType = Enums.AttackSubType.Nuke;
-            attack5.CoolDown = 3000;
-            attack5.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack5.AttackCost = 40;
-            attack5.MinDamage = 1;
-            attack5.MaxDamage = 5;
-            player.attackList.Add(attack5);
+            //Attack attack5 = new Attack();
+            //attack5.Active = true;
+            //attack5.Key = Keys.D4;
+            //attack5.AttackType = Enums.AttackType.Bullet;
+            //attack5.AttackSubType = Enums.AttackSubType.Nuke;
+            //attack5.CoolDown = 3000;
+            //attack5.Texture = Content.Load<Texture2D>("Images\\raindrop");
+            //attack5.IconTexture = Content.Load<Texture2D>("Images\\skill4");
+            //attack5.AttackCost = 40;
+            //attack5.MinDamage = 50;
+            //attack5.MaxDamage = 100;
+            //player.attackList.Add(attack5);
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
@@ -273,6 +270,8 @@ namespace SampleGame
                 timer += deltaT;
             }
 
+            levelInfo.CheckSongStage(stopwatch);
+
             // update player
             player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
                           levelInfo.AgentList, levelInfo.Width, levelInfo.Height);
@@ -281,7 +280,7 @@ namespace SampleGame
             List<GameAgent> walls = levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Wall).ToList();
 
             // updating each moving object
-            foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type != (int)Enums.AgentType.Wall).ToList())
+            foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Enemy).OrderBy(ga => Vector2.Distance(player.Position, ga.Position)).ToList())
                     ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
 
             // getting the updated visible rect
@@ -386,9 +385,9 @@ namespace SampleGame
             DrawDebuggingInformation();
 
             // draw skill sprites
-            spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
-            spriteBatch.Draw(skill2Texture, new Rectangle(500, 550, 50, 50), Color.White);
-            spriteBatch.Draw(skill4Texture, new Rectangle(600, 550, 50, 50), Color.White);
+            //spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
+            //spriteBatch.Draw(skill2Texture, new Rectangle(500, 550, 50, 50), Color.White);
+            //spriteBatch.Draw(skill4Texture, new Rectangle(600, 550, 50, 50), Color.White);
 
 
             spriteBatch.End();   
@@ -455,20 +454,20 @@ namespace SampleGame
             DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
             DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, true);
 
-            Color cooldownColor = new Color(140, 0, 0, 80);
+            //Color cooldownColor = new Color(140, 0, 0, 80);
 
             // skills bar
-            DrawingHelper.DrawRectangle(new Rectangle(450, 600 - (int)player.attackList[2].ActiveCoolDown / 30, 50, (player.attackList[2].ActiveCoolDown > 0) ? (int)player.attackList[2].ActiveCoolDown / 30 : 0), cooldownColor, true);
-            DrawingHelper.DrawRectangle(new Rectangle(450, 550, 49, 50), Color.White, false);
+            //DrawingHelper.DrawRectangle(new Rectangle(450, 600 - (int)player.attackList[2].ActiveCoolDown / 30, 50, (player.attackList[2].ActiveCoolDown > 0) ? (int)player.attackList[2].ActiveCoolDown / 30 : 0), cooldownColor, true);
+            //DrawingHelper.DrawRectangle(new Rectangle(450, 550, 49, 50), Color.White, false);
 
-            DrawingHelper.DrawRectangle(new Rectangle(500, 600 - (int)player.attackList[1].ActiveCoolDown / 20, 50, (player.attackList[1].ActiveCoolDown > 0) ? (int)player.attackList[1].ActiveCoolDown / 20 : 0), cooldownColor, true);
-            DrawingHelper.DrawRectangle(new Rectangle(500, 550, 49, 50), Color.White, false);
+            //DrawingHelper.DrawRectangle(new Rectangle(500, 600 - (int)player.attackList[1].ActiveCoolDown / 20, 50, (player.attackList[1].ActiveCoolDown > 0) ? (int)player.attackList[1].ActiveCoolDown / 20 : 0), cooldownColor, true);
+            //DrawingHelper.DrawRectangle(new Rectangle(500, 550, 49, 50), Color.White, false);
 
-            DrawingHelper.DrawRectangle(new Rectangle(550, 550, 50, 50), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
-            DrawingHelper.DrawRectangle(new Rectangle(550, 550, 49, 50), Color.White, false);
+            //DrawingHelper.DrawRectangle(new Rectangle(550, 550, 50, 50), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
+            //DrawingHelper.DrawRectangle(new Rectangle(550, 550, 49, 50), Color.White, false);
 
-            DrawingHelper.DrawRectangle(new Rectangle(600, 600 - (int)player.attackList[3].ActiveCoolDown / 60, 50, (player.attackList[3].ActiveCoolDown > 0) ? (int)player.attackList[3].ActiveCoolDown / 60 : 0), cooldownColor, true);
-            DrawingHelper.DrawRectangle(new Rectangle(600, 550, 49, 50), Color.White, false);
+            //DrawingHelper.DrawRectangle(new Rectangle(600, 600 - (int)player.attackList[3].ActiveCoolDown / 60, 50, (player.attackList[3].ActiveCoolDown > 0) ? (int)player.attackList[3].ActiveCoolDown / 60 : 0), cooldownColor, true);
+            //DrawingHelper.DrawRectangle(new Rectangle(600, 550, 49, 50), Color.White, false);
         }
 
         private int timeInMinutes(double timeRemaining)
@@ -523,7 +522,7 @@ namespace SampleGame
             Vector2 playerHeading = Utils.CalculateRotatedMovement(new Vector2(1, 0), player.Rotation);
 
             spriteBatch.DrawString(font1, "Player Pos: " + Math.Round(player.Position.X, 4) + ", " + Math.Round(player.Position.Y, 4), new Vector2(20, 20), Color.LightGreen, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
-            spriteBatch.DrawString(font1, "Player Heading: " + Math.Round(playerHeading.X, 4) + ", " + Math.Round(playerHeading.Y, 4), new Vector2(20, 40), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font1, "Player Heading: " + Math.Round(playerHeading.X, 4) + ", " + Math.Round(playerHeading.Y, 4) + ", " + Math.Round(player.Rotation, 4), new Vector2(20, 40), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font1, "Player Health: " + player.Health , new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             
             //spriteBatch.DrawString(font1, "Press H to show navigation nodes.", new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);

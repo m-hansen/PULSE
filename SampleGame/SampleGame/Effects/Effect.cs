@@ -40,7 +40,7 @@ namespace SampleGame.Effects
             }
         }
 
-        public virtual Effect CloneToDirection(float offset, int type)
+        public virtual Effect CloneToDirection(float offset, Enums.AttackType type, Enums.AttackSubType subType)
         {
             return new Effect() { Active = false };
         }

@@ -14,9 +14,9 @@ namespace SampleGame.Effects
         public int MaxDamage;
         public int MinDamage;
         public int TimeElapsed;
-        public int SplitsRemaining = 2;
+        public int SplitsRemaining = 3;
 
-        public override Effect CloneToDirection(float offset, int type)
+        public override Effect CloneToDirection(float offset, Enums.AttackType type, Enums.AttackSubType subType)
         {
             Bullet bullet = new Bullet();
             bullet.LoadEffect(Texture);
@@ -27,10 +27,8 @@ namespace SampleGame.Effects
             bullet.MinDamage = MinDamage;
             bullet.MaxDamage = MaxDamage;
             bullet.CastedBy = CastedBy;
-            if (type == (int)Enums.AttackSubType.Nuke || type == (int)Enums.AttackSubType.NukeSpawn)
-            {
-                bullet.EffectSubType = Enums.AttackSubType.NukeSpawn;
-            }
+            bullet.EffectType = type;
+            bullet.EffectSubType = subType;
 
             return bullet;
         }
@@ -61,10 +59,10 @@ namespace SampleGame.Effects
 
                     foreach (GameAgent agent in intersectingAgentList)
                     {
-                        if (agent.Type != (int)Enums.AgentType.Wall)
+                        if (agent.Type == (int)Enums.AgentType.Enemy)
                         {
                             ((MovingAgent)agent).TakeDamage(MinDamage + rand.Next(MaxDamage - MinDamage));
-                            Active = false;
+                            if (EffectSubType != Enums.AttackSubType.Nuke && EffectSubType != Enums.AttackSubType.NukeSpawn) Active = false;
                         }
                     }
                 }

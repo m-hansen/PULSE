@@ -16,6 +16,10 @@ namespace SampleGame.Agents
 
         public List<Attack> attackList = new List<Attack>();
         public Enums.EnemyState State;
+        public bool IsUsingAttacks;
+        public int Wave;
+        public int Spacing; // padding outside of the bounds so that agent's aren't grouped too closely
+        public int DropType;
 
         #endregion
 
@@ -30,7 +34,8 @@ namespace SampleGame.Agents
                 case Enums.EnemyState.AggressiveCloseToPlayer: AggressiveCloseToPlayerUpdate(gametime); break;
                 case Enums.EnemyState.AggressiveCirclePlayer:  AggressiveCirclePlayerUpdate(gametime);  break;
                 case Enums.EnemyState.RoamRandom:              RoamRandomUpdate(gametime);              break;
-                case Enums.EnemyState.Ranged:                  RangedUpdate(gametime);                  break;   
+                case Enums.EnemyState.Ranged:                  RangedUpdate(gametime);                  break;  
+                case Enums.EnemyState.RangedNoAttack:          RangedNoAttackUpdate(gametime);          break;
             }
 
  	        base.Update(gametime, playerObj, agentList, nodeSize);
@@ -44,7 +49,7 @@ namespace SampleGame.Agents
         {
             // updating rotation & position for moving towards target position
             Rotation = Utils.GetRotationToTarget(TargetPosition, Position);
-            Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
+            Position = GetNextPosition(Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed + Position);
 
             // getting access to our global variables
             Game1 game = Game1.Current;
@@ -76,7 +81,7 @@ namespace SampleGame.Agents
 
             // updating rotation & position for moving towards target position
             Rotation = Utils.GetRotationToTarget(playerObj.Position, Position);
-            Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
+            Position = GetNextPosition(Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed + Position);
 
             // if this agent intersects the player
             if (Bounds.Intersects(playerObj.Bounds))
@@ -114,7 +119,16 @@ namespace SampleGame.Agents
                 // random movement?
             }
 
-            UseAttack(gametime);
+            // if this agent intersects the player
+            if (Bounds.Intersects(playerObj.Bounds))
+            {
+                // the player should take damage equal to the health of the enemy
+                // and the enemy should explode
+                playerObj.TakeDamage((int)Health);
+                TakeDamage(Health);
+            }
+
+            if (IsUsingAttacks) UseAttack(gametime);
         }
 
         #endregion
@@ -139,7 +153,16 @@ namespace SampleGame.Agents
                 // random movement?
             }
 
-            UseAttack(gametime);
+            // if this agent intersects the player
+            if (Bounds.Intersects(playerObj.Bounds))
+            {
+                // the player should take damage equal to the health of the enemy
+                // and the enemy should explode
+                playerObj.TakeDamage((int)Health);
+                TakeDamage(Health);
+            }
+
+            if (IsUsingAttacks) UseAttack(gametime);
         }
 
         #endregion
@@ -151,27 +174,49 @@ namespace SampleGame.Agents
             // NOTE: Could implement a target rotation and rotation speed to make this not
             // turn immediately
 
+            Player playerObj = Game1.Current.player;
+
             // if the agent is still not close to it's target
             if (Vector2.Distance(TargetPosition, Position) > MeleeDistance)
             {
-                Rotation = Utils.GetRotationToTarget(TargetPosition, Position);
-                Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
+                float rotToTarget = Utils.GetRotationToTarget(TargetPosition, Position);
+                Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), rotToTarget) * MaxSpeed;
+                Rotation = Utils.GetRotationToTarget(playerObj.Position, Position);
+            }
+            else if (timeAtCurrentNode > 0)
+            {
+                Rotation = Utils.GetRotationToTarget(playerObj.Position, Position);
+                timeAtCurrentNode--;
             }
             else
             {
+                Rectangle visibleRect = Game1.Current.levelInfo.VisibleRect;
+
                 Random rand = new Random();
 
                 TargetPosition = new Vector2
                 (
-                       rand.Next(FrameWidth, Game1.Current.levelInfo.Width - FrameWidth),
-                       rand.Next(FrameHeight, Game1.Current.levelInfo.Height - FrameHeight)
+                       rand.Next(visibleRect.Top + FrameWidth, visibleRect.Right - FrameWidth),
+                       rand.Next(visibleRect.Left + FrameHeight, visibleRect.Bottom - FrameHeight)
                 );
 
-                Rotation = Utils.GetRotationToTarget(TargetPosition, Position);
-                Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
+                float rotToTarget = Utils.GetRotationToTarget(TargetPosition, Position);
+                Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), rotToTarget) * MaxSpeed;
+                Rotation = Utils.GetRotationToTarget(playerObj.Position, Position);
+
+                timeAtCurrentNode = rand.Next(TimeAtEachPoint);
             }
 
-            UseAttack(gametime);
+            // if this agent intersects the player
+            if (Bounds.Intersects(playerObj.Bounds))
+            {
+                // the player should take damage equal to the health of the enemy
+                // and the enemy should explode
+                playerObj.TakeDamage((int)Health);
+                TakeDamage(Health);
+            }
+
+            if (IsUsingAttacks) UseAttack(gametime);
         }
 
         #endregion
@@ -188,7 +233,47 @@ namespace SampleGame.Agents
             else
             {
                 Rotation = Utils.GetRotationToTarget(Game1.Current.player.Position, Position);
-                UseAttack(gametime);
+            }
+
+            Player playerObj = Game1.Current.player;
+
+            // if this agent intersects the player
+            if (Bounds.Intersects(playerObj.Bounds))
+            {
+                // the player should take damage equal to the health of the enemy
+                // and the enemy should explode
+                playerObj.TakeDamage((int)Health);
+                TakeDamage(Health);
+            }
+
+            if (IsUsingAttacks) UseAttack(gametime);
+        }
+
+        #endregion
+
+        #region AI State: Ranged No Attack Methods
+
+        private void RangedNoAttackUpdate(GameTime gametime)
+        {
+            if (Vector2.Distance(TargetPosition, Position) > MeleeDistance)
+            {
+                Rotation = Utils.GetRotationToTarget(TargetPosition, Position);
+                Position += Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed;
+            }
+            else
+            {
+                Rotation = TargetRotation;
+            }
+
+            Player playerObj = Game1.Current.player;
+
+            // if this agent intersects the player
+            if (Bounds.Intersects(playerObj.Bounds))
+            {
+                // the player should take damage equal to the health of the enemy
+                // and the enemy should explode
+                playerObj.TakeDamage((int)Health);
+                TakeDamage(Health);
             }
         }
 
@@ -204,9 +289,14 @@ namespace SampleGame.Agents
             // if the enemy has no more health
             if (Health <= 0)
             {
+                if (DropType > 0)
+                {
+                    Game1.Current.levelInfo.AgentList.Add(new Item(DropType, Position));
+                }
+
                 // creating an explosion effect
                 Explosion explosion = new Explosion();
-                explosion.LoadExplosion(Game1.Current.Content.Load<Texture2D>("Images\\explosion1"), new Rectangle(0, 0, 139, 107), 6);
+                explosion.LoadExplosion(Game1.Current.Content.Load<Texture2D>("Images\\explosion7"), new Rectangle(0, 0, 40, 40), 11);
                 explosion.Position = Position;
                 explosion.AnimationInterval = new TimeSpan(1100000);
 
@@ -216,6 +306,41 @@ namespace SampleGame.Agents
                 // removing / destroying the enemy
                 Game1.Current.levelInfo.AgentList.Remove(this);
             }
+        }
+
+        #endregion
+
+        #region Steering Behaviors
+
+        private Vector2 GetNextPosition(Vector2 targetPos)
+        {
+            return targetPos;
+
+            //Rectangle targetBounds = new Rectangle
+            //(
+            //    (int)(targetPos.X - Origin.X * Scale - Spacing),
+            //    (int)(targetPos.Y - Origin.Y * Scale - Spacing),
+            //    (int)(rects == null ? Texture.Width * Scale : rects[0].Width * Scale + 2 * Spacing),
+            //    (int)(rects == null ? Texture.Height * Scale : rects[0].Height * Scale + 2 * Spacing)
+            //);
+
+            //GameAgent intersectingAgent = Game1.Current.levelInfo.AgentList.Where(ga => ga.Bounds.Intersects(targetBounds) && ga != this).FirstOrDefault();
+
+            //if (intersectingAgent == null) return targetPos;
+
+            //List<GameAgent> agentList = Game1.Current.levelInfo.AgentList;
+
+            //List<TargetVectorHelper> targetVectorHelperList = new List<TargetVectorHelper>()
+            //{
+            //    new TargetVectorHelper(Enums.Direction.Up, Position, Origin, Scale, Spacing, Bounds.Width, Bounds.Height, MaxSpeed, targetPos, agentList),
+            //    new TargetVectorHelper(Enums.Direction.Left, Position, Origin, Scale, Spacing, Bounds.Width, Bounds.Height, MaxSpeed, targetPos, agentList),
+            //    new TargetVectorHelper(Enums.Direction.Down, Position, Origin, Scale, Spacing, Bounds.Width, Bounds.Height, MaxSpeed, targetPos, agentList),
+            //    new TargetVectorHelper(Enums.Direction.Right, Position, Origin, Scale, Spacing, Bounds.Width, Bounds.Height, MaxSpeed, targetPos, agentList)
+            //};
+
+            //targetVectorHelperList = targetVectorHelperList.Where(tvh => !tvh.IsIntersecting).OrderBy(tvh => tvh.TargetDistance).ToList();
+
+            //return targetVectorHelperList.Count < 1 ? Position : targetVectorHelperList[0].TargetPosition;
         }
 
         #endregion
@@ -230,7 +355,7 @@ namespace SampleGame.Agents
             {
                 if (!usedAttack && attack.ActiveCoolDown <= 0)
                 {
-                    attack.UseAttack(Enums.AgentType.NPC, this);
+                    attack.UseAttack(Enums.AgentType.Enemy, this);
 
                     attack.ActiveCoolDown = attack.CoolDown + (new Random()).Next((int)(attack.CoolDown * 0.2));
 

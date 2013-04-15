@@ -48,7 +48,7 @@ namespace SampleGame
             endPoint2 = Utils.CalculateRotatedMovement(new Vector2(0, -1), playerRot + Rotation2) * MaxDistance + playerPos;
 
             // pie slice sensors only work for npcs
-            List<GameAgent> npcs = agentAIList.Where(a => a.Type == (int)Enums.AgentType.NPC).ToList();
+            List<GameAgent> npcs = agentAIList.Where(a => a.Type == (int)Enums.AgentType.Enemy).ToList();
 
             foreach (MovingAgent agent in npcs)
             {

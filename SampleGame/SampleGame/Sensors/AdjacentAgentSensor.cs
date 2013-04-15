@@ -38,7 +38,7 @@ namespace SampleGame
             inRangeInfoList.Clear();
             isInRange = false;
 
-            List<GameAgent> npcs = agentAIList.Where(a => a.Type == (int)Enums.AgentType.NPC).ToList();
+            List<GameAgent> npcs = agentAIList.Where(a => a.Type == (int)Enums.AgentType.Enemy).ToList();
 
             // check if agent is within the radius
             foreach (MovingAgent agent in npcs)

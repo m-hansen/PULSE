@@ -19,11 +19,14 @@ namespace SampleGame.Attacks
         public int CoolDown;        // in miliseconds
         public bool Active = true;
         public Texture2D Texture;
+        public Texture2D IconTexture;
+        public bool HasIcon = false;
         public Rectangle? BoundingRect = null;
         public int Frames;
         public int MinDamage;
         public int MaxDamage;
         public int AttackCost;
+        public Color Color = Color.White;
 
         public int ActiveCoolDown = 0;
 
@@ -41,8 +44,7 @@ namespace SampleGame.Attacks
                     ActiveCoolDown -= gameTime.ElapsedGameTime.Milliseconds;
                 }
                 else if ((keyboard.IsKeyDown(Key) ||
-                    (mouse.LeftButton == ButtonState.Pressed && AttackSubType == Enums.AttackSubType.TriBullet) ||
-                    (mouse.RightButton == ButtonState.Pressed && AttackSubType == Enums.AttackSubType.Nuke))
+                    (mouse.LeftButton == ButtonState.Pressed && AttackSubType == Enums.AttackSubType.TriBullet))
                     && Game1.Current.player.Power > AttackCost)
                 {
                     AddAttackToActiveEffects(Enums.AgentType.Player, Game1.Current.player);
@@ -72,11 +74,11 @@ namespace SampleGame.Attacks
 
                     switch (AttackSubType)
                     {
-                        case Enums.AttackSubType.Default:       LoadDefaultBullet(castedBy, agent);  break;
-                        case Enums.AttackSubType.TriBullet:     LoadTriBullet(castedBy, agent);      break;
-                        case Enums.AttackSubType.SplitBullets:  LoadSplitBullets(castedBy, agent);   break;
-                        case Enums.AttackSubType.Nuke:          LoadNuke(castedBy, agent);           break;
-                        case Enums.AttackSubType.BulletShield:  LoadBulletShield(castedBy, agent);   break;
+                        case Enums.AttackSubType.Default:       LoadDefaultBullet(castedBy, agent);    break;
+                        case Enums.AttackSubType.TriBullet:     LoadTriBullet(castedBy, agent);        break;
+                        case Enums.AttackSubType.SplitBullets:  LoadSplitBullets(castedBy, agent);     break;
+                        case Enums.AttackSubType.Nuke:          LoadNuke(castedBy, agent);             break;
+                        case Enums.AttackSubType.BulletShield:  LoadBulletShield(castedBy, agent);     break;
                     }
 
                     break;
@@ -85,7 +87,16 @@ namespace SampleGame.Attacks
 
                     switch (AttackSubType)
                     {
-                        case Enums.AttackSubType.Default: LoadDefaultExplosion(castedBy, agent); break;
+                        case Enums.AttackSubType.Default:       LoadDefaultExplosion(castedBy, agent); break;
+                    }
+
+                    break;
+
+                case Enums.AttackType.MovementEffect:
+
+                    switch (AttackSubType)
+                    {
+                        case Enums.AttackSubType.Teleport:      UseTeleport(castedBy, agent);          break;
                     }
 
                     break;
@@ -99,7 +110,7 @@ namespace SampleGame.Attacks
             bullet.Position = agent.Position + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 2)), agent.Rotation);
             bullet.Rotation = agent.Rotation;
             bullet.MaxSpeed = castedBy == Enums.AgentType.Player ? 8 : 6;
-            bullet.Color = Color.White;
+            bullet.Color = Color;
             bullet.MinDamage = MinDamage;
             bullet.MaxDamage = MaxDamage;
             bullet.EffectType = AttackType;
@@ -115,11 +126,11 @@ namespace SampleGame.Attacks
             int bulletSpeed = 8;
             float angleModifier = 0.25f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Random rand = new Random();
                 Color color = (i % 2 == 0) ? new Color(rand.Next(180, 255), rand.Next(180, 255), rand.Next(180, 255), 255) : new Color(rand.Next(0, 100), rand.Next(0, 100), rand.Next(0, 100), 255);
-                
+
                 Bullet bullet = new Bullet();
                 bullet.LoadEffect(Texture);
                 bullet.Position = agent.Position + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 2)), agent.Rotation);
@@ -135,6 +146,7 @@ namespace SampleGame.Attacks
             }
 
             Game1.Current.EffectComponent.NukeSplit();
+
             ActiveCoolDown = CoolDown;
         }
 
@@ -163,53 +175,56 @@ namespace SampleGame.Attacks
             ActiveCoolDown = CoolDown;
         }
 
+        private List<Color> GetBulletColorListByAgentType(Enums.AgentType castedBy)
+        {
+            switch (castedBy)
+            {
+                case Enums.AgentType.Player:
+
+                    return new List<Color>() 
+                    {
+                        Color.AliceBlue,
+                        Color.Purple,
+                        Color.LightBlue,
+                        Color.Blue,
+                        Color.LightGreen,
+                        Color.Green,
+                        Color.WhiteSmoke,
+                        Color.White
+                    };
+
+                case Enums.AgentType.Enemy:
+
+                    return new List<Color>()
+                    {
+                        Color.LightYellow,
+                        Color.Yellow,
+                        Color.LightGoldenrodYellow,
+                        Color.Orange,
+                        Color.Pink,
+                        Color.Red
+                    };
+
+                default:
+
+                    return new List<Color>()
+                    {
+                        Color.White,
+                        Color.White
+                    };
+            }
+        }
+
         private void LoadTriBullet(Enums.AgentType castedBy, MovingAgent agent)
         {
+            List<Color> colorList = GetBulletColorListByAgentType(castedBy);
+
             int colorChangeInterval = 100; // 100 seems like a good interval - 20 to demo
-            
-            if (bulletCount == 6 * colorChangeInterval)
-            {
-                innerColor = Color.LightBlue;
-                outerColor = Color.Blue;
-                bulletCount = 0;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == 5 * colorChangeInterval)
-            {
-                innerColor = Color.LightGreen;
-                outerColor = Color.Green;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == 4 * colorChangeInterval)
-            {
-                innerColor = Color.LightYellow;
-                outerColor = Color.Yellow;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == 3 * colorChangeInterval)
-            {
-                innerColor = Color.LightGoldenrodYellow;
-                outerColor = Color.Orange;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == 2 * colorChangeInterval)
-            {
-                innerColor = Color.Pink;
-                outerColor = Color.Red;
-               // LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == colorChangeInterval)
-            {
-                innerColor = Color.Pink;
-                outerColor = Color.Purple;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
-            else if (bulletCount == 0)
-            {
-                innerColor = Color.LightBlue;
-                outerColor = Color.Blue;
-                //LoadNuke(castedBy, agent, outerColor);
-            }
+
+            if (bulletCount > colorChangeInterval * colorList.Count / 2) bulletCount = 0;
+
+            innerColor = colorList[(2 * (bulletCount / colorChangeInterval)) % colorList.Count];
+            outerColor = colorList[(2 * (bulletCount / colorChangeInterval) + 1) % colorList.Count];
 
             int bulletSpeed = 8;
             float angleModifier = 0.25f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
@@ -294,6 +309,42 @@ namespace SampleGame.Attacks
 
                 ActiveCoolDown = CoolDown;
             }
+        }
+
+        private void UseTeleport(Enums.AgentType castedBy, MovingAgent agent)
+        {
+            Game1 game = Game1.Current;
+
+            int teleportDistance = 100;
+
+            Vector2 targetPos = agent.Position + Utils.CalculateRotatedMovement(new Vector2(0, -1), agent.Rotation) * teleportDistance;
+
+            if (!game.levelInfo.VisibleRect.Contains(new Point((int)targetPos.X, (int)targetPos.Y)))
+            {
+                targetPos = FixTargetMovePositionForLevelBounds(targetPos, agent.Bounds.Width, agent.Bounds.Height, game.levelInfo.VisibleRect);
+            }
+        }
+
+        private Vector2 FixTargetMovePositionForLevelBounds(Vector2 targetPos, int agentWidth, int agentHeight, Rectangle visibleRect)
+        {
+            Rectangle targetBounds = new Rectangle
+            (
+                (int)(targetPos.X - (agentWidth / 2)),
+                (int)(targetPos.Y - (agentHeight / 2)),
+                agentWidth,
+                agentHeight
+            );
+
+            if (targetPos.X < visibleRect.Left)
+            {
+
+            }
+            else if (targetPos.X > visibleRect.Right)
+            {
+
+            }
+
+            return targetPos;
         }
     }
 }

@@ -111,11 +111,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agents\Enemy.cs" />
+    <Compile Include="Agents\Item.cs" />
     <Compile Include="Attacks\Attack.cs" />
     <Compile Include="Effects\Bullet.cs" />
     <Compile Include="Effects\Effect.cs" />
     <Compile Include="Effects\EffectComponent.cs" />
     <Compile Include="Effects\Explosion.cs" />
+    <Compile Include="Helpers\TargetVectorHelper.cs" />
+    <Compile Include="Helpers\TextureInfo.cs" />
+    <Compile Include="LevelTimeSpan.cs" />
     <Compile Include="Sensors\AdjacentAgentSensor.cs" />
     <Compile Include="Agents\GameAgent.cs" />
     <Compile Include="Helpers\Enums.cs" />

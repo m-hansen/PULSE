@@ -10,7 +10,8 @@ namespace SampleGame
         public enum AttackType
         {
             Bullet = 0,
-            Explosion = 1
+            Explosion = 1,
+            MovementEffect = 2
         }
 
         public enum AttackSubType
@@ -20,7 +21,8 @@ namespace SampleGame
             SplitBullets = 2,
             Nuke = 3,
             NukeSpawn = 4,
-            BulletShield = 5
+            BulletShield = 5,
+            Teleport = 6
         }
 
         public enum SensorType
@@ -33,9 +35,9 @@ namespace SampleGame
         public enum AgentType
         {
             Wall = 0,
-            NPC = 1,
-            Patrol = 2,
-            Player = 3
+            Enemy = 1,
+            Player = 2,
+            Item = 3
         }
 
         public enum Deceleration
@@ -61,7 +63,24 @@ namespace SampleGame
             RoamRandom = 12,
             RoamRandomNoAttack = 13,
             Ranged = 14,
-            Boss = 15
+            RangedNoAttack = 15,
+            Boss = 16
+        }
+
+        public enum Direction
+        {
+            Up = 0,
+            Left = 1,
+            Down = 2,
+            Right = 3
+        }
+
+        public enum ItemType
+        {
+            NukeAttack = 1,
+            HealthPowerUp = 2,
+            EnergyPowerUp = 3,
+            TeleportSpell = 4
         }
     }
 }

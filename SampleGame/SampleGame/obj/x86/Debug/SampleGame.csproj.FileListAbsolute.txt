@@ -385,3 +385,68 @@ C:\Users\Matthew\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\
 C:\Users\Matthew\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.xnb
 C:\Users\Matthew\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma
 C:\Users\Matthew\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_shattered.wma
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\SampleGame.exe
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\SampleGame.pdb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\DrawingHelper.dll
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\SampleGame.exe
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\SampleGame.pdb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\kamikaze1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\follower1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\nuke_icon.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion7.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship1.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship2.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\health_icon.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\energy_icon.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_icon.xnb
+C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_image.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\kamikaze1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\follower1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\nuke_icon.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion7.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship1.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship2.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\health_icon.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\energy_icon.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_icon.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_image.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\SampleGame.exe
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\SampleGame.pdb
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\bin\x86\Debug\DrawingHelper.dll
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\SampleGame.csprojResolveAssemblyReference.cache
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\SampleGame.exe
+C:\Users\Matt\Desktop\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGame\obj\x86\Debug\SampleGame.pdb
