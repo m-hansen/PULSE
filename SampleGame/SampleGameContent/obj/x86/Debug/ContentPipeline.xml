@@ -245,6 +245,15 @@
       <Extra>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
       <Time>2013-04-14T23:51:24.7399588-04:00</Time>
     </Item>
+    <Item>
+      <Source>Audio\beep.mp3</Source>
+      <Name>Audio\beep</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\beep.xnb</Output>
+      <Time>2013-04-18T23:11:51.2222433-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -260,7 +260,7 @@ namespace SampleGame
 
         public override void TakeDamage(float damage)
         {
-            Game1.Current.PlayerHitSound.Play();
+            //Game1.Current.PlayerHitSound.Play();
             Health -= damage;
 
             if (Health <= 0)
@@ -271,38 +271,41 @@ namespace SampleGame
 
         public override void Draw(SpriteBatch sprites, SpriteFont font1, Rectangle visibleRect)
         {
-            Point point = new Point(450, 550);
-            int width = 52;
-            int height = 52;
-            int padding = 1;
-            Color cooldownColor = new Color(140, 0, 0, 80);
-
-            foreach (Attack attack in attackList.Where(a => a.HasIcon).ToList())
+            if (!Game1.Current.IsTitleScreen)
             {
-                // draws the cooldown rect
-                if (attack.ActiveCoolDown > 0)
-                {
-                    Rectangle targetRect = new Rectangle
-                    (
-                        point.X + padding,
-                        point.Y + padding + height - (height * attack.ActiveCoolDown / attack.CoolDown),
-                        width - 2 * padding,
-                        (height * attack.ActiveCoolDown / attack.CoolDown) - 2 * padding
-                    );
+                Point point = new Point(450, 550);
+                int width = 52;
+                int height = 52;
+                int padding = 1;
+                Color cooldownColor = new Color(140, 0, 0, 80);
 
-                    DrawingHelper.DrawRectangle(targetRect, cooldownColor, true);
+                foreach (Attack attack in attackList.Where(a => a.HasIcon).ToList())
+                {
+                    // draws the cooldown rect
+                    if (attack.ActiveCoolDown > 0)
+                    {
+                        Rectangle targetRect = new Rectangle
+                        (
+                            point.X + padding,
+                            point.Y + padding + height - (height * attack.ActiveCoolDown / attack.CoolDown),
+                            width - 2 * padding,
+                            (height * attack.ActiveCoolDown / attack.CoolDown) - 2 * padding
+                        );
+
+                        DrawingHelper.DrawRectangle(targetRect, cooldownColor, true);
+                    }
+
+                    // draws the outline box
+                    DrawingHelper.DrawRectangle(new Rectangle(point.X, point.Y, width, height), Color.White, false);
+
+                    // draws the attack icon texture
+                    sprites.Draw(attack.IconTexture, new Rectangle(point.X + padding, point.Y + padding, width - 2 * padding, height - 2 * padding), Color.White);
+
+                    point.X += width;
                 }
 
-                // draws the outline box
-                DrawingHelper.DrawRectangle(new Rectangle(point.X, point.Y, width, height), Color.White, false);
-
-                // draws the attack icon texture
-                sprites.Draw(attack.IconTexture, new Rectangle(point.X + padding, point.Y + padding, width - 2 * padding, height - 2 * padding), Color.White);
-
-                point.X += width;
+                base.Draw(sprites, font1, visibleRect);
             }
-
-            base.Draw(sprites, font1, visibleRect);
         }
     }
 }

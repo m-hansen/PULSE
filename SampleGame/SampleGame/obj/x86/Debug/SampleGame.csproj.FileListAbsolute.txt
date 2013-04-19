@@ -459,3 +459,4 @@ C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Ima
 C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb
 C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb
 C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma
+C:\Users\Matt\Desktop\samplegame\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\beep.xnb

@@ -27,6 +27,11 @@ namespace SampleGame
         Texture2D crosshairTexture;
         Song backgroundMusic;
         bool songStart = false;
+        bool isCountdown = false;
+        double countdown = 3;
+        Stopwatch sw = new Stopwatch();
+        SoundEffect countdownSound;
+        
         double timer;           // for time elapsed
         double deltaT;          // for time elapsed
         Stopwatch stopwatch;    // for time elapsed
@@ -48,6 +53,7 @@ namespace SampleGame
         public LevelInfo levelInfo = new LevelInfo();
         public SpriteFont font1;
         public SoundEffect PlayerHitSound;
+        public bool IsTitleScreen = true;
 
         public Game1()
         {
@@ -118,8 +124,9 @@ namespace SampleGame
             // loading the font to display text on the screen
             font1 = Content.Load<SpriteFont>("fonts/Font1");
 
-            // load player hit sound
+            // load sounds
             PlayerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
+            countdownSound = Content.Load<SoundEffect>("Audio\\beep");
 
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
@@ -134,7 +141,7 @@ namespace SampleGame
             attack1.Frames = 1;
             attack1.MinDamage = 5;
             attack1.MaxDamage = 10;
-            attack1.AttackCost = 1;
+            attack1.AttackCost = 0;
             player.attackList.Add(attack1);
 
             //Attack attack2 = new Attack();
@@ -193,6 +200,7 @@ namespace SampleGame
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
+            #region load walls for previous assignments
             // ************ LOADING THE WALLS FOR THE ASSIGNMENT ********* //
 
             //Random rnd = new Random();
@@ -228,6 +236,7 @@ namespace SampleGame
             //}
 
             // ********* END LOADING THE WALLS FOR THE ASSIGNMENT ******** //
+            #endregion
 
             //debugNodeTexture = this.Content.Load<Texture2D>("Images\\10_by_10");
 
@@ -242,13 +251,6 @@ namespace SampleGame
 
         protected override void Update(GameTime gameTime)
         {
-            // begin playing background music
-            if (!songStart)
-            {
-                MediaPlayer.Play(backgroundMusic);
-                songStart = true;
-            }
-
             // Allows the game to exit
             if ((keyboardStateCurrent.IsKeyUp(Keys.Escape) && keyboardStatePrevious.IsKeyDown(Keys.Escape)) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -260,110 +262,148 @@ namespace SampleGame
             // Update mouse state
             mouseStatePrevious = mouseStateCurrent;
             mouseStateCurrent = Mouse.GetState();
-
-            // update timer
-            if (!stopwatch.IsRunning)
-                stopwatch.Start();
-            else
-            {
-                deltaT = stopwatch.Elapsed.TotalSeconds - timer;
-                timer += deltaT;
-            }
-
-            levelInfo.CheckSongStage(stopwatch);
-
             // update player
             player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
                           levelInfo.AgentList, levelInfo.Width, levelInfo.Height);
+            if (IsTitleScreen)
+            {
+                if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
+                {
+                    IsTitleScreen = false;
+                    isCountdown = true;
+                    sw.Start();
+                }
+            }
+            else if (isCountdown)
+            {
+                if ((countdown > 2.99 && countdown < 3.01) ||
+                        (countdown > 1.99 && countdown < 2.01) ||
+                        (countdown > 0.99 && countdown < 1.01))
+                    countdownSound.Play();
 
-            // getting all non moving objects
-            List<GameAgent> walls = levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Wall).ToList();
+                deltaT = sw.Elapsed.TotalSeconds - timer;
+                timer += deltaT;
+                countdown -= deltaT;
+                
+                if (countdown <= 0)
+                {
+                    isCountdown = false;
+                    timer = 0;
+                    deltaT = 0;
+                    sw.Stop();
+                }
+            }
+            else
+            {
+                // begin playing background music
+                if (!songStart)
+                {
+                    MediaPlayer.Play(backgroundMusic);
+                    songStart = true;
+                }
 
-            // updating each moving object
-            foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Enemy).OrderBy(ga => Vector2.Distance(player.Position, ga.Position)).ToList())
+                // update timer
+                if (!stopwatch.IsRunning)
+                    stopwatch.Start();
+                else
+                {
+                    deltaT = stopwatch.Elapsed.TotalSeconds - timer;
+                    timer += deltaT;
+                }
+
+                levelInfo.CheckSongStage(stopwatch);
+
+                
+
+                // getting all non moving objects
+                List<GameAgent> walls = levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Wall).ToList();
+
+                // updating each moving object
+                foreach (GameAgent agent in levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Enemy).OrderBy(ga => Vector2.Distance(player.Position, ga.Position)).ToList())
                     ((MovingAgent)agent).Update(gameTime, player, walls, levelInfo.LevelNodeSize);
 
-            // getting the updated visible rect
-            levelInfo.SetVisibleArea(player.Position, windowWidth, windowHeight);
+                // getting the updated visible rect
+                levelInfo.SetVisibleArea(player.Position, windowWidth, windowHeight);
 
-            // DEBUGGING
+                #region Code from prev assignments
+                // DEBUGGING
+                //if (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton != ButtonState.Pressed)
+                //{
+                //    if (mouseStateCurrent.X > 0 && mouseStateCurrent.X < windowWidth
+                //        && mouseStateCurrent.Y > 0 && mouseStateCurrent.Y < windowHeight)
+                //    {
+                //        GameAgent wallAgent = levelInfo.AgentList.Where(ga => ga.Bounds.Contains(new Point(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top))).FirstOrDefault();
 
-            //if (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton != ButtonState.Pressed)
-            //{
-            //    if (mouseStateCurrent.X > 0 && mouseStateCurrent.X < windowWidth
-            //        && mouseStateCurrent.Y > 0 && mouseStateCurrent.Y < windowHeight)
-            //    {
-            //        GameAgent wallAgent = levelInfo.AgentList.Where(ga => ga.Bounds.Contains(new Point(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top))).FirstOrDefault();
-
-            //        if (wallAgent != null)
-            //        {
-            //            debugIndex = levelInfo.AgentList.IndexOf(wallAgent);
-            //        }
-            //        else
-            //        {
-            //            debugIndex = -1;
-            //        }
-            //        //foreach (GameAgent agent in levelInfo.AgentList)
-            //        //{
-            //        //    if (agent.Bounds.Contains(new Point(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top)))
-            //        //    {
-            //        //        debugIndex = levelInfo.AgentList.IndexOf(agent);
-            //        //        break;
-            //        //    }
-            //        //}
+                //        if (wallAgent != null)
+                //        {
+                //            debugIndex = levelInfo.AgentList.IndexOf(wallAgent);
+                //        }
+                //        else
+                //        {
+                //            debugIndex = -1;
+                //        }
+                //        //foreach (GameAgent agent in levelInfo.AgentList)
+                //        //{
+                //        //    if (agent.Bounds.Contains(new Point(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top)))
+                //        //    {
+                //        //        debugIndex = levelInfo.AgentList.IndexOf(agent);
+                //        //        break;
+                //        //    }
+                //        //}
 
 
-            //        // UNCOMMENT FOR PART 2) (and make sure to comment PART 3 below)
-            //        //if (debugIndex == -1)
-            //        //{
-            //        //    if (startPos == null)
-            //        //    {
-            //        //        startPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
-            //        //        Debug.WriteLine("Start Pos: " + startPos);
-            //        //        //startPos = new Vector2(436, 2036);
-            //        //    }
-            //        //    else if (endPos == null)
-            //        //    {
-            //        //        endPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
-            //        //        //endPos = new Vector2(137, 2013);
-            //        //        Vector2 playerPos = player.Position;
-            //        //        Debug.WriteLine("End Pos: " + endPos);
+                //        // UNCOMMENT FOR PART 2) (and make sure to comment PART 3 below)
+                //        //if (debugIndex == -1)
+                //        //{
+                //        //    if (startPos == null)
+                //        //    {
+                //        //        startPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
+                //        //        Debug.WriteLine("Start Pos: " + startPos);
+                //        //        //startPos = new Vector2(436, 2036);
+                //        //    }
+                //        //    else if (endPos == null)
+                //        //    {
+                //        //        endPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
+                //        //        //endPos = new Vector2(137, 2013);
+                //        //        Vector2 playerPos = player.Position;
+                //        //        Debug.WriteLine("End Pos: " + endPos);
 
-            //        //        player.Position = startPos.Value;
-            //        //        pathToTarget = player.FindPathToTarget(endPos.Value, levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList(), levelInfo.LevelNodeSize);
-            //        //        player.Position = playerPos;
-            //        //    }
-            //        //}
+                //        //        player.Position = startPos.Value;
+                //        //        pathToTarget = player.FindPathToTarget(endPos.Value, levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList(), levelInfo.LevelNodeSize);
+                //        //        player.Position = playerPos;
+                //        //    }
+                //        //}
 
-            //        // UNCOMMENT FOR PART 3) (and make sure to comment PART 2 above)
-            //        //if (debugIndex == -1)
-            //        //{
-            //        //    Vector2 targetPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
+                //        // UNCOMMENT FOR PART 3) (and make sure to comment PART 2 above)
+                //        //if (debugIndex == -1)
+                //        //{
+                //        //    Vector2 targetPos = new Vector2(mouseStateCurrent.X + levelInfo.VisibleRect.Left, mouseStateCurrent.Y + levelInfo.VisibleRect.Top);
 
-            //        //    foreach (GameAgent agent in levelInfo.AgentList)
-            //        //    {
-            //        //        if (agent.GetType() == typeof(MovingAgent))
-            //        //        {
-            //        //            MovingAgent patrol = (MovingAgent)agent;
-            //        //            patrol.SetTargetPoint(targetPos, levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList(), levelInfo.LevelNodeSize);
-            //        //        }
-            //        //    }
-            //        //}
-            //    }
-            //}
-            //else if (mouseStateCurrent.LeftButton != ButtonState.Pressed)
-            //{
-            //    debugIndex = -1;
-            //}
+                //        //    foreach (GameAgent agent in levelInfo.AgentList)
+                //        //    {
+                //        //        if (agent.GetType() == typeof(MovingAgent))
+                //        //        {
+                //        //            MovingAgent patrol = (MovingAgent)agent;
+                //        //            patrol.SetTargetPoint(targetPos, levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Wall).ToList(), levelInfo.LevelNodeSize);
+                //        //        }
+                //        //    }
+                //        //}
+                //    }
+                //}
+                //else if (mouseStateCurrent.LeftButton != ButtonState.Pressed)
+                //{
+                //    debugIndex = -1;
+                //}
 
-            //if (mouseStateCurrent.RightButton == ButtonState.Pressed && mouseStatePrevious.RightButton != ButtonState.Pressed)
-            //{
-            //    startPos = null;
-            //    endPos = null;
-            //    pathToTarget = new List<LevelNode>();
-            //}
-            //// END DEBUGGING
-
+                //if (mouseStateCurrent.RightButton == ButtonState.Pressed && mouseStatePrevious.RightButton != ButtonState.Pressed)
+                //{
+                //    startPos = null;
+                //    endPos = null;
+                //    pathToTarget = new List<LevelNode>();
+                //}
+                //// END DEBUGGING
+                #endregion
+            }
             base.Update(gameTime);
         }
 
@@ -373,8 +413,23 @@ namespace SampleGame
 
             spriteBatch.Begin();
 
+            if (IsTitleScreen)
+            {
+                spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+            }
+
+            if (isCountdown)
+            {
+                int ct = (int)countdown + 1;
+                spriteBatch.DrawString(font1, "" + ct, new Vector2(windowWidth / 2 - 13, windowHeight / 2 - 150), Color.Green, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
+                DrawingHelper.DrawCircle(new Vector2(windowWidth / 2 - 3, windowHeight / 2 - 128), 30, Color.Green, false);
+                DrawingHelper.DrawCircle(new Vector2(windowWidth / 2 - 3, windowHeight / 2 - 128), 35, Color.Green, false);
+                //spriteBatch.Draw(player.Texture, new Vector2(windowWidth / 2, windowHeight / 2), Color.White);
+            }
+
             // draw the custom crosshair
-            spriteBatch.Draw(crosshairTexture, new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y), 
+            spriteBatch.Draw(crosshairTexture, new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y),
                 null, Color.White, 0.0f, new Vector2(crosshairTexture.Width / 2, crosshairTexture.Height / 2), .5f, SpriteEffects.None, 1.0f);
 
             foreach (GameAgent agent in levelInfo.AgentList)
@@ -388,14 +443,17 @@ namespace SampleGame
             //spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
             //spriteBatch.Draw(skill2Texture, new Rectangle(500, 550, 50, 50), Color.White);
             //spriteBatch.Draw(skill4Texture, new Rectangle(600, 550, 50, 50), Color.White);
+            
 
+            spriteBatch.End();
 
-            spriteBatch.End();   
-
-            spriteBatch.Begin();
-            DrawUI();
-
-            spriteBatch.End();                          
+            // display the UI
+            if (!IsTitleScreen)
+            {
+                spriteBatch.Begin();
+                DrawUI();
+                spriteBatch.End();
+            }                    
 
             base.Draw(gameTime);
         }
@@ -406,13 +464,15 @@ namespace SampleGame
             double timeRemaining = levelInfo.TimeAllocated - timer;
             int seconds = remainingSeconds(timeRemaining);
             spriteBatch.DrawString(font1, "Time Remaining", new Vector2(windowWidth / 2 - 70, 5), Color.White);
-            if (timeRemaining <= 0)
+            if (isCountdown)
+                spriteBatch.DrawString(font1, "4:40", new Vector2(windowWidth / 2 - 17, 30), Color.White);
+            else if (timeRemaining <= 0)
                 spriteBatch.DrawString(font1, "0:00", new Vector2(windowWidth / 2 - 17, 30), Color.White);
             else if (seconds < 10)
                 spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + "0" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
             else
                 spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
-
+           
             // the elapsed timer for debugging purposes
             seconds = remainingSeconds(timer);
             if (seconds < 10)
