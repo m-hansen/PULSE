@@ -25,6 +25,7 @@ namespace SampleGame
         public MouseState mouseStateCurrent;
         MouseState mouseStatePrevious;
         Texture2D crosshairTexture;
+        Texture2D titleTexture;
         Song backgroundMusic;
         bool songStart = false;
         bool isCountdown = false;
@@ -32,6 +33,8 @@ namespace SampleGame
         Stopwatch sw = new Stopwatch();
         SoundEffect countdownSound;
         int titleScreen = 0;
+        float scaleSize = 1.0f;
+        bool titleExpanding = false;
         
         double timer;           // for time elapsed
         double deltaT;          // for time elapsed
@@ -134,6 +137,9 @@ namespace SampleGame
 
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
+
+            // load the title texture
+            titleTexture = Content.Load<Texture2D>("Images\\PULSE");
 
             Attack attack1 = new Attack();
             attack1.Active = true;
@@ -436,7 +442,7 @@ namespace SampleGame
 
             if (IsTitleScreen)
             {
-                DrawTitleScreen();
+                DrawTitleScreen(gameTime);
             }
 
             if (isCountdown)
@@ -477,12 +483,21 @@ namespace SampleGame
             base.Draw(gameTime);
         }
 
-        private void DrawTitleScreen()
+        private void DrawTitleScreen(GameTime gameTime)
         {
             switch (titleScreen)
             {
                 case 0:
-                    spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
+                    if (scaleSize < 1 && titleExpanding)
+                        scaleSize += (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
+                    else
+                    {
+                        titleExpanding = false;
+                        if (scaleSize < 0.95) titleExpanding = true;
+                        scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
+                    }
+                    spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height/2), scaleSize, SpriteEffects.None, 0.0f);
+                    //spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
                     spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
                     break;
                 case 1:
