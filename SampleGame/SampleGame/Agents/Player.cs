@@ -22,9 +22,13 @@ namespace SampleGame
         public float MaxPower = 100.0f;
         public float Power;  // used for shooting bullets/skills
 
+        bool berserkerSoundPlayed = false;
+        int tempScore = 0;          // used to calculate difference between scores after entering berserker mode
+        int berserkerLength = 200;  // the score difference needed to end berserker mode
+
         public Player()
         {
-            Health = 50.0f;
+            Health = 100.0f;
             Power = 100.0f;
         }
 
@@ -231,6 +235,29 @@ namespace SampleGame
             // health recharge rate
             if (Health < MaxHealth) Health += 0.02f;
             else Health = MaxHealth;
+
+            // go into berserker mode every 1000 points
+            if (Score % 1000 == 0 && Score != 0)
+            {
+                attackList[0].CoolDown = 0;
+                attackList[0].MinDamage = 10;
+                attackList[0].MaxDamage = 20;
+                Color = Color.Red;
+                tempScore = Score;
+                if (!berserkerSoundPlayed)
+                {
+                    Game1.Current.BerserkerSound.Play();
+                    berserkerSoundPlayed = true;
+                }
+            }
+            if ((berserkerSoundPlayed) && ((Score - tempScore) >= berserkerLength))
+            {
+                attackList[0].CoolDown = 50;
+                attackList[0].MinDamage = 5;
+                attackList[0].MaxDamage = 10;
+                Color = Color.White;
+                berserkerSoundPlayed = false;
+            }
         }
 
         private bool IsValidMove(Vector2 nextPos, List<GameAgent> agentAIList, int levelWidth, int levelHeight)

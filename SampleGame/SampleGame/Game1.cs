@@ -54,6 +54,7 @@ namespace SampleGame
         public LevelInfo levelInfo = new LevelInfo();
         public SpriteFont font1;
         public SoundEffect PlayerHitSound;
+        public SoundEffect BerserkerSound;
         public bool IsTitleScreen = true;
         public string LevelEndText = "Congratulations!";
 
@@ -129,6 +130,7 @@ namespace SampleGame
             // load sounds
             PlayerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
             countdownSound = Content.Load<SoundEffect>("Audio\\beep");
+            BerserkerSound = Content.Load<SoundEffect>("Audio\\whistle-flute-1");
 
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");

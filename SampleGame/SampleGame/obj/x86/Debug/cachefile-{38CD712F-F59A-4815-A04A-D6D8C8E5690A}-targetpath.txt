@@ -23,8 +23,9 @@ Content\Images\teleport_icon.xnb
 Content\Images\teleport_image.xnb
 Content\Images\star_effect2.xnb
 Content\Images\boss1.xnb
+Content\Images\box1.xnb
 Content\Audio\player_hit.xnb
 Content\Audio\voxis_pour_elle.xnb
 Content\Audio\voxis_pour_elle.wma
 Content\Audio\beep.xnb
-Content\Images\box1.xnb
+Content\Audio\whistle-flute-1.xnb

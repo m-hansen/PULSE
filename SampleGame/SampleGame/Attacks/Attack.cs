@@ -425,6 +425,8 @@ namespace SampleGame.Attacks
             }
 
             agent.Position = targetPos;
+            agent.Color = Color.Yellow;
+            agent.Color = Color.White;
 
             ActiveCoolDown = CoolDown;
         }
