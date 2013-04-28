@@ -26,6 +26,7 @@ namespace SampleGame
         MouseState mouseStatePrevious;
         Texture2D crosshairTexture;
         Texture2D titleTexture;
+        Texture2D subtitleTexture;
         Song backgroundMusic;
         bool songStart = false;
         bool isCountdown = false;
@@ -140,6 +141,7 @@ namespace SampleGame
 
             // load the title texture
             titleTexture = Content.Load<Texture2D>("Images\\PULSE");
+            subtitleTexture = Content.Load<Texture2D>("Images\\enter_to_play");
 
             Attack attack1 = new Attack();
             attack1.Active = true;
@@ -497,8 +499,9 @@ namespace SampleGame
                         scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
                     }
                     spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height/2), scaleSize, SpriteEffects.None, 0.0f);
+                    spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
                     //spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
-                    spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                    //spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
                     break;
                 case 1:
                     spriteBatch.DrawString(font1, LevelEndText, new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
@@ -525,11 +528,11 @@ namespace SampleGame
                 spriteBatch.DrawString(font1, timeInMinutes(timeRemaining) + ":" + seconds, new Vector2(windowWidth / 2 - 17, 30), Color.White);
            
             // the elapsed timer for debugging purposes
-            seconds = remainingSeconds(timer);
-            if (seconds < 10)
-                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + "0" + seconds, new Vector2(850, 5), Color.White);
-            else
-                spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + seconds, new Vector2(850, 5), Color.White);
+            //seconds = remainingSeconds(timer);
+            //if (seconds < 10)
+            //    spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + "0" + seconds, new Vector2(850, 5), Color.White);
+            //else
+            //    spriteBatch.DrawString(font1, "Time Elapsed (for debugging): " + timeInMinutes(timer) + ":" + seconds, new Vector2(850, 5), Color.White);
             //spriteBatch.DrawString(font1, "Potential Transition Times (approx.)", new Vector2(850, 100), Color.Orange);
             //spriteBatch.DrawString(font1, "0:49", new Vector2(900, 120), Color.Orange);
             //spriteBatch.DrawString(font1, "1:06", new Vector2(900, 140), Color.Orange);

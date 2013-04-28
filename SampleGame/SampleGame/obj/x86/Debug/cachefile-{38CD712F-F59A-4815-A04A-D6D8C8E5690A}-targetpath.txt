@@ -30,3 +30,4 @@ Content\Audio\voxis_pour_elle.wma
 Content\Audio\beep.xnb
 Content\Audio\whistle-flute-1.xnb
 Content\Images\PULSE.xnb
+Content\Images\enter_to_play.xnb

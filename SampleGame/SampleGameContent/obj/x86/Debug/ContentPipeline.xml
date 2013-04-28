@@ -281,6 +281,15 @@
       <Output>C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\bin\x86\Debug\Content\Images\PULSE.xnb</Output>
       <Time>2013-04-27T21:46:15.6456449-04:00</Time>
     </Item>
+    <Item>
+      <Source>Images\enter_to_play.png</Source>
+      <Name>Images\enter_to_play</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enter_to_play.xnb</Output>
+      <Time>2013-04-28T00:22:09.8596754-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

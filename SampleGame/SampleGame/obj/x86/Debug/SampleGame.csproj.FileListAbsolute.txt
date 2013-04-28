@@ -574,3 +574,4 @@ C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\obj\x86\Debug\Microsoft.Xna.Fr
 C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\obj\x86\Debug\SampleGame.exe
 C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\obj\x86\Debug\SampleGame.pdb
 C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\bin\x86\Debug\Content\Images\PULSE.xnb
+C:\Users\Matt\Desktop\pulse\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enter_to_play.xnb
