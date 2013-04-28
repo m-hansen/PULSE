@@ -120,6 +120,7 @@ namespace SampleGame.Attacks
             bullet.MaxDamage = MaxDamage;
             bullet.EffectType = AttackType;
             bullet.CastedBy = castedBy;
+            bullet.HitsRemaining = 1;
 
             Game1.Current.EffectComponent.AddEffect(bullet);
 
@@ -145,6 +146,7 @@ namespace SampleGame.Attacks
                 bullet.MinDamage = MinDamage;
                 bullet.MaxDamage = MaxDamage;
                 bullet.CastedBy = castedBy;
+                bullet.HitsRemaining = 3;
                 bullet.EffectSubType = Enums.AttackSubType.Nuke;
 
                 Game1.Current.EffectComponent.AddEffect(bullet);
@@ -171,6 +173,7 @@ namespace SampleGame.Attacks
                 bullet.MinDamage = MinDamage;
                 bullet.MaxDamage = MaxDamage;
                 bullet.CastedBy = castedBy;
+                bullet.HitsRemaining = 1;
 
                 Game1.Current.EffectComponent.AddEffect(bullet);
             }
@@ -222,8 +225,8 @@ namespace SampleGame.Attacks
 
         private void LoadDoubleTriBullet(Enums.AgentType castedBy, MovingAgent agent)
         {
-            innerColor = Color.Red;
-            outerColor = Color.Orange;
+            //innerColor = Color.Red;
+            //outerColor = Color.Orange;
 
             int bulletSpeed = 8;
             float angleModifier = 0.25f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
@@ -233,7 +236,7 @@ namespace SampleGame.Attacks
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 3; j++)
                 {
-                    Vector2 pos = new Vector2(agent.Position.X, agent.Position.Y + (i == 0 ? -50 : 50)) + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 2)), agent.Rotation);
+                    Vector2 pos = new Vector2(agent.Position.X, agent.Position.Y + (i == 0 ? -50 : 50)) + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 4)), agent.Rotation);
 
                     Bullet bullet = new Bullet();
                     bullet.LoadEffect(Texture);
@@ -247,6 +250,7 @@ namespace SampleGame.Attacks
                     bullet.EffectSubType = Enums.AttackSubType.TriBullet;
                     bullet.EffectType = Enums.AttackType.Bullet;
                     bullet.Color = (i % 2 == 0) ? new Color(50, 100, 240) : new Color(245, 50, 55); // light blue / light red
+                    bullet.HitsRemaining = 1;
 
                     Game1.Current.EffectComponent.AddEffect(bullet);
                 }
@@ -285,6 +289,7 @@ namespace SampleGame.Attacks
             bullet.MaxDamage = MaxDamage;
             bullet.CastedBy = castedBy;
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
+            bullet.HitsRemaining = 1;
 
             Game1.Current.EffectComponent.AddEffect(bullet);
 
@@ -298,6 +303,7 @@ namespace SampleGame.Attacks
             bullet1.MaxDamage = MaxDamage;
             bullet1.CastedBy = castedBy;
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
+            bullet.HitsRemaining = 1;
 
             Game1.Current.EffectComponent.AddEffect(bullet1);
 
@@ -311,6 +317,7 @@ namespace SampleGame.Attacks
             bullet2.MaxDamage = MaxDamage;
             bullet2.CastedBy = castedBy;
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
+            bullet.HitsRemaining = 1;
 
             Game1.Current.EffectComponent.AddEffect(bullet2);
 

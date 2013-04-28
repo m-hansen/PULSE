@@ -265,7 +265,7 @@ namespace SampleGame
 
             if (Health <= 0)
             {
-                // GAME OVER:
+                Game1.Current.GameOver();
             }
         }
 

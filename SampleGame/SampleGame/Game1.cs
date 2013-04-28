@@ -28,9 +28,10 @@ namespace SampleGame
         Song backgroundMusic;
         bool songStart = false;
         bool isCountdown = false;
-        double countdown = 3;
+        double countdown = 4;
         Stopwatch sw = new Stopwatch();
         SoundEffect countdownSound;
+        int titleScreen = 0;
         
         double timer;           // for time elapsed
         double deltaT;          // for time elapsed
@@ -54,6 +55,7 @@ namespace SampleGame
         public SpriteFont font1;
         public SoundEffect PlayerHitSound;
         public bool IsTitleScreen = true;
+        public string LevelEndText = "Congratulations!";
 
         public Game1()
         {
@@ -169,7 +171,7 @@ namespace SampleGame
             attack3.HasIcon = true;
             attack3.AttackCost = 30;
             attack3.MinDamage = 10;
-            attack3.MaxDamage = 15;
+            attack3.MaxDamage = 200;
             player.attackList.Add(attack3);
 
             // ***** BULLET SPLITTING ***** //
@@ -262,10 +264,8 @@ namespace SampleGame
             // Update mouse state
             mouseStatePrevious = mouseStateCurrent;
             mouseStateCurrent = Mouse.GetState();
-            // update player
-            player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
-                          levelInfo.AgentList, levelInfo.Width, levelInfo.Height);
-            if (IsTitleScreen)
+            
+            if (IsTitleScreen && titleScreen == 0)
             {
                 if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
                 {
@@ -293,8 +293,12 @@ namespace SampleGame
                     sw.Stop();
                 }
             }
-            else
+            else if (!IsTitleScreen)
             {
+                // update player
+                player.Update(gameTime, keyboardStateCurrent, keyboardStatePrevious, mouseStateCurrent, mouseStatePrevious,
+                              levelInfo.AgentList, levelInfo.Width, levelInfo.Height);
+
                 // begin playing background music
                 if (!songStart)
                 {
@@ -307,13 +311,20 @@ namespace SampleGame
                     stopwatch.Start();
                 else
                 {
-                    deltaT = stopwatch.Elapsed.TotalSeconds - timer;
-                    timer += deltaT;
+                    double timeRemaining = levelInfo.TimeAllocated - timer;
+
+                    if (timeRemaining > 0)
+                    {
+                        deltaT = stopwatch.Elapsed.TotalSeconds - timer;
+                        timer += deltaT;
+                        levelInfo.CheckSongStage(stopwatch);
+                    }
+                    else
+                    {
+                        IsTitleScreen = true;
+                        titleScreen = 1;
+                    }
                 }
-
-                levelInfo.CheckSongStage(stopwatch);
-
-                
 
                 // getting all non moving objects
                 List<GameAgent> walls = levelInfo.AgentList.Where(a => a.Type == (int)Enums.AgentType.Wall).ToList();
@@ -407,6 +418,14 @@ namespace SampleGame
             base.Update(gameTime);
         }
 
+        public void GameOver()
+        {
+            LevelEndText = "Game Over!";
+            IsTitleScreen = true;
+            titleScreen = 1;
+            //MediaPlayer.Stop();//Play(backgroundMusic);
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);       
@@ -415,17 +434,15 @@ namespace SampleGame
 
             if (IsTitleScreen)
             {
-                spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                DrawTitleScreen();
             }
 
             if (isCountdown)
             {
-                int ct = (int)countdown + 1;
+                int ct = (int)countdown;
                 spriteBatch.DrawString(font1, "" + ct, new Vector2(windowWidth / 2 - 13, windowHeight / 2 - 150), Color.Green, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
                 DrawingHelper.DrawCircle(new Vector2(windowWidth / 2 - 3, windowHeight / 2 - 128), 30, Color.Green, false);
                 DrawingHelper.DrawCircle(new Vector2(windowWidth / 2 - 3, windowHeight / 2 - 128), 35, Color.Green, false);
-                //spriteBatch.Draw(player.Texture, new Vector2(windowWidth / 2, windowHeight / 2), Color.White);
             }
 
             // draw the custom crosshair
@@ -437,7 +454,7 @@ namespace SampleGame
 
             player.Draw(this.spriteBatch, font1, levelInfo.VisibleRect);
 
-            DrawDebuggingInformation();
+            //DrawDebuggingInformation();
 
             // draw skill sprites
             //spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
@@ -458,8 +475,25 @@ namespace SampleGame
             base.Draw(gameTime);
         }
 
+        private void DrawTitleScreen()
+        {
+            switch (titleScreen)
+            {
+                case 0:
+                    spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                    break;
+                case 1:
+                    spriteBatch.DrawString(font1, LevelEndText, new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(font1, "You scored: " + player.Score, new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                    break;
+            }
+        }
+
         private void DrawUI()
         {
+            spriteBatch.DrawString(font1, "Score: " + player.Score, new Vector2(20, 20), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+
             // timer
             double timeRemaining = levelInfo.TimeAllocated - timer;
             int seconds = remainingSeconds(timeRemaining);

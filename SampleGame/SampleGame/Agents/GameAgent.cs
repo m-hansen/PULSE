@@ -36,7 +36,7 @@ namespace SampleGame
         public int FrameHeight { get { return rects == null ? Texture.Height : rects[0].Height; } }
 
         // the agent's current bounding rectangle, used for collision detection
-        public Rectangle Bounds
+        public virtual Rectangle Bounds
         {
             get
             {

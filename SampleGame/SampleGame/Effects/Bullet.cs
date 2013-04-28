@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using SampleGame.Helpers;
+using SampleGame.Agents;
 
 namespace SampleGame.Effects
 {
@@ -15,6 +16,7 @@ namespace SampleGame.Effects
         public int MinDamage;
         public int TimeElapsed;
         public int SplitsRemaining = 3;
+        public int HitsRemaining;
 
         public override Effect CloneToDirection(float offset, Enums.AttackType type, Enums.AttackSubType subType)
         {
@@ -62,7 +64,10 @@ namespace SampleGame.Effects
                         if (agent.Type == (int)Enums.AgentType.Enemy)
                         {
                             ((MovingAgent)agent).TakeDamage(MinDamage + rand.Next(MaxDamage - MinDamage));
-                            if (EffectSubType != Enums.AttackSubType.Nuke && EffectSubType != Enums.AttackSubType.NukeSpawn) Active = false;
+                            //if (EffectSubType != Enums.AttackSubType.Nuke && EffectSubType != Enums.AttackSubType.NukeSpawn) Active = false;
+                            HitsRemaining--;
+
+                            if (HitsRemaining < 1) Active = false;
                         }
                     }
                 }

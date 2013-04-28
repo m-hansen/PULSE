@@ -14,3 +14,4 @@ C:\Users\Matt\Desktop\Game1\m_hansen-samplegame-2634154d8bd6\SampleGame\SampleGa
 C:\Users\Matt\Desktop\meow\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
 C:\Users\David\Desktop\New Project\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
 C:\Users\Matt\Desktop\game1\m_hansen-samplegame-b2cbce5e29e8\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache
+C:\Users\David\Desktop\New folder\m_hansen-samplegame-78e6bbbad123\SampleGame\SampleGameContent\obj\x86\Debug\SampleGameContent.contentprojResolveAssemblyReference.cache

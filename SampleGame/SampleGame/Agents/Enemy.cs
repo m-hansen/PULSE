@@ -335,6 +335,9 @@ namespace SampleGame.Agents
 
                 // removing / destroying the enemy
                 Game1.Current.levelInfo.AgentList.Remove(this);
+
+                // giving the player points for destroying the enemy
+                Game1.Current.player.Score += Score;
             }
         }
 

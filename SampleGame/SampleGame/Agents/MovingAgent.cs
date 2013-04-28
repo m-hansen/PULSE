@@ -23,6 +23,7 @@ namespace SampleGame
         public int PathIndex = 0;
         public float TargetRotation;
         public float Health;
+        public int Score;
 
         public int TimeAtEachPoint;
         public int NPCRange;

@@ -27,3 +27,4 @@ Content\Audio\player_hit.xnb
 Content\Audio\voxis_pour_elle.xnb
 Content\Audio\voxis_pour_elle.wma
 Content\Audio\beep.xnb
+Content\Images\box1.xnb

@@ -126,7 +126,7 @@ namespace SampleGame.Agents
             attackObj.HasIcon = true;
             attackObj.AttackCost = 60;
             attackObj.MinDamage = 50;
-            attackObj.MaxDamage = 100;
+            attackObj.MaxDamage = 200;
             game.player.attackList.Add(attackObj);
         }
 

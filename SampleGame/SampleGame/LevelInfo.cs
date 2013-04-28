@@ -64,8 +64,8 @@ namespace SampleGame
             levelTimeSpanList.Add(new LevelTimeSpan(274000, 279000, 0));
 
             nukeDropTime = rand.Next(30000, 45000);
-            teleportDropTime = rand.Next(0, 5000);
-            bossSpawnTime = 100;// 15000;
+            teleportDropTime = rand.Next(1000, 5000);
+            bossSpawnTime = 60000;
         }
 
         #region Get Visible Area
@@ -137,6 +137,7 @@ namespace SampleGame
             boss.Scale = ti.Scale;
             boss.MaxSpeed = 2;
             boss.MeleeDistance = 5;
+            boss.Score = 10000;
             boss.ID = nextID;
 
             Attack attackObj = new Attack();
@@ -189,6 +190,7 @@ namespace SampleGame
             pAgent1.TargetPosition = new Vector2(400, 800);
             pAgent1.Health = rand.Next(minHealth, maxHealth);
             pAgent1.MaxSpeed = 5;
+            pAgent1.Score = 10;
             pAgent1.ID = nextID;
 
             nextID++;
@@ -206,6 +208,7 @@ namespace SampleGame
             pAgent1.State = Enums.EnemyState.KamikazeAcrossScreen;
             pAgent1.TargetPosition = new Vector2(400, -100);
             pAgent1.Health = 40;
+            pAgent1.Score = 10;
             pAgent1.MaxSpeed = 5;
 
             AgentList.Add(pAgent1);
@@ -221,6 +224,7 @@ namespace SampleGame
             pAgent1.State = Enums.EnemyState.AggressiveCloseToPlayer;
             pAgent1.MeleeDistance = 200;
             pAgent1.Health = 15;
+            pAgent1.Score = 10;
             pAgent1.MaxSpeed = 3;
 
             Attack attack1 = new Attack();
@@ -248,6 +252,7 @@ namespace SampleGame
             pAgent1.State = Enums.EnemyState.RoamRandomNoAttack;
             pAgent1.MeleeDistance = 40;
             pAgent1.Health = 15;
+            pAgent1.Score = 10;
             pAgent1.MaxSpeed = 3;
 
             AgentList.Add(pAgent1);
@@ -267,6 +272,7 @@ namespace SampleGame
             pAgent1.MeleeDistance = 2;
             pAgent1.Health = 15;
             pAgent1.MaxSpeed = 2;
+            pAgent1.Score = 10;
             pAgent1.IsUsingAttacks = true;
             pAgent1.ID = nextID;
 
@@ -300,6 +306,7 @@ namespace SampleGame
             pAgent1.MeleeDistance = 2;
             pAgent1.Health = 15;
             pAgent1.MaxSpeed = 2;
+            pAgent1.Score = 10;
             pAgent1.TargetRotation = targetRotation;
             pAgent1.IsUsingAttacks = false;
 
@@ -340,6 +347,7 @@ namespace SampleGame
             pAgent1.IsUsingAttacks = false; // attackList != null && attackList.Count > 0;
             pAgent1.Wave = wave;
             pAgent1.ID = nextID;
+            pAgent1.Score = 10;
 
             nextID++;
 
@@ -376,6 +384,7 @@ namespace SampleGame
             pAgent1.MaxSpeed = 3;
             pAgent1.IsUsingAttacks = true; // attackList != null && attackList.Count > 0;
             pAgent1.ID = nextID;
+            pAgent1.Score = 10;
 
             nextID++;
 
@@ -420,7 +429,7 @@ namespace SampleGame
             LevelNodeSize = 50;
             TimeAllocated = 280; // in seconds (4:40)
 
-            //SetVisibleArea(new Vector2(), Width, Height);
+            SetVisibleArea(new Vector2(), Width, Height);
 
             //PlayerStartPos = new Vector2(1850, 3000);
             PlayerStartPos = new Vector2(600, 350);
