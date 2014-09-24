@@ -7,7 +7,7 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Fonts\Font1.xnb</Output>
       <Time>2013-04-29T18:35:41.2417312-04:00</Time>
     </Item>
     <Item>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\agent.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\agent.xnb</Output>
+      <Time>2014-09-14T02:05:30.8486962-04:00</Time>
     </Item>
     <Item>
       <Source>Images\crosshair.png</Source>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\crosshair.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\enemy_agent1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\explosion1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\raindrop.xnb</Output>
+      <Time>2014-09-14T02:05:30.8496962-04:00</Time>
     </Item>
     <Item>
       <Source>Images\ship1.png</Source>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\ship1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\ship1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -70,7 +70,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\subject.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\subject.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\wall.xnb</Output>
+      <Time>2014-09-14T02:05:30.8506963-04:00</Time>
     </Item>
     <Item>
       <Source>Images\wall1.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\wall1.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\wall1.xnb</Output>
+      <Time>2014-09-14T02:05:30.8516964-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill1.png</Source>
@@ -97,7 +97,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -106,7 +106,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill2.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill2.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -115,7 +115,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\skill4.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill4.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -124,7 +124,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\kamikaze1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\kamikaze1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -133,7 +133,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\follower1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\follower1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -142,7 +142,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\nuke_icon.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\nuke_icon.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -151,7 +151,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\explosion7.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\explosion7.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -160,7 +160,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\big_ship1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -169,7 +169,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\big_ship2.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\big_ship2.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -178,7 +178,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\health_icon.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\health_icon.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -187,7 +187,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\energy_icon.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\energy_icon.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -196,7 +196,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_icon.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\teleport_icon.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -205,7 +205,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\teleport_image.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\teleport_image.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -214,7 +214,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\star_effect2.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\star_effect2.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -223,7 +223,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\boss1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\boss1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -232,7 +232,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\box1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\box1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -241,7 +241,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\PULSE.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\PULSE.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -250,7 +250,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Images\enter_to_play.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\enter_to_play.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
@@ -259,8 +259,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\player_hit.xnb</Output>
-      <Time>2013-04-29T18:35:41.0827221-04:00</Time>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\player_hit.xnb</Output>
+      <Time>2014-09-14T02:05:30.8486962-04:00</Time>
     </Item>
     <Item>
       <Source>Audio\voxis_pour_elle.mp3</Source>
@@ -268,8 +268,8 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb</Output>
-      <Extra>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_pour_elle.xnb</Output>
+      <Extra>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_pour_elle.wma</Extra>
       <Time>2013-04-29T18:35:41.2357308-04:00</Time>
     </Item>
     <Item>
@@ -278,7 +278,7 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\beep.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\beep.xnb</Output>
       <Time>2013-04-29T18:35:41.0807219-04:00</Time>
     </Item>
     <Item>
@@ -287,7 +287,7 @@
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\Audio\whistle-flute-1.xnb</Output>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\whistle-flute-1.xnb</Output>
       <Time>2013-04-29T18:35:41.239731-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
@@ -296,10 +296,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Matt\git\PULSE\SampleGame\SampleGameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Matt\git\PULSE\SampleGame\SampleGameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Matt\git\PULSE\SampleGame\SampleGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

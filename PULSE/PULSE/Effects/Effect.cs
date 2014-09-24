@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SampleGame.Effects
+namespace PulseGame.Effects
 {
     public class Effect
     {

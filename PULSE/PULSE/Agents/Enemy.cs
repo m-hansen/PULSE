@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SampleGame.Attacks;
+using PulseGame.Attacks;
 using Microsoft.Xna.Framework;
-using SampleGame.Helpers;
-using SampleGame.Effects;
+using PulseGame.Helpers;
+using PulseGame.Effects;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SampleGame.Agents
+namespace PulseGame.Agents
 {
     public class Enemy : MovingAgent
     {
@@ -56,7 +56,7 @@ namespace SampleGame.Agents
                 return;
             }
 
-            Rectangle visibleRect = PULSEGame.Current.levelInfo.VisibleRect;
+            Rectangle visibleRect = PulseGame.Current.levelInfo.VisibleRect;
 
             if (Vector2.Distance(Position, TargetPosition) < MeleeDistance)
             {
@@ -82,7 +82,7 @@ namespace SampleGame.Agents
             Position = GetNextPosition(Utils.CalculateRotatedMovement(new Vector2(0, -1), Rotation) * MaxSpeed + Position);
 
             // getting access to our global variables
-            PULSEGame game = PULSEGame.Current;
+            PulseGame game = PulseGame.Current;
 
             // if this agent intersects the player
             if (Bounds.Intersects(game.player.Bounds))
@@ -107,7 +107,7 @@ namespace SampleGame.Agents
 
         private void KamikazeTowardsPlayerUpdate(GameTime gametime)
         {
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             // updating rotation & position for moving towards target position
             Rotation = Utils.GetRotationToTarget(playerObj.Position, Position);
@@ -131,7 +131,7 @@ namespace SampleGame.Agents
         private void AggressiveCloseToPlayerUpdate(GameTime gametime)
         {
             // getting the player info
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             // finding the distance between agent and player
             float distance = Vector2.Distance(playerObj.Position, Position);
@@ -168,7 +168,7 @@ namespace SampleGame.Agents
         // NOTE: this method is currently the same as AggressiveCloseToPlayer();
         private void AggressiveCirclePlayerUpdate(GameTime gametime)
         {
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             float distance = Vector2.Distance(playerObj.Position, Position);
 
@@ -204,7 +204,7 @@ namespace SampleGame.Agents
             // NOTE: Could implement a target rotation and rotation speed to make this not
             // turn immediately
 
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             // if the agent is still not close to it's target
             if (Vector2.Distance(TargetPosition, Position) > MeleeDistance)
@@ -220,7 +220,7 @@ namespace SampleGame.Agents
             }
             else
             {
-                Rectangle visibleRect = PULSEGame.Current.levelInfo.VisibleRect;
+                Rectangle visibleRect = PulseGame.Current.levelInfo.VisibleRect;
 
                 Random rand = new Random();
 
@@ -262,10 +262,10 @@ namespace SampleGame.Agents
             }
             else
             {
-                Rotation = Utils.GetRotationToTarget(PULSEGame.Current.player.Position, Position);
+                Rotation = Utils.GetRotationToTarget(PulseGame.Current.player.Position, Position);
             }
 
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             // if this agent intersects the player
             if (Bounds.Intersects(playerObj.Bounds))
@@ -295,7 +295,7 @@ namespace SampleGame.Agents
                 Rotation = TargetRotation;
             }
 
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             // if this agent intersects the player
             if (Bounds.Intersects(playerObj.Bounds))
@@ -317,27 +317,27 @@ namespace SampleGame.Agents
             Health -= damage;
 
             // if the enemy has no more health
-            if (Health <= 0)
+            if (Health <= 0 && PulseGame.Current.gameState == (int)Enums.GameState.Gameplay)
             {
                 if (DropType > 0)
                 {
-                    PULSEGame.Current.levelInfo.AgentList.Add(new Item(DropType, Position));
+                    PulseGame.Current.levelInfo.AgentList.Add(new Item(DropType, Position));
                 }
 
                 // creating an explosion effect
                 Explosion explosion = new Explosion();
-                explosion.LoadExplosion(PULSEGame.Current.Content.Load<Texture2D>("Images\\explosion7"), new Rectangle(0, 0, 40, 40), 11);
+                explosion.LoadExplosion(PulseGame.Current.Content.Load<Texture2D>("Images\\explosion7"), new Rectangle(0, 0, 40, 40), 11);
                 explosion.Position = Position;
                 explosion.AnimationInterval = new TimeSpan(1100000);
 
                 // adding the effect to our list
-                PULSEGame.Current.EffectComponent.AddEffect(explosion);
+                PulseGame.Current.effectComponent.AddEffect(explosion);
 
                 // removing / destroying the enemy
-                PULSEGame.Current.levelInfo.AgentList.Remove(this);
+                PulseGame.Current.levelInfo.AgentList.Remove(this);
 
                 // giving the player points for destroying the enemy
-                PULSEGame.Current.player.Score += Score;
+                PulseGame.Current.player.Score += Score;
             }
         }
 

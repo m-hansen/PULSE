@@ -5,13 +5,13 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SampleGame.Agents;
-using SampleGame.Attacks;
+using PulseGame.Agents;
+using PulseGame.Attacks;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 
-namespace SampleGame
+namespace PulseGame
 {
     public class LevelInfo
     {
@@ -127,7 +127,7 @@ namespace SampleGame
             ti.Scale = 0.75f;
 
             Enemy boss = new Enemy();
-            boss.LoadContent(PULSEGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
+            boss.LoadContent(PulseGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
             boss.Position = new Vector2(VisibleRect.Right + 50, VisibleRect.Center.Y);
             boss.TargetPosition = new Vector2(VisibleRect.Right - 150, VisibleRect.Center.Y);
             boss.Rotation = (float)(7 * Math.PI / 2);
@@ -147,7 +147,7 @@ namespace SampleGame
             attackObj.CoolDown = 15000;
             attackObj.ActiveCoolDown = 1000;
             attackObj.AttackCost = 100;
-            attackObj.Texture = PULSEGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attackObj.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
             attackObj.Frames = 1;
             attackObj.MinDamage = 1;
             attackObj.MaxDamage = 1;
@@ -163,7 +163,7 @@ namespace SampleGame
             attackObj1.AttackSubType = Enums.AttackSubType.ReflectingStar;
             attackObj1.CoolDown = 30000;
             attackObj1.ActiveCoolDown = 1000;
-            attackObj1.Texture = PULSEGame.Current.Content.Load<Texture2D>(ti1.TextureString);
+            attackObj1.Texture = PulseGame.Current.Content.Load<Texture2D>(ti1.TextureString);
             attackObj1.BoundingRect = ti1.TextureRect;
             attackObj1.Frames = ti1.Frames;
             attackObj1.MinDamage = 100;
@@ -182,7 +182,7 @@ namespace SampleGame
             TextureInfo ti = new TextureInfo("kamikaze1");
 
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
+            pAgent1.LoadContent(PulseGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
             pAgent1.Position = GetRandomStartPos();// new Vector2(400, 800);//1150, 2650);
             pAgent1.Rotation = 0.0f;
             pAgent1.Type = (int)Enums.AgentType.Enemy;
@@ -201,7 +201,7 @@ namespace SampleGame
         private void LoadEnemyKamikazeTowardsTarget()
         {
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.LoadContent(PulseGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
             pAgent1.Position = new Vector2(400, 800);//1150, 2650);
             pAgent1.Rotation = 0.0f;
             pAgent1.Type = (int)Enums.AgentType.Enemy;
@@ -217,7 +217,7 @@ namespace SampleGame
         private void LoadEnemyAggressiveCloseToPlayer()
         {
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.LoadContent(PulseGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
             pAgent1.Position = new Vector2(400, 800);//1150, 2650);
             pAgent1.Rotation = 0.0f;
             pAgent1.Type = (int)Enums.AgentType.Enemy;
@@ -232,7 +232,7 @@ namespace SampleGame
             attack1.AttackType = (int)Enums.AttackType.Bullet;
             attack1.AttackSubType = (int)Enums.AttackSubType.Default;
             attack1.CoolDown = 1000;
-            attack1.Texture = PULSEGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attack1.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
             attack1.Frames = 1;
             attack1.MinDamage = 10;
             attack1.MaxDamage = 15;
@@ -244,7 +244,7 @@ namespace SampleGame
         private void LoadEnemyRoamRandomNoAttack()
         {
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.LoadContent(PulseGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
             pAgent1.Position = new Vector2(400, 800);//1150, 2650);
             pAgent1.TargetPosition = new Vector2(400, 600);
             pAgent1.Rotation = 0.0f;
@@ -263,7 +263,7 @@ namespace SampleGame
             TextureInfo ti = new TextureInfo("enemy_agent1");
 
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
+            pAgent1.LoadContent(PulseGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
             pAgent1.Position = GetRandomStartPos();//1150, 2650);
             pAgent1.TargetPosition = GetRandomEndPos(pAgent1.Position);//1150, 2650);
             pAgent1.Rotation = 0.0f;
@@ -284,7 +284,7 @@ namespace SampleGame
             attackObj.AttackSubType = (int)Enums.AttackSubType.Default;
             attackObj.CoolDown = 3000;
             attackObj.ActiveCoolDown = 1000;
-            attackObj.Texture = PULSEGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attackObj.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
             attackObj.Frames = 1;
             attackObj.MinDamage = 10;
             attackObj.MaxDamage = 15;
@@ -297,7 +297,7 @@ namespace SampleGame
         private void LoadEnemyRanged(Vector2 startPos, Vector2 targetPos, float targetRotation)
         {
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
+            pAgent1.LoadContent(PulseGame.Current.Content, "Images\\enemy_agent1", new Rectangle(0, 0, 26, 29), 4);
             pAgent1.Position = startPos;//1150, 2650);
             pAgent1.TargetPosition = targetPos;//1150, 2650);
             pAgent1.Rotation = targetRotation;
@@ -334,7 +334,7 @@ namespace SampleGame
                                              //List<Attack> attackList)
         {
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, textureInfo.TextureString, textureInfo.TextureRect, textureInfo.Frames);
+            pAgent1.LoadContent(PulseGame.Current.Content, textureInfo.TextureString, textureInfo.TextureRect, textureInfo.Frames);
             pAgent1.Position = startPos;//1150, 2650);
             pAgent1.TargetPosition = targetPos;//1150, 2650);
             pAgent1.Rotation = targetRotation;
@@ -373,7 +373,7 @@ namespace SampleGame
             int minHealth = 5;
 
             Enemy pAgent1 = new Enemy();
-            pAgent1.LoadContent(PULSEGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
+            pAgent1.LoadContent(PulseGame.Current.Content, ti.TextureString, ti.TextureRect, ti.Frames);
             pAgent1.Position = GetRandomStartPos();//1150, 2650);
             pAgent1.TargetPosition = GetRandomEndPos(pAgent1.Position);//1150, 2650);
             pAgent1.Rotation = 0.0f;
@@ -394,7 +394,7 @@ namespace SampleGame
             attackObj.AttackSubType = (int)Enums.AttackSubType.Default;
             attackObj.CoolDown = 3000;
             attackObj.ActiveCoolDown = 1000;
-            attackObj.Texture = PULSEGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attackObj.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
             attackObj.Frames = 1;
             attackObj.MinDamage = 10;
             attackObj.MaxDamage = 15;
@@ -403,10 +403,6 @@ namespace SampleGame
 
             AgentList.Add(pAgent1);
         }
-
-        #endregion
-
-        #region Load Attack
 
         #endregion
 
@@ -558,7 +554,7 @@ namespace SampleGame
                 }
                 else if ( (difficulty != 0) && (stopwatch.ElapsedMilliseconds - lastPowerUp > powerUpInterval / difficulty) )
                 {
-                    Player playerObj = PULSEGame.Current.player;
+                    Player playerObj = PulseGame.Current.player;
 
                     if (playerObj.Health < playerObj.MaxHealth * 0.25 && GetCurrentHealthPowerUpCount() < 3)
                     {
@@ -747,7 +743,7 @@ namespace SampleGame
         {
             songPhase++;
 
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             playerObj.HasControl = true;
 
@@ -757,7 +753,7 @@ namespace SampleGame
             attack1.AttackSubType = (int)Enums.AttackSubType.Default;
             attack1.CoolDown = 3000;
             attack1.ActiveCoolDown = 1000;
-            attack1.Texture = PULSEGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            attack1.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
             attack1.Frames = 1;
             attack1.MinDamage = 10;
             attack1.MaxDamage = 15;

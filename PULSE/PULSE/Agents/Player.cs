@@ -6,12 +6,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Drawing;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 using System.Diagnostics;
-using SampleGame.Attacks;
-using SampleGame.Agents;
+using PulseGame.Attacks;
+using PulseGame.Agents;
 
-namespace SampleGame
+namespace PulseGame
 {
     public class Player : MovingAgent
     {
@@ -207,11 +207,6 @@ namespace SampleGame
                 attack.Update(gameTime, keyboardStateCurrent, mouseStateCurrent);
             }
 
-            //foreach (Sensor sensor in SensorList)
-            //{
-            //    sensor.Update(keyboardStateCurrent, agentAIList, this.Position, this.Rotation);
-            //}
-
             // if the object is active on the screen
             if (Moving)
             {
@@ -228,12 +223,12 @@ namespace SampleGame
             }
 
             // power recharge rate
-            //Power = MaxPower;
             if (Power < MaxPower) Power += 0.10f;//0.08f;
             else Power = MaxPower;
 
             // health recharge rate
-            if (Health < MaxHealth) Health += 0.02f;
+            if (Health < 0) Health = 0;
+            else if (Health < MaxHealth) Health += 0.02f;
             else Health = MaxHealth;
 
             // go into berserker mode every 1000 points
@@ -246,7 +241,7 @@ namespace SampleGame
                 tempScore = Score;
                 if (!berserkerSoundPlayed)
                 {
-                    PULSEGame.Current.BerserkerSound.Play();
+                    PulseGame.Current.berserkerSound.Play();
                     berserkerSoundPlayed = true;
                 }
             }
@@ -271,34 +266,17 @@ namespace SampleGame
             );
 
             return rect.Top > 0 && rect.Left > 0 && rect.Right < levelWidth && rect.Bottom < levelHeight;
-
-            // COMMENTED OUT: Player can now run into enemies & walls.
-
-            //bool collision = false;
-
-            //foreach (GameAgent agent in agentAIList)
-            //{
-            //    if (collision = agent.Bounds.Intersects(rect))
-            //        break;
-            //}
-
-            //return (!collision && rect.Left > 0 && rect.Left + rect.Width < levelWidth && rect.Top > 0 && rect.Top + rect.Height < levelHeight);
         }
 
         public override void TakeDamage(float damage)
         {
             //Game1.Current.PlayerHitSound.Play();
             Health -= damage;
-
-            if (Health <= 0)
-            {
-                PULSEGame.Current.GameOver();
-            }
         }
 
         public override void Draw(SpriteBatch sprites, SpriteFont font1, Rectangle visibleRect)
         {
-            if (!PULSEGame.Current.IsTitleScreen)
+            if (PulseGame.Current.gameState != (int)Enums.GameState.Attract)
             {
                 Point point = new Point(450, 550);
                 int width = 52;

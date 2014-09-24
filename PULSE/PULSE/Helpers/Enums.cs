@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SampleGame
-{
+namespace PulseGame
+{ 
+    // For now we will use one class to hold enums
+    // We may want to separate these as the project grows
     public class Enums
     {
+
+        public enum GameState
+        {
+            Attract,
+            Countdown,
+            Gameplay,
+            GameOver
+        }
+
         public enum AttackType
         {
             Bullet = 0,

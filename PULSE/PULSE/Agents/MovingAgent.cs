@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Timers;
 using System.Diagnostics;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 
-namespace SampleGame
+namespace PulseGame
 {
     public class MovingAgent : GameAgent
     {
@@ -652,7 +652,7 @@ namespace SampleGame
 
             if (Health <= 0)
             {
-                PULSEGame.Current.levelInfo.AgentList.Remove(this);
+                PulseGame.Current.levelInfo.AgentList.Remove(this);
             }
         }
 

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using SampleGame.Attacks;
+using PulseGame.Attacks;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SampleGame.Agents
+namespace PulseGame.Agents
 {
     public class Item : MovingAgent
     {
@@ -50,7 +50,7 @@ namespace SampleGame.Agents
             Position = position;
             Type = (int)Enums.AgentType.Item;
             
-            LoadContent(PULSEGame.Current.Content, assetName, rect, frames);
+            LoadContent(PulseGame.Current.Content, assetName, rect, frames);
         }
 
         public void GetItem()
@@ -85,7 +85,7 @@ namespace SampleGame.Agents
 
         private void GetEnergyPowerUp()
         {
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             Random rand = new Random();
 
@@ -99,7 +99,7 @@ namespace SampleGame.Agents
 
         private void GetHealthPowerUp()
         {
-            Player playerObj = PULSEGame.Current.player;
+            Player playerObj = PulseGame.Current.player;
 
             Random rand = new Random();
 
@@ -113,7 +113,7 @@ namespace SampleGame.Agents
 
         private void GetNukeAttack()
         {
-            PULSEGame game = PULSEGame.Current;
+            PulseGame game = PulseGame.Current;
 
             Attack attackObj = new Attack();
             attackObj.Active = true;
@@ -132,7 +132,7 @@ namespace SampleGame.Agents
 
         private void GetTeleportSpell()
         {
-            PULSEGame game = PULSEGame.Current;
+            PulseGame game = PulseGame.Current;
 
             Attack attackObj = new Attack();
             attackObj.Active = true;

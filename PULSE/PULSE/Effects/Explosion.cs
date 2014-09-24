@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 
-namespace SampleGame.Effects
+namespace PulseGame.Effects
 {
     public class Explosion : Effect
     {
@@ -47,8 +47,8 @@ namespace SampleGame.Effects
 
                 if (EffectSubType == Enums.AttackSubType.ReflectingStar)
                 {
-                    EffectComponent ef = PULSEGame.Current.EffectComponent;
-                    Vector2 playerPos = PULSEGame.Current.player.Position;
+                    EffectComponent ef = PulseGame.Current.effectComponent;
+                    Vector2 playerPos = PulseGame.Current.player.Position;
 
                     foreach (Effect effect in ef.effectList.Where(e => e.GetType() == typeof(Bullet) && e.CastedBy == Enums.AgentType.Enemy && e.Bounds.Intersects(Bounds)).ToList())
                     {
@@ -58,7 +58,7 @@ namespace SampleGame.Effects
                         bullet.Position += Utils.CalculateRotatedMovement(new Vector2(0, -2), bullet.Rotation);
                     }
 
-                    Player playerObj = PULSEGame.Current.player;
+                    Player playerObj = PulseGame.Current.player;
 
                     if (playerObj.Bounds.Intersects(Bounds))
                     {

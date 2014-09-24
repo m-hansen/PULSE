@@ -13,7 +13,7 @@ using Drawing;
 // TODO
 // fix relative angles?
 
-namespace SampleGame
+namespace PulseGame
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.

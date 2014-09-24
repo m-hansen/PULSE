@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace SampleGame.Helpers
+namespace PulseGame.Helpers
 {
     public static class Utils
     {

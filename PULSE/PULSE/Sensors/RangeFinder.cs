@@ -6,11 +6,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Drawing;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 
 // TODO - fix intersection point to reflect bounds of wall and not a horizontal line
 
-namespace SampleGame
+namespace PulseGame
 {
     public class RangeFinder : Sensor
     {

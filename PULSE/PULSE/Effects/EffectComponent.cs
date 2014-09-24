@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using SampleGame.Helpers;
+using PulseGame.Helpers;
 
 
-namespace SampleGame.Effects
+namespace PulseGame.Effects
 {
     public class EffectComponent : DrawableGameComponent
     {
@@ -64,7 +64,7 @@ namespace SampleGame.Effects
 
         public override void Update(GameTime gameTime)
         {
-            LevelInfo levelInfo = PULSEGame.Current.levelInfo;
+            LevelInfo levelInfo = PulseGame.Current.levelInfo;
 
             for (int i = 0; i < effectList.Count; i++)
             {
@@ -82,7 +82,7 @@ namespace SampleGame.Effects
         public override void Draw(GameTime gameTime)
         {
             //SpriteFont font1 = Game1.Current.font1;
-            Rectangle visibleRect = PULSEGame.Current.levelInfo.VisibleRect;
+            Rectangle visibleRect = PulseGame.Current.levelInfo.VisibleRect;
 
             batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 

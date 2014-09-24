@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using SampleGame.Effects;
+using PulseGame.Effects;
 using Microsoft.Xna.Framework.Graphics;
 using System.Diagnostics;
-using SampleGame.Helpers;
-using SampleGame.Agents;
+using PulseGame.Helpers;
+using PulseGame.Agents;
 
-namespace SampleGame.Attacks
+namespace PulseGame.Attacks
 {
     public class Attack
     {
@@ -48,10 +48,10 @@ namespace SampleGame.Attacks
                 }
                 else if ((keyboard.IsKeyDown(Key) ||
                     (mouse.LeftButton == ButtonState.Pressed && AttackSubType == Enums.AttackSubType.TriBullet))
-                    && PULSEGame.Current.player.Power > AttackCost)
+                    && PulseGame.Current.player.Power > AttackCost)
                 {
-                    AddAttackToActiveEffects(Enums.AgentType.Player, PULSEGame.Current.player);
-                    PULSEGame.Current.player.Power -= AttackCost;
+                    AddAttackToActiveEffects(Enums.AgentType.Player, PulseGame.Current.player);
+                    PulseGame.Current.player.Power -= AttackCost;
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace SampleGame.Attacks
             bullet.CastedBy = castedBy;
             bullet.HitsRemaining = 1;
 
-            PULSEGame.Current.EffectComponent.AddEffect(bullet);
+            PulseGame.Current.effectComponent.AddEffect(bullet);
 
             ActiveCoolDown = CoolDown;
         }
@@ -149,10 +149,10 @@ namespace SampleGame.Attacks
                 bullet.HitsRemaining = 3;
                 bullet.EffectSubType = Enums.AttackSubType.Nuke;
 
-                PULSEGame.Current.EffectComponent.AddEffect(bullet);
+                PulseGame.Current.effectComponent.AddEffect(bullet);
             }
 
-            PULSEGame.Current.EffectComponent.NukeSplit();
+            PulseGame.Current.effectComponent.NukeSplit();
 
             ActiveCoolDown = CoolDown;
         }
@@ -175,7 +175,7 @@ namespace SampleGame.Attacks
                 bullet.CastedBy = castedBy;
                 bullet.HitsRemaining = 1;
 
-                PULSEGame.Current.EffectComponent.AddEffect(bullet);
+                PulseGame.Current.effectComponent.AddEffect(bullet);
             }
 
             //Game1.Current.EffectComponent.SplitBulletsFromPlayer();
@@ -231,7 +231,7 @@ namespace SampleGame.Attacks
             int bulletSpeed = 8;
             float angleModifier = 0.25f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
 
-            Vector2 playerPos = PULSEGame.Current.player.Position;
+            Vector2 playerPos = PulseGame.Current.player.Position;
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 3; j++)
@@ -252,7 +252,7 @@ namespace SampleGame.Attacks
                     bullet.Color = (i % 2 == 0) ? new Color(50, 100, 240) : new Color(245, 50, 55); // light blue / light red
                     bullet.HitsRemaining = 1;
 
-                    PULSEGame.Current.EffectComponent.AddEffect(bullet);
+                    PulseGame.Current.effectComponent.AddEffect(bullet);
                 }
 
             currentSequence += AttackCost;
@@ -291,7 +291,7 @@ namespace SampleGame.Attacks
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
             bullet.HitsRemaining = 1;
 
-            PULSEGame.Current.EffectComponent.AddEffect(bullet);
+            PulseGame.Current.effectComponent.AddEffect(bullet);
 
             Bullet bullet1 = new Bullet();
             bullet1.LoadEffect(Texture);
@@ -305,7 +305,7 @@ namespace SampleGame.Attacks
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
             bullet.HitsRemaining = 1;
 
-            PULSEGame.Current.EffectComponent.AddEffect(bullet1);
+            PulseGame.Current.effectComponent.AddEffect(bullet1);
 
             Bullet bullet2 = new Bullet();
             bullet2.LoadEffect(Texture);
@@ -319,7 +319,7 @@ namespace SampleGame.Attacks
             bullet.EffectSubType = Enums.AttackSubType.TriBullet;
             bullet.HitsRemaining = 1;
 
-            PULSEGame.Current.EffectComponent.AddEffect(bullet2);
+            PulseGame.Current.effectComponent.AddEffect(bullet2);
 
             // change the color set of the bullets
             bulletCount++;
@@ -329,7 +329,7 @@ namespace SampleGame.Attacks
 
         private void LoadSplitBullets(Enums.AgentType castedBy, MovingAgent agent)
         {
-            PULSEGame.Current.EffectComponent.SplitBulletsFromPlayer();
+            PulseGame.Current.effectComponent.SplitBulletsFromPlayer();
 
             ActiveCoolDown = CoolDown;
         }
@@ -339,7 +339,7 @@ namespace SampleGame.Attacks
             Random rand  = new Random();
 
             int padding = 100;
-            LevelInfo levelInfo = PULSEGame.Current.levelInfo;
+            LevelInfo levelInfo = PulseGame.Current.levelInfo;
 
             Explosion explosion = new Explosion();
             explosion.LoadExplosion(Texture, BoundingRect, Frames);
@@ -348,7 +348,7 @@ namespace SampleGame.Attacks
             explosion.EffectSubType = Enums.AttackSubType.ReflectingStar;
             explosion.CastedBy = castedBy;
 
-            PULSEGame.Current.EffectComponent.AddEffect(explosion);
+            PulseGame.Current.effectComponent.AddEffect(explosion);
 
             ActiveCoolDown = CoolDown;
         }
@@ -367,7 +367,7 @@ namespace SampleGame.Attacks
                 explosion.CastedBy = castedBy;
                 explosion.EffectSubType = Enums.AttackSubType.Default;
 
-                PULSEGame.Current.EffectComponent.AddEffect(explosion);
+                PulseGame.Current.effectComponent.AddEffect(explosion);
 
                 ActiveCoolDown = CoolDown;
             }
@@ -375,11 +375,11 @@ namespace SampleGame.Attacks
             {
                 Explosion explosion = new Explosion();
                 explosion.LoadExplosion(Texture, BoundingRect, Frames);
-                explosion.Position = PULSEGame.Current.player.Position;
+                explosion.Position = PulseGame.Current.player.Position;
                 explosion.AnimationInterval = new TimeSpan(1100000);
                 explosion.EffectSubType = Enums.AttackSubType.Default;
 
-                PULSEGame.Current.EffectComponent.AddEffect(explosion);
+                PulseGame.Current.effectComponent.AddEffect(explosion);
 
                 ActiveCoolDown = CoolDown;
             }
@@ -387,7 +387,7 @@ namespace SampleGame.Attacks
 
         private void UseTeleport(Enums.AgentType castedBy, MovingAgent agent)
         {
-            PULSEGame game = PULSEGame.Current;
+            PulseGame game = PulseGame.Current;
 
             Vector2 targetPos = new Vector2(game.mouseStateCurrent.X, game.mouseStateCurrent.Y);
 

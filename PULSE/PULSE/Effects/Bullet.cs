@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using SampleGame.Helpers;
-using SampleGame.Agents;
+using PulseGame.Helpers;
+using PulseGame.Agents;
 
-namespace SampleGame.Effects
+namespace PulseGame.Effects
 {
     public class Bullet : Effect
     {
@@ -42,7 +42,7 @@ namespace SampleGame.Effects
             TimeElapsed += gameTime.ElapsedGameTime.Milliseconds;
             if (SplitsRemaining > 0 && EffectSubType == Enums.AttackSubType.Nuke && TimeElapsed > 200)
             {
-                PULSEGame.Current.EffectComponent.NukeSplit();//SplitBulletsFromPlayer();
+                PulseGame.Current.effectComponent.NukeSplit();//SplitBulletsFromPlayer();
                 TimeElapsed = 0;
                 SplitsRemaining--;
             }
@@ -74,7 +74,7 @@ namespace SampleGame.Effects
             }
             else
             {
-                Player playerObj = PULSEGame.Current.player;
+                Player playerObj = PulseGame.Current.player;
 
                 if (Bounds.Intersects(playerObj.Bounds))
                 {
