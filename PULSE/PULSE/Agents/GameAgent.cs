@@ -10,8 +10,6 @@ namespace PulseGame
 {
     public class GameAgent
     {
-        #region Constants
-
         public Texture2D Texture { get; private set; }  // the image set for the object
         public Vector2 Origin;                          // origin of object: currently set to the middle of the image
         public Vector2 Position;                        // the current position of the object
@@ -49,8 +47,6 @@ namespace PulseGame
                 );
             }
         }
-
-        #endregion
 
         #region Debugging
 

@@ -131,7 +131,7 @@
     <Compile Include="Agents\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="PULSEGame.cs" />
+    <Compile Include="PulseGame.cs" />
     <Compile Include="Sensors\RangeFinder.cs" />
     <Compile Include="Sensors\Sensor.cs" />
   </ItemGroup>
@@ -140,8 +140,8 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PULSEContent\PULSEContent.contentproj">
-      <Name>PULSEContent %28Content%29</Name>
+    <ProjectReference Include="..\PulseContent\PulseContent.contentproj">
+      <Name>PulseContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
       <Project>{38CD712F-F59A-4815-A04A-D6D8C8E5690A}</Project>
     </ProjectReference>

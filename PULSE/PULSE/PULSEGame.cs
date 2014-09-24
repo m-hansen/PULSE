@@ -130,33 +130,6 @@ namespace PulseGame
             titleTexture = Content.Load<Texture2D>("Images\\PULSE");
             subtitleTexture = Content.Load<Texture2D>("Images\\enter_to_play");
 
-            Attack attack1 = new Attack();
-            attack1.Active = true;
-            attack1.Key = Keys.Space;
-            attack1.AttackType = Enums.AttackType.Bullet;
-            attack1.AttackSubType = Enums.AttackSubType.TriBullet;
-            attack1.CoolDown = 50;
-            attack1.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack1.Frames = 1;
-            attack1.MinDamage = 5;
-            attack1.MaxDamage = 10;
-            attack1.AttackCost = 0;
-            player.attackList.Add(attack1);
-
-            Attack attack3 = new Attack();
-            attack3.Active = true;
-            attack3.Key = Keys.D1;
-            attack3.AttackType = Enums.AttackType.Bullet;
-            attack3.AttackSubType = Enums.AttackSubType.BulletShield;
-            attack3.CoolDown = 1500;
-            attack3.Texture = Content.Load<Texture2D>("Images\\raindrop");
-            attack3.IconTexture = Content.Load<Texture2D>("Images\\skill1");
-            attack3.HasIcon = true;
-            attack3.AttackCost = 30;
-            attack3.MinDamage = 10;
-            attack3.MaxDamage = 200;
-            player.attackList.Add(attack3);
-
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
             player.Position = levelInfo.PlayerStartPos;
@@ -172,7 +145,9 @@ namespace PulseGame
         {
             // Allows the game to exit
             if ((keyboardStateCurrent.IsKeyUp(Keys.Escape) && keyboardStatePrevious.IsKeyDown(Keys.Escape)) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
                 this.Exit();
+            }
 
             // Update keyboard state
             keyboardStatePrevious = keyboardStateCurrent;
@@ -279,7 +254,8 @@ namespace PulseGame
         {
             gameState = (int)Enums.GameState.GameOver;
             levelEndText = "Game Over!";
-            Initialize();
+            // TODO need to clean assets and restart game
+            //Initialize();
             //MediaPlayer.Stop();//Play(backgroundMusic);
         }
 

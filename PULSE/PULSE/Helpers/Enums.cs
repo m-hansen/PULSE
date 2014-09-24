@@ -18,6 +18,14 @@ namespace PulseGame
             GameOver
         }
 
+        public enum PlayerSkills
+        {
+            Default,
+            BulletShield,
+            Teleport,
+            Nuke
+        }
+
         public enum AttackType
         {
             Bullet = 0,

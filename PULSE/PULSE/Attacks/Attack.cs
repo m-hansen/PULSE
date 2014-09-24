@@ -30,6 +30,7 @@ namespace PulseGame.Attacks
         public Color Color = Color.White;
         public int MaxSequence;
         private int currentSequence;
+        public bool IsUnlocked = false;
 
         public int ActiveCoolDown = 0;
 
@@ -399,19 +400,6 @@ namespace PulseGame.Attacks
                 agent.Bounds.Height
             );
 
-            //if (!game.levelInfo.VisibleRect.Contains(new Point((int)targetPos.X, (int)targetPos.Y)))
-            //{
-            //    targetPos = FixTargetMovePositionForLevelBounds(targetPos, targetBounds, game.levelInfo.VisibleRect);
-
-            //    targetBounds = new Rectangle
-            //    (
-            //        (int)(targetPos.X - (agent.Bounds.Width / 2)),
-            //        (int)(targetPos.Y - (agent.Bounds.Height / 2)),
-            //        agent.Bounds.Width,
-            //        agent.Bounds.Height
-            //    );
-            //}
-
             if (castedBy == Enums.AgentType.Player)
             {
                 List<GameAgent> intersectingAgentList = game.levelInfo.AgentList.Where(ga => ga.Type == (int)Enums.AgentType.Enemy && ga.Bounds.Intersects(targetBounds) && ((Enemy)ga).Health < agent.Health).ToList();
@@ -425,8 +413,26 @@ namespace PulseGame.Attacks
             }
 
             agent.Position = targetPos;
-            agent.Color = Color.Yellow;
             agent.Color = Color.White;
+
+            int bulletSpeed = 10;
+            float angleModifier = 6.0f; // lower numbers for straight line - higher for wide angle - NOTE: values between 0 and 1 work best
+
+            for (int i = 0; i < 200; i++)
+            {
+                Bullet bullet = new Bullet();
+                bullet.LoadEffect(Texture);
+                bullet.Position = agent.Position + Utils.CalculateRotatedMovement(new Vector2(0, -(agent.FrameHeight / 2)), agent.Rotation);
+                bullet.Rotation = (agent.Rotation - (0.5f * angleModifier)) + (float)random.NextDouble() * angleModifier;
+                bullet.MaxSpeed = bulletSpeed;
+                bullet.Color = Color.Yellow;
+                bullet.MinDamage = MinDamage;
+                bullet.MaxDamage = MaxDamage;
+                bullet.CastedBy = castedBy;
+                bullet.HitsRemaining = 1;
+
+                PulseGame.Current.effectComponent.AddEffect(bullet);
+            }
 
             ActiveCoolDown = CoolDown;
         }

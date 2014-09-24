@@ -17,7 +17,7 @@ namespace PulseGame
     {
         public float Speed;  // forward - backward speed
         public bool HasControl = true;
-        public List<Attack> attackList = new List<Attack>();
+        public Attack[] skillList = new Attack[4];
         public float MaxHealth = 100.0f;
         public float MaxPower = 100.0f;
         public float Power;  // used for shooting bullets/skills
@@ -30,7 +30,72 @@ namespace PulseGame
         {
             Health = 100.0f;
             Power = 100.0f;
+            LoadSkills();
         }
+
+        #region Loading skills
+        private void LoadSkills()
+        {
+            Attack defaultAttack = new Attack();
+            defaultAttack.IsUnlocked = true;
+            defaultAttack.Active = true;
+            defaultAttack.Key = Keys.Space;
+            defaultAttack.AttackType = Enums.AttackType.Bullet;
+            defaultAttack.AttackSubType = Enums.AttackSubType.TriBullet;
+            defaultAttack.CoolDown = 50;
+            defaultAttack.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            defaultAttack.Frames = 1;
+            defaultAttack.MinDamage = 5;
+            defaultAttack.MaxDamage = 10;
+            defaultAttack.AttackCost = 0;
+            skillList[(int)Enums.PlayerSkills.Default] = defaultAttack;
+
+            Attack bulletShieldSkill = new Attack();
+            bulletShieldSkill.IsUnlocked = true;
+            bulletShieldSkill.Active = true;
+            bulletShieldSkill.Key = Keys.D1;
+            bulletShieldSkill.AttackType = Enums.AttackType.Bullet;
+            bulletShieldSkill.AttackSubType = Enums.AttackSubType.BulletShield;
+            bulletShieldSkill.CoolDown = 1500;
+            bulletShieldSkill.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            bulletShieldSkill.IconTexture = PulseGame.Current.Content.Load<Texture2D>("Images\\skill1");
+            bulletShieldSkill.HasIcon = true;
+            bulletShieldSkill.AttackCost = 30;
+            bulletShieldSkill.MinDamage = 10;
+            bulletShieldSkill.MaxDamage = 200;
+            skillList[(int)Enums.PlayerSkills.BulletShield] = bulletShieldSkill;
+
+            Attack teleportSkill = new Attack();
+            teleportSkill.IsUnlocked = false;
+            teleportSkill.Active = true;
+            teleportSkill.Key = Keys.D2;
+            teleportSkill.AttackType = Enums.AttackType.MovementEffect;
+            teleportSkill.AttackSubType = Enums.AttackSubType.Teleport;
+            teleportSkill.CoolDown = 15000;
+            teleportSkill.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            teleportSkill.IconTexture = PulseGame.Current.Content.Load<Texture2D>("Images\\teleport_image");
+            teleportSkill.HasIcon = true;
+            teleportSkill.AttackCost = 20;
+            teleportSkill.MinDamage = 1;
+            teleportSkill.MaxDamage = 5;
+            skillList[(int)Enums.PlayerSkills.Teleport] = teleportSkill;
+
+            Attack nukeSkill = new Attack();
+            nukeSkill.IsUnlocked = false;
+            nukeSkill.Active = true;
+            nukeSkill.Key = Keys.D3;
+            nukeSkill.AttackType = Enums.AttackType.Bullet;
+            nukeSkill.AttackSubType = Enums.AttackSubType.Nuke;
+            nukeSkill.CoolDown = 3000;
+            nukeSkill.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
+            nukeSkill.IconTexture = PulseGame.Current.Content.Load<Texture2D>("Images\\skill4");
+            nukeSkill.HasIcon = true;
+            nukeSkill.AttackCost = 60;
+            nukeSkill.MinDamage = 50;
+            nukeSkill.MaxDamage = 200;
+            skillList[(int)Enums.PlayerSkills.Nuke] = nukeSkill;
+        }
+        #endregion
 
         #region Initialize Sensors Method (UNUSED)
 
@@ -132,12 +197,6 @@ namespace PulseGame
 
             Rotation = Utils.GetRotationToTarget(mouseStateCurrentVec, Position);
 
-            // rotation
-            //if (keyboardStateCurrent.IsKeyDown(Keys.Left) || keyboardStateCurrent.IsKeyDown(Keys.A))
-            //    Rotation -= (elapsedTime * RotationSpeed) % MathHelper.TwoPi;
-            //if (keyboardStateCurrent.IsKeyDown(Keys.Right) || keyboardStateCurrent.IsKeyDown(Keys.D))
-            //    Rotation += (elapsedTime * RotationSpeed) % MathHelper.TwoPi;
-
             // movement
             if (keyboardStateCurrent.IsKeyDown(Keys.Up) || keyboardStateCurrent.IsKeyDown(Keys.W))
             {
@@ -202,9 +261,12 @@ namespace PulseGame
                 }
             }
 
-            foreach (Attack attack in attackList)
+            foreach (Attack attack in skillList)
             {
-                attack.Update(gameTime, keyboardStateCurrent, mouseStateCurrent);
+                if (attack.IsUnlocked)
+                {
+                    attack.Update(gameTime, keyboardStateCurrent, mouseStateCurrent);
+                }
             }
 
             // if the object is active on the screen
@@ -234,9 +296,9 @@ namespace PulseGame
             // go into berserker mode every 1000 points
             if (Score % 1000 == 0 && Score != 0)
             {
-                attackList[0].CoolDown = 0;
-                attackList[0].MinDamage = 10;
-                attackList[0].MaxDamage = 20;
+                skillList[(int)Enums.PlayerSkills.Default].CoolDown = 0;
+                skillList[(int)Enums.PlayerSkills.Default].MinDamage = 10;
+                skillList[(int)Enums.PlayerSkills.Default].MaxDamage = 20;
                 Color = Color.Red;
                 tempScore = Score;
                 if (!berserkerSoundPlayed)
@@ -247,9 +309,9 @@ namespace PulseGame
             }
             if ((berserkerSoundPlayed) && ((Score - tempScore) >= berserkerLength))
             {
-                attackList[0].CoolDown = 50;
-                attackList[0].MinDamage = 5;
-                attackList[0].MaxDamage = 10;
+                skillList[(int)Enums.PlayerSkills.Default].CoolDown = 50;
+                skillList[(int)Enums.PlayerSkills.Default].MinDamage = 5;
+                skillList[(int)Enums.PlayerSkills.Default].MaxDamage = 10;
                 Color = Color.White;
                 berserkerSoundPlayed = false;
             }
@@ -284,7 +346,7 @@ namespace PulseGame
                 int padding = 1;
                 Color cooldownColor = new Color(140, 0, 0, 80);
 
-                foreach (Attack attack in attackList.Where(a => a.HasIcon).ToList())
+                foreach (Attack attack in skillList.Where(a => a.HasIcon).ToList())
                 {
                     // draws the cooldown rect
                     if (attack.ActiveCoolDown > 0)

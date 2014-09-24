@@ -113,55 +113,12 @@ namespace PulseGame.Agents
 
         private void GetNukeAttack()
         {
-            PulseGame game = PulseGame.Current;
-
-            Attack attackObj = new Attack();
-            attackObj.Active = true;
-            attackObj.Key = GetNextAvaliableKey(game.player.attackList.Count);
-            attackObj.AttackType = Enums.AttackType.Bullet;
-            attackObj.AttackSubType = Enums.AttackSubType.Nuke;
-            attackObj.CoolDown = 3000;
-            attackObj.Texture = game.Content.Load<Texture2D>("Images\\raindrop");
-            attackObj.IconTexture = game.Content.Load<Texture2D>("Images\\skill4");
-            attackObj.HasIcon = true;
-            attackObj.AttackCost = 60;
-            attackObj.MinDamage = 50;
-            attackObj.MaxDamage = 200;
-            game.player.attackList.Add(attackObj);
+            PulseGame.Current.player.skillList[(int)Enums.PlayerSkills.Nuke].IsUnlocked = true;
         }
 
         private void GetTeleportSpell()
         {
-            PulseGame game = PulseGame.Current;
-
-            Attack attackObj = new Attack();
-            attackObj.Active = true;
-            attackObj.Key = GetNextAvaliableKey(game.player.attackList.Count);
-            attackObj.AttackType = Enums.AttackType.MovementEffect;
-            attackObj.AttackSubType = Enums.AttackSubType.Teleport;
-            attackObj.CoolDown = 15000;
-            attackObj.IconTexture = game.Content.Load<Texture2D>("Images\\teleport_image");
-            attackObj.HasIcon = true;
-            attackObj.AttackCost = 20;
-            game.player.attackList.Add(attackObj);
-        }
-
-        private Keys GetNextAvaliableKey(int attackListSize)
-        {
-            switch (attackListSize)
-            {
-                case 1: return Keys.D1;
-                case 2: return Keys.D2;
-                case 3: return Keys.D3;
-                case 4: return Keys.D4;
-                case 5: return Keys.D5;
-                case 6: return Keys.D6;
-                case 7: return Keys.D7;
-                case 8: return Keys.D8;
-                case 9: return Keys.D9;
-            }
-
-            return Keys.P;
+            PulseGame.Current.player.skillList[(int)Enums.PlayerSkills.Teleport].IsUnlocked = true;
         }
     }
 }

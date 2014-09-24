@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PulseGame.Helpers
 {
@@ -29,5 +30,15 @@ namespace PulseGame.Helpers
         {
             return (float)Math.Round(Rotation * 180 / MathHelper.Pi, 2);
         }
+
+        // Convert a texture to a color array
+        public static Color[] TextureToArray(Texture2D texture)
+        {
+            Color[] colorArray = new Color[texture.Width * texture.Height];
+            texture.GetData(colorArray);
+
+            return colorArray;
+        }
+
     }
 }
