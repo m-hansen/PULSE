@@ -45,7 +45,9 @@ namespace PulseGame
             levelTimeSpanList.Add(new LevelTimeSpan(0, 1000, 0));
             // swap between 0 and 1 difficulty for the song intro
             for (int i = 1000; i < 46000; i += 1999)
+            {
                 levelTimeSpanList.Add(new LevelTimeSpan(i, i + 1999, ((i % 2 == 0) ? 1 : 0)));
+            }
             levelTimeSpanList.Add(new LevelTimeSpan(46000, 57000, 2));
             levelTimeSpanList.Add(new LevelTimeSpan(57000, 66000, 3));
             levelTimeSpanList.Add(new LevelTimeSpan(66000, 101000, 2));
@@ -121,7 +123,7 @@ namespace PulseGame
 
         private void SpawnBoss()
         {
-            int health = 500000;
+            int health = 50000;
 
             TextureInfo ti = new TextureInfo("boss1");
             ti.Scale = 0.75f;
