@@ -63,6 +63,15 @@ namespace PulseGame.Effects
                     {
                         if (agent.Type == (int)Enums.AgentType.Enemy)
                         {
+                            if (((Enemy)agent).State == Enums.EnemyState.Boss)
+                            {
+                                if (!Utils.IntersectPixels(agent.Bounds, Utils.TextureToArray(agent.Texture), Bounds, Utils.TextureToArray(Texture)))
+                                {
+                                    // per pixel collision for boss only
+                                    continue;
+                                }
+                            }
+
                             ((MovingAgent)agent).TakeDamage(MinDamage + rand.Next(MaxDamage - MinDamage));
                             //if (EffectSubType != Enums.AttackSubType.Nuke && EffectSubType != Enums.AttackSubType.NukeSpawn) Active = false;
                             HitsRemaining--;

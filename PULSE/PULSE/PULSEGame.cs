@@ -42,7 +42,9 @@ namespace PulseGame
         private Texture2D crosshairTexture;
         private Texture2D titleTexture;
         private Texture2D subtitleTexture;
+        private Texture2D skillLockTexture;
 
+        private Song titleMusic;
         private Song backgroundMusic;
         private SoundEffect countdownSound;
 
@@ -108,6 +110,10 @@ namespace PulseGame
             // create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // load in the title music
+            titleMusic = Content.Load<Song>("Audio\\voxis_shattered");
+            MediaPlayer.IsRepeating = false;    // everything is set up for sound to loop - just change this value
+
             // load in the background music
             backgroundMusic = Content.Load<Song>("Audio\\voxis_pour_elle");
             MediaPlayer.IsRepeating = false;    // everything is set up for sound to loop - just change this value
@@ -116,7 +122,7 @@ namespace PulseGame
             player.LoadContent(this.Content, "Images\\ship1", new Rectangle(0, 0, 38, 41), 8);
 
             // loading the font to display text on the screen
-            font1 = Content.Load<SpriteFont>("fonts/Font1");
+            font1 = Content.Load<SpriteFont>("fonts\\Font1");
 
             // load sounds
             playerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
@@ -129,6 +135,9 @@ namespace PulseGame
             // load the title texture
             titleTexture = Content.Load<Texture2D>("Images\\PULSE");
             subtitleTexture = Content.Load<Texture2D>("Images\\enter_to_play");
+
+            // load the skill lock texture
+            skillLockTexture = Content.Load<Texture2D>("Images\\skill_lock");
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
@@ -160,8 +169,16 @@ namespace PulseGame
             switch (gameState)
             {
                 case (int)Enums.GameState.Attract:
+                    // Play the title music
+                    if (!songStart)
+                    {
+                        MediaPlayer.Play(titleMusic);
+                        songStart = true;
+                    }
                     if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
                     {
+                        MediaPlayer.Stop();
+                        songStart = false;
                         gameState = (int)Enums.GameState.Countdown;
                         sw.Start();
                     }
@@ -299,12 +316,7 @@ namespace PulseGame
                 player.Draw(this.spriteBatch, font1, levelInfo.VisibleRect);
             }
 
-            DrawDebuggingInformation();
-
-            // draw skill sprites
-            //spriteBatch.Draw(skill1Texture, new Rectangle(450, 550, 50, 50), Color.White);
-            //spriteBatch.Draw(skill2Texture, new Rectangle(500, 550, 50, 50), Color.White);
-            //spriteBatch.Draw(skill4Texture, new Rectangle(600, 550, 50, 50), Color.White);
+            //DrawDebuggingInformation();
 
             spriteBatch.End();
 
@@ -333,7 +345,7 @@ namespace PulseGame
                         if (scaleSize < 0.95) titleExpanding = true;
                         scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
                     }
-                    spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
+                    spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, new Color(255,255,255,2), 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
                     spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
                     //spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
                     //spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
@@ -349,6 +361,10 @@ namespace PulseGame
 
         private void DrawUI()
         {
+            // lower GUI background color
+            DrawingHelper.DrawRectangle(new Rectangle(0, windowHeight - (windowHeight / 10), windowWidth, windowHeight / 10), new Color(20, 20, 20, 255), true);
+
+            DrawingHelper.DrawRectangle(new Rectangle((windowWidth / 2) - (windowWidth / 10), 0, windowWidth / 5, windowHeight / 10), new Color(20, 20, 20, 255), true);
             spriteBatch.DrawString(font1, "Score: " + player.Score, new Vector2(20, 20), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
 
             // timer
@@ -378,28 +394,50 @@ namespace PulseGame
                 healthBarColor = Color.Red;
 
             spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), healthBarColor, false);
             DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.Health * 2), 20), healthBarColor, true);
+            DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), Color.Black, false);
 
             // power bar
             spriteBatch.DrawString(font1, "Power", new Vector2(688, 648), Color.White);
-            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
             DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.Power * 2), 20), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, true);
+            DrawingHelper.DrawRectangle(new Rectangle(750, 650, (int)(player.MaxPower * 2), 20), Color.Black, false);
 
-            //Color cooldownColor = new Color(140, 0, 0, 80);
+            // Skill bar
+            int uiHeight = windowHeight / 10; // 10% of window height
+            int numSkills = player.skillList.Length;
+            int skillBoxWidth = 52;
+            int skillBoxHeight = 52;
+            int padding = 1;
+            Point skillBarPos = new Point((windowWidth / 2) - (numSkills * (padding + skillBoxWidth) / 2), windowHeight - uiHeight + ((uiHeight - (padding + skillBoxHeight)) / 2));
+            Color cooldownColor = new Color(140, 0, 0, 80);
+            int skillNumber = 0;
+            foreach (Attack attack in player.skillList.Where(a => a.HasIcon).ToList())
+            {
+                skillNumber++;
 
-            // skills bar
-            //DrawingHelper.DrawRectangle(new Rectangle(450, 600 - (int)player.attackList[2].ActiveCoolDown / 30, 50, (player.attackList[2].ActiveCoolDown > 0) ? (int)player.attackList[2].ActiveCoolDown / 30 : 0), cooldownColor, true);
-            //DrawingHelper.DrawRectangle(new Rectangle(450, 550, 49, 50), Color.White, false);
+                // draws the attack icon texture
+                spriteBatch.Draw(attack.IsUnlocked ? attack.IconTexture : skillLockTexture, new Rectangle(skillBarPos.X + padding, skillBarPos.Y + padding, skillBoxWidth - (2 * padding), skillBoxHeight - (2 * padding)), Color.White);
+                spriteBatch.DrawString(font1, skillNumber.ToString(), new Vector2(skillBarPos.X + padding + 3, skillBarPos.Y + padding), Color.LemonChiffon);
 
-            //DrawingHelper.DrawRectangle(new Rectangle(500, 600 - (int)player.attackList[1].ActiveCoolDown / 20, 50, (player.attackList[1].ActiveCoolDown > 0) ? (int)player.attackList[1].ActiveCoolDown / 20 : 0), cooldownColor, true);
-            //DrawingHelper.DrawRectangle(new Rectangle(500, 550, 49, 50), Color.White, false);
+                // draws the cooldown rect
+                if (attack.ActiveCoolDown > 0)
+                {
+                    Rectangle targetRect = new Rectangle
+                    (
+                        skillBarPos.X + padding,
+                        skillBarPos.Y + padding + skillBoxHeight - (skillBoxHeight * attack.ActiveCoolDown / attack.CoolDown),
+                        skillBoxWidth - 2 * padding,
+                        (skillBoxHeight * attack.ActiveCoolDown / attack.CoolDown) - 2 * padding
+                    );
 
-            //DrawingHelper.DrawRectangle(new Rectangle(550, 550, 50, 50), (player.Power < 0.5) ? Color.MediumPurple : Color.Purple, false);
-            //DrawingHelper.DrawRectangle(new Rectangle(550, 550, 49, 50), Color.White, false);
+                    DrawingHelper.DrawRectangle(targetRect, cooldownColor, true);
+                }
 
-            //DrawingHelper.DrawRectangle(new Rectangle(600, 600 - (int)player.attackList[3].ActiveCoolDown / 60, 50, (player.attackList[3].ActiveCoolDown > 0) ? (int)player.attackList[3].ActiveCoolDown / 60 : 0), cooldownColor, true);
-            //DrawingHelper.DrawRectangle(new Rectangle(600, 550, 49, 50), Color.White, false);
+                // draws the outline box
+                DrawingHelper.DrawRectangle(new Rectangle(skillBarPos.X, skillBarPos.Y, skillBoxWidth, skillBoxHeight), Color.Black, false);
+
+                skillBarPos.X += skillBoxWidth;
+            }
         }
 
         private int timeInMinutes(double timeRemaining)

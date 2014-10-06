@@ -290,16 +290,35 @@
       <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Audio\whistle-flute-1.xnb</Output>
       <Time>2013-04-29T18:35:41.239731-04:00</Time>
     </Item>
+    <Item>
+      <Source>Audio\voxis_shattered.mp3</Source>
+      <Name>Audio\voxis_shattered</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.xnb</Output>
+      <Extra>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.wma</Extra>
+      <Time>2014-10-05T20:00:45.4865189-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\skill_lock.png</Source>
+      <Name>Images\skill_lock</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill_lock.xnb</Output>
+      <Time>2014-10-05T21:58:03.9580964-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Matt\git\Pulse\Pulse\PULSEContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Matt\git\Pulse\Pulse\Pulse\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Matt\git\Pulse\Pulse\PULSEContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

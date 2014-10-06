@@ -78,3 +78,6 @@ C:\Users\Matt\git\Pulse\Pulse\Pulse\obj\x86\Debug\Pulse.csprojResolveAssemblyRef
 C:\Users\Matt\git\Pulse\Pulse\Pulse\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Matt\git\Pulse\Pulse\Pulse\obj\x86\Debug\SampleGame.exe
 C:\Users\Matt\git\Pulse\Pulse\Pulse\obj\x86\Debug\SampleGame.pdb
+C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.xnb
+C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.wma
+C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill_lock.xnb

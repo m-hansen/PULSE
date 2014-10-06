@@ -85,7 +85,7 @@ namespace PulseGame
                 0,
                 0,
                 windowWidth,
-                windowHeight
+                windowHeight - (windowHeight / 10)
             );
         }
 

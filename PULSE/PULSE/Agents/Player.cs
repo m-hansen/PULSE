@@ -333,46 +333,46 @@ namespace PulseGame
         public override void TakeDamage(float damage)
         {
             //Game1.Current.PlayerHitSound.Play();
-            Health -= damage;
+            //Health -= damage;
         }
 
         public override void Draw(SpriteBatch sprites, SpriteFont font1, Rectangle visibleRect)
         {
-            if (PulseGame.Current.gameState != (int)Enums.GameState.Attract)
-            {
-                Point point = new Point(450, 550);
-                int width = 52;
-                int height = 52;
-                int padding = 1;
-                Color cooldownColor = new Color(140, 0, 0, 80);
+            //if (PulseGame.Current.gameState != (int)Enums.GameState.Attract)
+            //{
+            //    Point point = new Point(450, 550);
+            //    int width = 52;
+            //    int height = 52;
+            //    int padding = 1;
+            //    Color cooldownColor = new Color(140, 0, 0, 80);
 
-                foreach (Attack attack in skillList.Where(a => a.HasIcon).ToList())
-                {
-                    // draws the cooldown rect
-                    if (attack.ActiveCoolDown > 0)
-                    {
-                        Rectangle targetRect = new Rectangle
-                        (
-                            point.X + padding,
-                            point.Y + padding + height - (height * attack.ActiveCoolDown / attack.CoolDown),
-                            width - 2 * padding,
-                            (height * attack.ActiveCoolDown / attack.CoolDown) - 2 * padding
-                        );
+            //    foreach (Attack attack in skillList.Where(a => a.HasIcon).ToList())
+            //    {
+            //        // draws the cooldown rect
+            //        if (attack.ActiveCoolDown > 0)
+            //        {
+            //            Rectangle targetRect = new Rectangle
+            //            (
+            //                point.X + padding,
+            //                point.Y + padding + height - (height * attack.ActiveCoolDown / attack.CoolDown),
+            //                width - 2 * padding,
+            //                (height * attack.ActiveCoolDown / attack.CoolDown) - 2 * padding
+            //            );
 
-                        DrawingHelper.DrawRectangle(targetRect, cooldownColor, true);
-                    }
+            //            DrawingHelper.DrawRectangle(targetRect, cooldownColor, true);
+            //        }
 
-                    // draws the outline box
-                    DrawingHelper.DrawRectangle(new Rectangle(point.X, point.Y, width, height), Color.White, false);
+            //        // draws the outline box
+            //        DrawingHelper.DrawRectangle(new Rectangle(point.X, point.Y, width, height), Color.Black, false);
 
-                    // draws the attack icon texture
-                    sprites.Draw(attack.IconTexture, new Rectangle(point.X + padding, point.Y + padding, width - 2 * padding, height - 2 * padding), Color.White);
+            //        // draws the attack icon texture
+            //        sprites.Draw(attack.IconTexture, new Rectangle(point.X + padding, point.Y + padding, width - 2 * padding, height - 2 * padding), Color.White);
 
-                    point.X += width;
-                }
+            //        point.X += width;
+            //    }
 
                 base.Draw(sprites, font1, visibleRect);
-            }
+            //}
         }
     }
 }
