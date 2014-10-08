@@ -57,6 +57,10 @@ namespace PulseGame
         private double timer;           // for time elapsed
         private double deltaT;          // for time elapsed
 
+        private bool isDebugging = false;
+
+        private HighScoreTable highScores;
+
         private List<LevelNode> pathToTarget = new List<LevelNode>();
 
         private int windowWidth = 0;
@@ -101,6 +105,8 @@ namespace PulseGame
             player.Speed = 4.0f;                                                // setting forward - backward speed
             player.Health = 100;
             player.HasControl = true;
+
+            highScores = new HighScoreTable();
 
             base.Initialize();
         }
@@ -156,6 +162,12 @@ namespace PulseGame
             if ((keyboardStateCurrent.IsKeyUp(Keys.Escape) && keyboardStatePrevious.IsKeyDown(Keys.Escape)) || GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
             {
                 this.Exit();
+            }
+
+            // Display debugging info
+            if (keyboardStateCurrent.IsKeyDown(Keys.Tab) && keyboardStatePrevious.IsKeyUp(Keys.Tab))
+            {
+                isDebugging = !isDebugging;
             }
 
             // Update keyboard state
@@ -259,7 +271,7 @@ namespace PulseGame
                 case (int)Enums.GameState.GameOver:
                     if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
                     {
-                        gameState = (int)Enums.GameState.Attract;
+                        RestartGame();
                     }
                     break;
             }
@@ -271,9 +283,32 @@ namespace PulseGame
         {
             gameState = (int)Enums.GameState.GameOver;
             levelEndText = "Game Over!";
-            // TODO need to clean assets and restart game
-            //Initialize();
-            //MediaPlayer.Stop();//Play(backgroundMusic);
+            highScores.LoadTable();
+            highScores.AddScoreToTable(player.Score);
+        }
+
+        public void RestartGame()
+        {
+            MediaPlayer.Stop();
+
+            // Init vars
+            player.Initialize();
+
+            timer = 0;
+            deltaT = 0;
+            countdown = 4;
+            sw = new Stopwatch();
+            stopwatch = new Stopwatch();
+
+            levelInfo.Initialize();
+            levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
+
+            player.Position = levelInfo.PlayerStartPos;
+            Mouse.SetPosition(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+
+            songStart = false;
+
+            gameState = (int)Enums.GameState.Attract;
         }
 
         protected override void Draw(GameTime gameTime)
@@ -316,7 +351,8 @@ namespace PulseGame
                 player.Draw(this.spriteBatch, font1, levelInfo.VisibleRect);
             }
 
-            //DrawDebuggingInformation();
+            if (isDebugging)
+                DrawDebuggingInformation();
 
             spriteBatch.End();
 
@@ -334,29 +370,32 @@ namespace PulseGame
 
         private void DrawTitleScreen(GameTime gameTime)
         {
-            switch (gameState)
+            if (scaleSize < 1 && titleExpanding)
             {
-                case (int)Enums.GameState.Attract:
-                    if (scaleSize < 1 && titleExpanding)
-                        scaleSize += (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
-                    else
-                    {
-                        titleExpanding = false;
-                        if (scaleSize < 0.95) titleExpanding = true;
-                        scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
-                    }
-                    spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, new Color(255,255,255,2), 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
-                    spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
-                    //spriteBatch.DrawString(font1, "Sample Game", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
-                    //spriteBatch.DrawString(font1, "Press ENTER to play!", new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
-                    break;
+                scaleSize += (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
             }
+            else
+            {
+                titleExpanding = false;
+                if (scaleSize < 0.95) titleExpanding = true;
+                scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
+            }
+
+            spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
+            spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
         }
 
         private void DrawGameOverScreeen(GameTime gameTime)
         {
             spriteBatch.DrawString(font1, levelEndText, new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font1, "You scored: " + player.Score, new Vector2(windowWidth / 2 - 85, windowHeight / 2 + 300), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+
+            // Draw high scores table
+            var scores = highScores.GetHighScores();
+            for (int i = 0; i < scores.Length; i++)
+            {
+                spriteBatch.DrawString(font1, scores[i].playerName + " : " + scores[i].score, new Vector2(windowWidth / 2, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+            }
         }
 
         private void DrawUI()
@@ -364,7 +403,9 @@ namespace PulseGame
             // lower GUI background color
             DrawingHelper.DrawRectangle(new Rectangle(0, windowHeight - (windowHeight / 10), windowWidth, windowHeight / 10), new Color(20, 20, 20, 255), true);
 
-            DrawingHelper.DrawRectangle(new Rectangle((windowWidth / 2) - (windowWidth / 10), 0, windowWidth / 5, windowHeight / 10), new Color(20, 20, 20, 255), true);
+            // timer box
+            DrawingHelper.DrawRectangle(new Rectangle((windowWidth / 2) - (windowWidth / 10), 0, windowWidth / 5, windowHeight / 10), new Color(20, 20, 20, 20), true);
+
             spriteBatch.DrawString(font1, "Score: " + player.Score, new Vector2(20, 20), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
 
             // timer

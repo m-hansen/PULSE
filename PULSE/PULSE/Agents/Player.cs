@@ -28,8 +28,14 @@ namespace PulseGame
 
         public Player()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             Health = 100.0f;
             Power = 100.0f;
+            Score = 0;
             LoadSkills();
         }
 

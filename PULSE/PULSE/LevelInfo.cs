@@ -29,7 +29,7 @@ namespace PulseGame
         private int kamikazeWeight = 30;
         private int rangedWeight = 30;
         private int randomWeight = 30;
-        private int aggressiveWeight = 10;
+        //private int aggressiveWeight = 10;
         private List<LevelTimeSpan> levelTimeSpanList = new List<LevelTimeSpan>();
         private Random rand = new Random();
         private long bossSpawnTime;
@@ -42,6 +42,14 @@ namespace PulseGame
 
         public LevelInfo()
         {
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            AgentList.Clear();
+            levelTimeSpanList.Clear();
+
             levelTimeSpanList.Add(new LevelTimeSpan(0, 1000, 0));
             // swap between 0 and 1 difficulty for the song intro
             for (int i = 1000; i < 46000; i += 1999)
@@ -312,17 +320,6 @@ namespace PulseGame
             pAgent1.TargetRotation = targetRotation;
             pAgent1.IsUsingAttacks = false;
 
-            //Attack attack1 = new Attack();
-            //attack1.Active = true;
-            //attack1.AttackType = (int)Enums.AttackType.Bullet;
-            //attack1.AttackSubType = (int)Enums.AttackSubType.Default;
-            //attack1.CoolDown = 1000;
-            //attack1.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
-            //attack1.Frames = 1;
-            //attack1.MinDamage = 10;
-            //attack1.MaxDamage = 15;
-            //pAgent1.attackList.Add(attack1);
-
             AgentList.Add(pAgent1);
         }
 
@@ -333,7 +330,6 @@ namespace PulseGame
                                              int health,
                                              int maxSpeed,
                                              int wave)
-                                             //List<Attack> attackList)
         {
             Enemy pAgent1 = new Enemy();
             pAgent1.LoadContent(PulseGame.Current.Content, textureInfo.TextureString, textureInfo.TextureRect, textureInfo.Frames);
@@ -352,17 +348,6 @@ namespace PulseGame
             pAgent1.Score = 10;
 
             nextID++;
-
-            //Attack attack1 = new Attack();
-            //attack1.Active = true;
-            //attack1.AttackType = (int)Enums.AttackType.Bullet;
-            //attack1.AttackSubType = (int)Enums.AttackSubType.Default;
-            //attack1.CoolDown = 1000;
-            //attack1.Texture = Game1.Current.Content.Load<Texture2D>("Images\\raindrop");
-            //attack1.Frames = 1;
-            //attack1.MinDamage = 10;
-            //attack1.MaxDamage = 15;
-            //pAgent1.attackList.Add(attack1);
 
             AgentList.Add(pAgent1);
         }
@@ -425,77 +410,12 @@ namespace PulseGame
             Height = 700;//3200;
             Name = "Level 1";
             LevelNodeSize = 50;
-            TimeAllocated = 280; // in seconds (4:40)
+            TimeAllocated = 10;//280; // in seconds (4:40)
 
             SetVisibleArea(new Vector2(), Width, Height);
 
             //PlayerStartPos = new Vector2(1850, 3000);
             PlayerStartPos = new Vector2(600, 350);
-
-            //// inside left
-            //LoadEnemyRanged(new Vector2(350, 150), new Vector2(350, 150), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 200), new Vector2(350, 200), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 250), new Vector2(350, 250), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 300), new Vector2(350, 300), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 350), new Vector2(350, 350), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 400), new Vector2(350, 400), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 450), new Vector2(350, 450), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 500), new Vector2(350, 500), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(350, 550), new Vector2(350, 550), (float)(Math.PI / 2));
-
-            //// mid left
-            //LoadEnemyRanged(new Vector2(300, 175), new Vector2(300, 175), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 225), new Vector2(300, 225), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 275), new Vector2(300, 275), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 325), new Vector2(300, 325), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 375), new Vector2(300, 375), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 425), new Vector2(300, 425), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 475), new Vector2(300, 475), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(300, 525), new Vector2(300, 525), (float)(Math.PI / 2));
-
-            //// outside left
-            //LoadEnemyRanged(new Vector2(250, 150), new Vector2(250, 150), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 200), new Vector2(250, 200), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 250), new Vector2(250, 250), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 300), new Vector2(250, 300), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 350), new Vector2(250, 350), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 400), new Vector2(250, 400), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 450), new Vector2(250, 450), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 500), new Vector2(250, 500), (float)(Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(250, 550), new Vector2(250, 550), (float)(Math.PI / 2));
-
-            //// inside right
-            //LoadEnemyRanged(new Vector2(750, 150), new Vector2(750, 150), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 200), new Vector2(750, 200), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 250), new Vector2(750, 250), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 300), new Vector2(750, 300), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 350), new Vector2(750, 350), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 400), new Vector2(750, 400), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 450), new Vector2(750, 450), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 500), new Vector2(750, 500), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(750, 550), new Vector2(750, 550), (float)(3 * Math.PI / 2));
-
-            //// mid right
-            //LoadEnemyRanged(new Vector2(800, 175), new Vector2(800, 175), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 225), new Vector2(800, 225), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 275), new Vector2(800, 275), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 325), new Vector2(800, 325), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 375), new Vector2(800, 375), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 425), new Vector2(800, 425), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 475), new Vector2(800, 475), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(800, 525), new Vector2(800, 525), (float)(3 * Math.PI / 2));
-
-            //// outside right
-            //LoadEnemyRanged(new Vector2(850, 150), new Vector2(850, 150), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 200), new Vector2(850, 200), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 250), new Vector2(850, 250), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 300), new Vector2(850, 300), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 350), new Vector2(850, 350), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 400), new Vector2(850, 400), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 450), new Vector2(850, 450), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 500), new Vector2(850, 500), (float)(3 * Math.PI / 2));
-            //LoadEnemyRanged(new Vector2(850, 550), new Vector2(850, 550), (float)(3 * Math.PI / 2));
-
         }
 
         #endregion
@@ -504,9 +424,6 @@ namespace PulseGame
 
         public void CheckSongStage(Stopwatch stopwatch)
         {
-            //switch (songType)
-            //CheckVoxisPourElleSongStage(stopwatch);
-
             GetCurrentDifficulty(stopwatch);
         }
 
@@ -600,196 +517,6 @@ namespace PulseGame
             //{
             //    LoadEnemyAggressiveCloseToPlayer();
             //}
-        }
-
-        public void SpawnEnemies(Stopwatch stopwatch)
-        {
-
-            //spriteBatch.DrawString(font1, "0:49", new Vector2(900, 120), Color.Orange);
-            //spriteBatch.DrawString(font1, "1:06", new Vector2(900, 140), Color.Orange);
-            //spriteBatch.DrawString(font1, "1:24", new Vector2(900, 160), Color.Orange);
-            //spriteBatch.DrawString(font1, "1:41", new Vector2(900, 180), Color.Orange);
-            //spriteBatch.DrawString(font1, "1:57", new Vector2(900, 200), Color.Orange);
-            //spriteBatch.DrawString(font1, "2:10", new Vector2(900, 220), Color.Orange);
-            //spriteBatch.DrawString(font1, "2:18", new Vector2(900, 240), Color.Orange);
-            //spriteBatch.DrawString(font1, "2:35", new Vector2(900, 260), Color.Orange);
-            //spriteBatch.DrawString(font1, "2:43", new Vector2(900, 280), Color.Orange);
-            //spriteBatch.DrawString(font1, "2:59", new Vector2(900, 300), Color.Orange);
-            //spriteBatch.DrawString(font1, "3:16", new Vector2(900, 320), Color.Orange);
-            //spriteBatch.DrawString(font1, "3:24", new Vector2(900, 340), Color.Orange);
-            //spriteBatch.DrawString(font1, "3:42", new Vector2(900, 360), Color.Orange);
-            //spriteBatch.DrawString(font1, "4:17", new Vector2(900, 380), Color.Orange);
-        }
-
-        public void CheckVoxisPourElleSongStage(Stopwatch stopwatch)
-        {
-            switch (songPhase)
-            {
-                case 1: if (stopwatch.ElapsedMilliseconds > 5000)  LoadVoxisPourElleSongStage1(); break; // about 5 sec
-                case 2: if (stopwatch.ElapsedMilliseconds > 10000) LoadVoxisPourElleSongStage2(); break; // about 10 sec
-                case 3: if (stopwatch.ElapsedMilliseconds > 20000) LoadVoxisPourElleSongStage3(); break; // about 15 sec
-                case 4: if (stopwatch.ElapsedMilliseconds > 25000) LoadVoxisPourElleSongStage4(); break; // about 30 sec
-                case 5: if (stopwatch.ElapsedMilliseconds > 30000) LoadVoxisPourElleSongStage4(); break; // about 49 sec
-            } 
-        }
-
-        private void LoadVoxisPourElleSongStage1()
-        {
-
-            //TextureInfo ti = new TextureInfo("enemy_agent1");
-
-            //int wave = 1;
-            //int health = 100;
-            //int maxSpeed = 2;
-
-            //songPhase++;
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-150, 450), new Vector2(200, 450), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-150, 550), new Vector2(200, 550), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-100, 475), new Vector2(250, 475), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-100, 525), new Vector2(250, 525), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-50, 500), new Vector2(300, 500), (float)(Math.PI / 2), health, maxSpeed, wave);
-
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-150, 150), new Vector2(200, 150), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-150, 250), new Vector2(200, 250), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-100, 175), new Vector2(250, 175), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-100, 225), new Vector2(250, 225), (float)(Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(-50, 200), new Vector2(300, 200), (float)(Math.PI / 2), health, maxSpeed, wave);
-
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1300, 450), new Vector2(950, 450), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1300, 550), new Vector2(950, 550), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1250, 475), new Vector2(900, 475), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1250, 525), new Vector2(900, 525), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1200, 500), new Vector2(850, 500), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1300, 150), new Vector2(950, 150), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1300, 250), new Vector2(950, 250), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1250, 175), new Vector2(900, 175), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1250, 225), new Vector2(900, 225), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-            //LoadEnemyRangedNoAttack(ti, new Vector2(1200, 200), new Vector2(850, 200), (float)(3 * Math.PI / 2), health, maxSpeed, wave);
-        }
-
-        private void LoadVoxisPourElleSongStage2()
-        {
-            TextureInfo ti = new TextureInfo("follower1");
-            
-            songPhase++;
-            int wave = 2;
-            int health = 100;
-            int maxSpeed = 2;
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(-50, 50), new Vector2(200, 200), (float)(Math.PI / 2), health, maxSpeed, wave); // middle left
-            LoadEnemyRangedNoAttack(ti, new Vector2(600, -150), new Vector2(300, 150), (float)(Math.PI / 2), health, maxSpeed, wave);// top 
-            LoadEnemyRangedNoAttack(ti, new Vector2(1000, -300), new Vector2(300, 250), (float)(Math.PI / 2), health, maxSpeed, wave);// bottom
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(-250, 300), new Vector2(200, 500), (float)(Math.PI / 2), health, maxSpeed, wave);  // middle left
-            LoadEnemyRangedNoAttack(ti, new Vector2(600, 900), new Vector2(300, 550), (float)(Math.PI / 2), health, maxSpeed, wave);// top 
-            LoadEnemyRangedNoAttack(ti, new Vector2(800, 900), new Vector2(300, 450), (float)(Math.PI / 2), health, maxSpeed, wave);// bottom
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(1450, 50), new Vector2(950, 200), (float)(3 * Math.PI / 2), health, maxSpeed, wave);  // middle left
-            LoadEnemyRangedNoAttack(ti, new Vector2(500, -100), new Vector2(850, 150), (float)(3 * Math.PI / 2), health, maxSpeed, wave);// top 
-            LoadEnemyRangedNoAttack(ti, new Vector2(300, -50), new Vector2(850, 250), (float)(3 * Math.PI / 2), health, maxSpeed, wave);// bottom
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(1250, 500), new Vector2(950, 500), (float)(3 * Math.PI / 2), health, maxSpeed, wave); // middle left
-            LoadEnemyRangedNoAttack(ti, new Vector2(400, 1050), new Vector2(850, 550), (float)(3 * Math.PI / 2), health, maxSpeed, wave);// top 
-            LoadEnemyRangedNoAttack(ti, new Vector2(400, 900), new Vector2(850, 450), (float)(3 * Math.PI / 2), health, maxSpeed, wave);// bottom
-        }
-
-        private void LoadVoxisPourElleSongStage3()
-        {
-            TextureInfo ti = new TextureInfo("kamikaze1");
-
-            int health = 100;
-            int maxSpeed = 2;
-            int wave1 = 3;
-            int wave2 = 2;
-
-            songPhase++;
-            LoadEnemyRangedNoAttack(ti, new Vector2(-150, 350), new Vector2(200, 350), (float)(Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(-100, 325), new Vector2(250, 325), (float)(Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(-100, 375), new Vector2(250, 375), (float)(Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(-50, 300), new Vector2(300, 300), (float)(Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(-50, 350), new Vector2(300, 350), (float)(Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(-50, 400), new Vector2(300, 400), (float)(Math.PI / 2), health, maxSpeed, wave1);
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(1300, 350), new Vector2(950, 350), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(1250, 325), new Vector2(900, 325), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(1250, 375), new Vector2(900, 375), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(1200, 300), new Vector2(850, 300), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(1200, 350), new Vector2(850, 350), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-            LoadEnemyRangedNoAttack(ti, new Vector2(1200, 400), new Vector2(850, 400), (float)(3 * Math.PI / 2), health, maxSpeed, wave1);
-
-            TextureInfo ti2 = new TextureInfo("follower1");
-            LoadEnemyRangedNoAttack(ti2, new Vector2(-150, 300), new Vector2(200, 300), (float)(Math.PI / 2), health, maxSpeed, wave2);
-            LoadEnemyRangedNoAttack(ti2, new Vector2(-150, 400), new Vector2(200, 400), (float)(Math.PI / 2), health, maxSpeed, wave2);
-            LoadEnemyRangedNoAttack(ti2, new Vector2(1300, 300), new Vector2(950, 300), (float)(3 * Math.PI / 2), health, maxSpeed, wave2);
-            LoadEnemyRangedNoAttack(ti2, new Vector2(1300, 400), new Vector2(950, 400), (float)(3 * Math.PI / 2), health, maxSpeed, wave2);
-        }
-
-        private void LoadVoxisPourElleSongStage4()
-        {
-            songPhase++;
-
-            int health = 100;
-            int maxSpeed = 1;
-            int wave = 4;
-
-            TextureInfo ti = new TextureInfo("big_ship1");
-            LoadEnemyRangedNoAttack(ti, new Vector2(520, -50), new Vector2(520, 50), (float)Math.PI, health, maxSpeed, wave);
-            LoadEnemyRangedNoAttack(ti, new Vector2(680, -50), new Vector2(680, 50), (float)Math.PI, health, maxSpeed, wave);
-
-            LoadEnemyRangedNoAttack(ti, new Vector2(520, 750), new Vector2(520, 650), 0, health, maxSpeed, wave);
-            LoadEnemyRangedNoAttack(ti, new Vector2(680, 750), new Vector2(680, 650), 0, health, maxSpeed, wave);
-        }
-
-        private void LoadVoxisPourElleSongStage5()
-        {
-            songPhase++;
-
-            Player playerObj = PulseGame.Current.player;
-
-            playerObj.HasControl = true;
-
-            Attack attack1 = new Attack();
-            attack1.Active = true;
-            attack1.AttackType = (int)Enums.AttackType.Bullet;
-            attack1.AttackSubType = (int)Enums.AttackSubType.Default;
-            attack1.CoolDown = 3000;
-            attack1.ActiveCoolDown = 1000;
-            attack1.Texture = PulseGame.Current.Content.Load<Texture2D>("Images\\raindrop");
-            attack1.Frames = 1;
-            attack1.MinDamage = 10;
-            attack1.MaxDamage = 15;
-            attack1.Color = Color.Red;
-
-            int count = 0;
-
-            foreach (Enemy enemyObj in AgentList.Where(p => p.Type == (int)Enums.AgentType.Enemy && ((Enemy)p).Wave == 1).ToList())
-            {
-                enemyObj.attackList.Add(attack1);
-                enemyObj.State = Enums.EnemyState.Ranged;
-                enemyObj.IsUsingAttacks = true;
-            }
-
-            foreach (Enemy enemyObj in AgentList.Where(p => p.Type == (int)Enums.AgentType.Enemy && ((Enemy)p).Wave == 2).ToList())
-            {
-                enemyObj.attackList.Add(attack1);
-                enemyObj.State = Enums.EnemyState.RoamRandom;
-                enemyObj.TimeAtEachPoint = 100;
-                enemyObj.Spacing = 10;
-                enemyObj.MaxSpeed = 2;
-                enemyObj.IsUsingAttacks = true;
-            }
-
-            foreach (Enemy enemyObj in AgentList.Where(p => p.Type == (int)Enums.AgentType.Enemy && ((Enemy)p).Wave == 3).OrderBy(p => Vector2.Distance(playerObj.Position, p.Position)).ToList())
-            {
-                enemyObj.State = Enums.EnemyState.KamikazeTowardsPlayer;
-                enemyObj.MaxSpeed = count < 10 ? 3 : 5; // furthest 2 kamikaze's fly faster towards player
-                count++;
-            }
-
-            Random rand = new Random();
-            int index = rand.Next(AgentList.Count);
-            ((Enemy)AgentList[index]).DropType = (int)Enums.ItemType.NukeAttack;
         }
 
         #endregion
