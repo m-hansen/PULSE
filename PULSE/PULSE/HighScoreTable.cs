@@ -52,7 +52,7 @@ namespace PulseGame
 
                 i++;
             }
-            Array.Sort(highScores);
+            Array.Sort(highScores, (s1, s2) => s2.score.CompareTo(s1.score));
         }
 
         public void AddScoreToTable(int playerScore)
@@ -60,9 +60,9 @@ namespace PulseGame
             // Check for a new high score
             if (playerScore > highScores[MAX_TABLE_SIZE - 1].score)
             {
-                highScores[MAX_TABLE_SIZE - 1].playerName = "UPDATE---this---string!!";
+                highScores[MAX_TABLE_SIZE - 1].playerName = "Player1"; // TODO update this to allow for user input
                 highScores[MAX_TABLE_SIZE - 1].score = playerScore;
-                Array.Sort(highScores);
+                Array.Sort(highScores, (s1, s2) => s2.score.CompareTo(s1.score));
             }
         }
 

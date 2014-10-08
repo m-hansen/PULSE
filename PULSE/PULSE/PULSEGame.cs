@@ -27,7 +27,7 @@ namespace PulseGame
         public SpriteFont font1;
         public SoundEffect playerHitSound;
         public SoundEffect berserkerSound;
-        public string levelEndText = "Congratulations!";
+        public string levelEndText;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -107,6 +107,7 @@ namespace PulseGame
             player.HasControl = true;
 
             highScores = new HighScoreTable();
+            levelEndText = "";
 
             base.Initialize();
         }
@@ -187,7 +188,8 @@ namespace PulseGame
                         MediaPlayer.Play(titleMusic);
                         songStart = true;
                     }
-                    if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
+                    if ((keyboardStateCurrent.IsKeyDown(Keys.Enter) && keyboardStatePrevious.IsKeyUp(Keys.Enter)) ||
+                        (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton == ButtonState.Released))
                     {
                         MediaPlayer.Stop();
                         songStart = false;
@@ -227,7 +229,7 @@ namespace PulseGame
                     // update player
                     if (player.Health <= 0)
                     {
-                        GameOver();
+                        GameOver("Game Over!");
                         break;
                     }
 
@@ -251,7 +253,7 @@ namespace PulseGame
                         }
                         else
                         {
-                            gameState = (int)Enums.GameState.GameOver;
+                            GameOver("Congratulations!");
                         }
                     }
 
@@ -269,7 +271,8 @@ namespace PulseGame
                     break;
 
                 case (int)Enums.GameState.GameOver:
-                    if (keyboardStateCurrent.IsKeyDown(Keys.Enter) || mouseStateCurrent.LeftButton == ButtonState.Pressed)
+                    if ((keyboardStateCurrent.IsKeyDown(Keys.Enter) && keyboardStatePrevious.IsKeyUp(Keys.Enter)) || 
+                        (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton == ButtonState.Released))
                     {
                         RestartGame();
                     }
@@ -279,10 +282,10 @@ namespace PulseGame
             base.Update(gameTime);
         }
 
-        public void GameOver()
+        public void GameOver(string endText)
         {
             gameState = (int)Enums.GameState.GameOver;
-            levelEndText = "Game Over!";
+            levelEndText = endText;
             highScores.LoadTable();
             highScores.AddScoreToTable(player.Score);
         }
@@ -392,9 +395,11 @@ namespace PulseGame
 
             // Draw high scores table
             var scores = highScores.GetHighScores();
+            spriteBatch.DrawString(font1, "High Scores", new Vector2(windowWidth / 2, windowHeight / 2 - 30), Color.White, 0.0f, Vector2.Zero, 1.25f, SpriteEffects.None, 0);
             for (int i = 0; i < scores.Length; i++)
             {
-                spriteBatch.DrawString(font1, scores[i].playerName + " : " + scores[i].score, new Vector2(windowWidth / 2, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font1, (i+1).ToString() +  "    " + scores[i].playerName + "    " + scores[i].score, 
+                    new Vector2(windowWidth / 2, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
             }
         }
 
@@ -423,7 +428,13 @@ namespace PulseGame
 
             // health bar
             Color healthBarColor;
-            if (player.Health >= 80)
+            if (player.Health > 50)
+                healthBarColor = Color.Green;
+            else if (player.Health > 20)
+                healthBarColor = Color.Yellow;
+            else
+                healthBarColor = Color.Red;
+            /*if (player.Health >= 80)
                 healthBarColor = Color.Green;
             else if (player.Health >= 60)
                 healthBarColor = Color.YellowGreen;
@@ -432,8 +443,7 @@ namespace PulseGame
             else if (player.Health >= 20)
                 healthBarColor = Color.Orange;
             else
-                healthBarColor = Color.Red;
-
+                healthBarColor = Color.Red;*/
             spriteBatch.DrawString(font1, "Health", new Vector2(163, 648), Color.White);
             DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.Health * 2), 20), healthBarColor, true);
             DrawingHelper.DrawRectangle(new Rectangle(225, 650, (int)(player.MaxHealth * 2), 20), Color.Black, false);
