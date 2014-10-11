@@ -53,6 +53,7 @@ namespace PulseGame.Attacks
                 {
                     AddAttackToActiveEffects(Enums.AgentType.Player, PulseGame.Current.player);
                     PulseGame.Current.player.Power -= AttackCost;
+                    Statistics.Increment((int)StatType.SHOT);
                 }
             }
         }

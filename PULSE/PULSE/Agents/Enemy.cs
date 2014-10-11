@@ -335,6 +335,7 @@ namespace PulseGame.Agents
 
                 // removing / destroying the enemy
                 PulseGame.Current.levelInfo.AgentList.Remove(this);
+                Statistics.Increment((int)StatType.ENEMY_KILL);
 
                 // giving the player points for destroying the enemy
                 PulseGame.Current.player.Score += Score;

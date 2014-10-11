@@ -121,6 +121,7 @@
     <Compile Include="Helpers\TextureInfo.cs" />
     <Compile Include="HighScoreTable.cs" />
     <Compile Include="LevelTimeSpan.cs" />
+    <Compile Include="Statistics.cs" />
     <Compile Include="Sensors\AdjacentAgentSensor.cs" />
     <Compile Include="Agents\GameAgent.cs" />
     <Compile Include="Helpers\Enums.cs" />

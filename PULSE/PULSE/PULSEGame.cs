@@ -297,6 +297,8 @@ namespace PulseGame
             // Init vars
             player.Initialize();
 
+            Statistics.Clear();
+
             timer = 0;
             deltaT = 0;
             countdown = 4;
@@ -547,6 +549,10 @@ namespace PulseGame
             spriteBatch.DrawString(font1, "Player Pos: " + Math.Round(player.Position.X, 4) + ", " + Math.Round(player.Position.Y, 4), new Vector2(20, 20), Color.LightGreen, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font1, "Player Heading: " + Math.Round(playerHeading.X, 4) + ", " + Math.Round(playerHeading.Y, 4) + ", " + Math.Round(player.Rotation, 4), new Vector2(20, 40), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
             spriteBatch.DrawString(font1, "Player Health: " + player.Health, new Vector2(20, 60), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+
+            // stats
+            spriteBatch.DrawString(font1, "Shots Fired: " + Statistics.GetStat((int)StatType.SHOT), new Vector2(20, 100), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font1, "Enemies Destroyed: " + Statistics.GetStat((int)StatType.ENEMY_KILL), new Vector2(20, 120), Color.DarkKhaki, 0.0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0);
         }
     }
 }
