@@ -410,7 +410,7 @@ namespace PulseGame
             Height = 700;//3200;
             Name = "Level 1";
             LevelNodeSize = 50;
-            TimeAllocated = 10;//280; // in seconds (4:40)
+            TimeAllocated = 280; // in seconds (4:40)
 
             SetVisibleArea(new Vector2(), Width, Height);
 

@@ -303,6 +303,8 @@ namespace PulseGame
             sw = new Stopwatch();
             stopwatch = new Stopwatch();
 
+            effectComponent.effectList.Clear();
+
             levelInfo.Initialize();
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 

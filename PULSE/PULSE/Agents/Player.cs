@@ -35,6 +35,7 @@ namespace PulseGame
         {
             Health = 100.0f;
             Power = 100.0f;
+            Color = Color.White;
             Score = 0;
             LoadSkills();
         }
