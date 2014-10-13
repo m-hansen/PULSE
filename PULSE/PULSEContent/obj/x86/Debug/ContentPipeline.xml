@@ -11,15 +11,6 @@
       <Time>2013-04-29T18:35:41.2417312-04:00</Time>
     </Item>
     <Item>
-      <Source>Images\agent.png</Source>
-      <Name>Images\agent</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\agent.xnb</Output>
-      <Time>2014-09-14T02:05:30.8486962-04:00</Time>
-    </Item>
-    <Item>
       <Source>Images\crosshair.png</Source>
       <Name>Images\crosshair</Name>
       <Importer>TextureImporter</Importer>
@@ -63,33 +54,6 @@
       <Options>None</Options>
       <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\ship1.xnb</Output>
       <Time>2013-04-29T18:35:41-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\subject.png</Source>
-      <Name>Images\subject</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\subject.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\wall.png</Source>
-      <Name>Images\wall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\wall.xnb</Output>
-      <Time>2014-09-14T02:05:30.8506963-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Images\wall1.png</Source>
-      <Name>Images\wall1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\wall1.xnb</Output>
-      <Time>2014-09-14T02:05:30.8516964-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill1.png</Source>
@@ -227,15 +191,6 @@
       <Time>2013-04-29T18:35:41-04:00</Time>
     </Item>
     <Item>
-      <Source>Images\box1.png</Source>
-      <Name>Images\box1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matt\git\Pulse\Pulse\Pulse\bin\x86\Debug\Content\Images\box1.xnb</Output>
-      <Time>2013-04-29T18:35:41-04:00</Time>
-    </Item>
-    <Item>
       <Source>Images\PULSE.png</Source>
       <Name>Images\PULSE</Name>
       <Importer>TextureImporter</Importer>
@@ -298,7 +253,7 @@
       <Options>None</Options>
       <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.xnb</Output>
       <Extra>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\voxis_shattered.wma</Extra>
-      <Time>2014-10-05T20:00:45.4865189-04:00</Time>
+      <Time>2014-10-08T00:29:58.2831566-04:00</Time>
     </Item>
     <Item>
       <Source>Images\skill_lock.png</Source>
@@ -307,7 +262,124 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\skill_lock.xnb</Output>
-      <Time>2014-10-05T21:58:03.9580964-04:00</Time>
+      <Time>2014-10-08T00:29:58.2871569-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonHoverLeft.png</Source>
+      <Name>Images\gui\ButtonHoverLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonHoverLeft.xnb</Output>
+      <Time>2014-10-11T22:31:12.937911-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonHoverMiddle.png</Source>
+      <Name>Images\gui\ButtonHoverMiddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonHoverMiddle.xnb</Output>
+      <Time>2014-10-11T22:31:12.9409112-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonHoverRight.png</Source>
+      <Name>Images\gui\ButtonHoverRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonHoverRight.xnb</Output>
+      <Time>2014-10-11T22:31:12.9419112-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonNormalLeft.png</Source>
+      <Name>Images\gui\ButtonNormalLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonNormalLeft.xnb</Output>
+      <Time>2014-10-11T22:31:12.9439113-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonNormalMiddle.png</Source>
+      <Name>Images\gui\ButtonNormalMiddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonNormalMiddle.xnb</Output>
+      <Time>2014-10-11T22:31:12.9449114-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonNormalRight.png</Source>
+      <Name>Images\gui\ButtonNormalRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonNormalRight.xnb</Output>
+      <Time>2014-10-11T22:31:12.9469115-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonPushedLeft.png</Source>
+      <Name>Images\gui\ButtonPushedLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonPushedLeft.xnb</Output>
+      <Time>2014-10-11T22:31:12.9479116-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonPushedMiddle.png</Source>
+      <Name>Images\gui\ButtonPushedMiddle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonPushedMiddle.xnb</Output>
+      <Time>2014-10-11T22:31:12.9489116-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\ButtonPushedRight.png</Source>
+      <Name>Images\gui\ButtonPushedRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\ButtonPushedRight.xnb</Output>
+      <Time>2014-10-11T22:31:12.9499117-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\text\exit_text.png</Source>
+      <Name>Images\text\exit_text</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\text\exit_text.xnb</Output>
+      <Time>2014-10-13T00:47:01.7637945-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\text\options_text.png</Source>
+      <Name>Images\text\options_text</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\text\options_text.xnb</Output>
+      <Time>2014-10-13T00:46:18.1833018-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\text\play_text.png</Source>
+      <Name>Images\text\play_text</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Images\text\play_text.xnb</Output>
+      <Time>2014-10-13T00:44:53.5614617-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\menu_hover.mp3</Source>
+      <Name>Audio\menu_hover</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\menu_hover.xnb</Output>
+      <Time>2014-10-13T00:26:39.446882-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

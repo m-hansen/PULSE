@@ -44,9 +44,32 @@ namespace PulseGame
         private Texture2D subtitleTexture;
         private Texture2D skillLockTexture;
 
+        // Menu text
+        private Texture2D playTexture;
+        private Texture2D optionsTexture;
+        private Texture2D exitTexture;
+
+        // Menu Button
+        Button[] menuButtons;
+        Button playButton;
+        Button optionsButton;
+        Button exitButton;
+
+        // Button
+        private Texture2D btnNormalLeftTexture;
+        private Texture2D btnNormalMiddleTexture;
+        private Texture2D btnNormalRightTexture;
+        private Texture2D btnHoverLeftTexture;
+        private Texture2D btnHoverMiddleTexture;
+        private Texture2D btnHoverRightTexture;
+        private Texture2D btnPushedLeftTexture;
+        private Texture2D btnPushedMiddleTexture;
+        private Texture2D btnPushedRightTexture;
+		
         private Song titleMusic;
         private Song backgroundMusic;
         private SoundEffect countdownSound;
+        private SoundEffect menuHoverSound;
 
         private bool songStart = false;
         private bool titleExpanding = false;
@@ -56,6 +79,8 @@ namespace PulseGame
         private double countdown = 4;
         private double timer;           // for time elapsed
         private double deltaT;          // for time elapsed
+
+        private Button dismissButton;
 
         private bool isDebugging = false;
 
@@ -134,7 +159,24 @@ namespace PulseGame
             // load sounds
             playerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
             countdownSound = Content.Load<SoundEffect>("Audio\\beep");
+            menuHoverSound = Content.Load<SoundEffect>("Audio\\menu_hover");
             berserkerSound = Content.Load<SoundEffect>("Audio\\whistle-flute-1");
+
+            // load menu textures
+            playTexture = Content.Load<Texture2D>("Images\\text\\play_text");
+            optionsTexture = Content.Load<Texture2D>("Images\\text\\options_text");
+            exitTexture = Content.Load<Texture2D>("Images\\text\\exit_text");
+
+            // load button textures
+            btnNormalLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalLeft");
+            btnNormalMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalMiddle");
+            btnNormalRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalRight");
+            btnHoverLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverLeft");
+            btnHoverMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverMiddle");
+            btnHoverRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverRight");
+            btnPushedLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedLeft");
+            btnPushedMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedMiddle");
+            btnPushedRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedRight");
 
             // load the custom crosshair
             crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
@@ -150,6 +192,24 @@ namespace PulseGame
 
             player.Position = levelInfo.PlayerStartPos;
             Mouse.SetPosition(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+
+            // Menu buttons
+            playButton = new Button(playTexture, menuHoverSound, font1, spriteBatch);
+            playButton.Location(windowWidth / 2, windowHeight / 2);
+            optionsButton = new Button(optionsTexture, menuHoverSound, font1, spriteBatch);
+            optionsButton.Location(windowWidth / 2, windowHeight / 2 + 100);
+            exitButton = new Button(exitTexture, menuHoverSound, font1, spriteBatch);
+            exitButton.Location(windowWidth / 2, windowHeight / 2 + 200);
+
+            // Create menu button array
+            menuButtons = new Button[3];
+            menuButtons[0] = playButton;
+            menuButtons[1] = optionsButton;
+            menuButtons[2] = exitButton;
+
+            //dismissButton = new Button(btnNormalMiddleTexture, font1, spriteBatch);
+            //dismissButton.Location(windowWidth / 2, windowHeight / 2 + 50);
+            //dismissButton.Text = "Dismiss";
         }
 
         protected override void UnloadContent()
@@ -196,6 +256,13 @@ namespace PulseGame
                         gameState = (int)Enums.GameState.Countdown;
                         sw.Start();
                     }
+
+                    // Update each menu button
+                    for (int i = 0; i < menuButtons.Length; i++)
+                    {
+                        menuButtons[i].Update();
+                    }
+
                     break;
 
                 case (int)Enums.GameState.Countdown:
@@ -271,6 +338,7 @@ namespace PulseGame
                     break;
 
                 case (int)Enums.GameState.GameOver:
+                    //dismissButton.Update();
                     if ((keyboardStateCurrent.IsKeyDown(Keys.Enter) && keyboardStatePrevious.IsKeyUp(Keys.Enter)) || 
                         (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton == ButtonState.Released))
                     {
@@ -288,6 +356,8 @@ namespace PulseGame
             levelEndText = endText;
             highScores.LoadTable();
             highScores.AddScoreToTable(player.Score);
+
+            
         }
 
         public void RestartGame()
@@ -377,6 +447,8 @@ namespace PulseGame
 
         private void DrawTitleScreen(GameTime gameTime)
         {
+            Vector2 origin = new Vector2(windowWidth / 2, windowHeight / 2);
+
             if (scaleSize < 1 && titleExpanding)
             {
                 scaleSize += (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
@@ -388,8 +460,27 @@ namespace PulseGame
                 scaleSize -= (float)gameTime.ElapsedGameTime.TotalSeconds / 50;
             }
 
-            spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 2 - 50), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
-            spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
+            // Title
+            spriteBatch.Draw(titleTexture, new Vector2(windowWidth / 2, windowHeight / 4), null, Color.White, 0.0f, new Vector2(titleTexture.Width / 2, titleTexture.Height / 2), scaleSize, SpriteEffects.None, 0.0f);
+            //spriteBatch.Draw(subtitleTexture, new Vector2(windowWidth / 2, windowHeight - 50), null, Color.White, 0.0f, new Vector2(subtitleTexture.Width / 2, subtitleTexture.Height / 2), 0.75f, SpriteEffects.None, 0.0f);
+
+            // Buttons
+            //spriteBatch.Draw(btnNormalRightTexture, new Vector2(windowWidth / 5, windowHeight / 2 + 50), Color.White);
+            //spriteBatch.Draw(btnNormalMiddleTexture, new Vector2(windowWidth / 5 + btnNormalRightTexture.Width, windowHeight / 2 + 50), Color.White);
+            //spriteBatch.Draw(btnNormalLeftTexture, new Vector2(windowWidth / 5 + btnNormalRightTexture.Width + btnNormalMiddleTexture.Width, windowHeight / 2 + 50), Color.White);
+
+            // Menu
+            float menuScale = 0.5f;
+            int menuVerticalSpacing = 75;
+            // Draw each menu button
+            for (int i = 0; i < menuButtons.Length; i++)
+            {
+                menuButtons[i].Draw(spriteBatch);
+            }
+
+           // spriteBatch.Draw(playTexture, new Vector2(windowWidth / 2, windowHeight / 2), null, Color.White, 0.0f, new Vector2(playTexture.Width / 2, playTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);
+            //spriteBatch.Draw(optionsTexture, new Vector2(windowWidth / 2, windowHeight / 2 + menuVerticalSpacing), null, Color.White, 0.0f, new Vector2(optionsTexture.Width / 2, optionsTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);
+           // spriteBatch.Draw(exitTexture, new Vector2(windowWidth / 2, windowHeight / 2 + menuVerticalSpacing * 2), null, Color.White, 0.0f, new Vector2(exitTexture.Width / 2, exitTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);            
         }
 
         private void DrawGameOverScreeen(GameTime gameTime)
@@ -405,6 +496,7 @@ namespace PulseGame
                 spriteBatch.DrawString(font1, (i+1).ToString() +  "    " + scores[i].playerName + "    " + scores[i].score, 
                     new Vector2(windowWidth / 2, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
             }
+            //dismissButton.Draw();
         }
 
         private void DrawUI()

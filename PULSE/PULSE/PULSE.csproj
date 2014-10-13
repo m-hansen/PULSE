@@ -113,6 +113,7 @@
     <Compile Include="Agents\Enemy.cs" />
     <Compile Include="Agents\Item.cs" />
     <Compile Include="Attacks\Attack.cs" />
+    <Compile Include="Button.cs" />
     <Compile Include="Effects\Bullet.cs" />
     <Compile Include="Effects\Effect.cs" />
     <Compile Include="Effects\EffectComponent.cs" />
