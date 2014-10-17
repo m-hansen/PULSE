@@ -1,2 +1,0 @@
-C:\Users\Matt\git\PULSE\SampleGame\SampleGameContent\obj\x86\Debug\PULSEContent.contentprojResolveAssemblyReference.cache
-C:\Users\Matt\git\Pulse\Pulse\PulseContent\obj\x86\Debug\PULSEContent.contentprojResolveAssemblyReference.cache

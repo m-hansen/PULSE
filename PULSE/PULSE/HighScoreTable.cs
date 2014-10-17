@@ -16,8 +16,9 @@ namespace PulseGame
         }
 
         private const int MAX_TABLE_SIZE = 10;
-        private const string PATH = "scores.txt";
+        private const string PATH = "\\scores.txt";
         private TableEntry[] highScores;
+        string root = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
         public HighScoreTable()
         {
@@ -27,16 +28,16 @@ namespace PulseGame
         public void LoadTable()
         {
             // Create the file if it doesn't exist
-            if (!File.Exists(PATH))
+            if (!File.Exists(root + PATH))
             {
-                File.Create(PATH);
+                File.Create(root + PATH);
             }
 
             // Read the file
             int i = 0;
-            foreach (var line in File.ReadLines(PATH))
+            foreach (string line in File.ReadLines(root + PATH))
             {
-                var tokens = line.Split(',');
+                string[] tokens = line.Split(',');
 
                 TableEntry entry = new TableEntry();
                 entry.score = int.Parse(tokens[0]);
@@ -55,6 +56,22 @@ namespace PulseGame
             Array.Sort(highScores, (s1, s2) => s2.score.CompareTo(s1.score));
         }
 
+        public void WriteToFile()
+        {
+            // Create the file if it doesn't exist
+            if (!File.Exists(root + PATH))
+            {
+                File.Create(root + PATH);
+            }
+
+            string[] scoresString = new string[highScores.Length];
+            for (int i = 0; i < highScores.Length; i++)
+            {
+                scoresString[i] = highScores[i].score + "," + highScores[i].playerName;
+            }
+            File.WriteAllLines(root + PATH, scoresString);
+        }
+
         public void AddScoreToTable(int playerScore)
         {
             // Check for a new high score
@@ -63,6 +80,7 @@ namespace PulseGame
                 highScores[MAX_TABLE_SIZE - 1].playerName = "Player1"; // TODO update this to allow for user input
                 highScores[MAX_TABLE_SIZE - 1].score = playerScore;
                 Array.Sort(highScores, (s1, s2) => s2.score.CompareTo(s1.score));
+                WriteToFile();
             }
         }
 
