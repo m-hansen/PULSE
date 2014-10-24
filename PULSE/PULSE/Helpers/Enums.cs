@@ -13,6 +13,7 @@ namespace PulseGame
         public enum GameState
         {
             Attract,
+            Options,
             Countdown,
             Gameplay,
             GameOver

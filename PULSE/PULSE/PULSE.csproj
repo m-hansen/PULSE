@@ -141,7 +141,6 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="scores.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PulseContent\PulseContent.contentproj">

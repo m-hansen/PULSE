@@ -8,11 +8,11 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Drawing;
+using Drawing; // DrawingHelper namespace
 using System.Diagnostics;
 using PulseGame.Helpers;
 using PulseGame.Effects;
-using PulseGame.Attacks;  // DrawingHelper namespace
+using PulseGame.Attacks;  
 
 namespace PulseGame
 {
@@ -248,13 +248,25 @@ namespace PulseGame
                         MediaPlayer.Play(titleMusic);
                         songStart = true;
                     }
-                    if ((keyboardStateCurrent.IsKeyDown(Keys.Enter) && keyboardStatePrevious.IsKeyUp(Keys.Enter)) ||
+                    // Check for mouse click
+                    if (/*(keyboardStateCurrent.IsKeyDown(Keys.Enter) && keyboardStatePrevious.IsKeyUp(Keys.Enter)) ||*/
                         (mouseStateCurrent.LeftButton == ButtonState.Pressed && mouseStatePrevious.LeftButton == ButtonState.Released))
                     {
-                        MediaPlayer.Stop();
-                        songStart = false;
-                        gameState = (int)Enums.GameState.Countdown;
-                        sw.Start();
+                        if (playButton.ContainsMouse)
+                        {
+                            MediaPlayer.Stop();
+                            songStart = false;
+                            gameState = (int)Enums.GameState.Countdown;
+                            sw.Start();
+                        }
+                        else if (optionsButton.ContainsMouse)
+                        {
+                            gameState = (int)Enums.GameState.Options;
+                        }
+                        else if (exitButton.ContainsMouse)
+                        {
+                            this.Exit();
+                        }
                     }
 
                     // Update each menu button
@@ -265,6 +277,9 @@ namespace PulseGame
 
                     break;
 
+                case (int)Enums.GameState.Options:
+                    break;
+                        
                 case (int)Enums.GameState.Countdown:
                     if ((countdown > 2.99 && countdown < 3.01) ||
                         (countdown > 1.99 && countdown < 2.01) ||
@@ -356,8 +371,6 @@ namespace PulseGame
             levelEndText = endText;
             highScores.LoadTable();
             highScores.AddScoreToTable(player.Score);
-
-            
         }
 
         public void RestartGame()
@@ -399,12 +412,17 @@ namespace PulseGame
                 DrawTitleScreen(gameTime);
             }
 
-            if (gameState == (int)Enums.GameState.GameOver)
+            else if (gameState == (int)Enums.GameState.GameOver)
             {
                 DrawGameOverScreeen(gameTime);
             }
 
-            if (gameState == (int)Enums.GameState.Countdown)
+            else if (gameState == (int)Enums.GameState.Options)
+            {
+                DrawOptionsScreen(gameTime);
+            }
+
+            else if (gameState == (int)Enums.GameState.Countdown)
             {
                 int ct = (int)countdown;
                 spriteBatch.DrawString(font1, "" + ct, new Vector2(windowWidth / 2 - 13, windowHeight / 2 - 150), Color.Green, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
@@ -416,7 +434,7 @@ namespace PulseGame
             spriteBatch.Draw(crosshairTexture, new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y),
                 null, Color.White, 0.0f, new Vector2(crosshairTexture.Width / 2, crosshairTexture.Height / 2), .5f, SpriteEffects.None, 1.0f);
 
-            if (gameState != (int)Enums.GameState.Attract)
+            if (gameState == (int)Enums.GameState.Countdown || gameState == (int)Enums.GameState.Gameplay || gameState == (int)Enums.GameState.GameOver)
             {
                 // draw each agent
                 foreach (GameAgent agent in levelInfo.AgentList)
@@ -434,7 +452,7 @@ namespace PulseGame
             spriteBatch.End();
 
 
-            if (gameState != (int)Enums.GameState.Attract)
+            if (gameState == (int)Enums.GameState.Countdown || gameState == (int)Enums.GameState.Gameplay || gameState == (int)Enums.GameState.GameOver)
             {
                 // display the UI
                 spriteBatch.Begin();
@@ -469,18 +487,11 @@ namespace PulseGame
             //spriteBatch.Draw(btnNormalMiddleTexture, new Vector2(windowWidth / 5 + btnNormalRightTexture.Width, windowHeight / 2 + 50), Color.White);
             //spriteBatch.Draw(btnNormalLeftTexture, new Vector2(windowWidth / 5 + btnNormalRightTexture.Width + btnNormalMiddleTexture.Width, windowHeight / 2 + 50), Color.White);
 
-            // Menu
-            float menuScale = 0.5f;
-            int menuVerticalSpacing = 75;
             // Draw each menu button
             for (int i = 0; i < menuButtons.Length; i++)
             {
                 menuButtons[i].Draw(spriteBatch);
             }
-
-           // spriteBatch.Draw(playTexture, new Vector2(windowWidth / 2, windowHeight / 2), null, Color.White, 0.0f, new Vector2(playTexture.Width / 2, playTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);
-            //spriteBatch.Draw(optionsTexture, new Vector2(windowWidth / 2, windowHeight / 2 + menuVerticalSpacing), null, Color.White, 0.0f, new Vector2(optionsTexture.Width / 2, optionsTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);
-           // spriteBatch.Draw(exitTexture, new Vector2(windowWidth / 2, windowHeight / 2 + menuVerticalSpacing * 2), null, Color.White, 0.0f, new Vector2(exitTexture.Width / 2, exitTexture.Height / 2), menuScale, SpriteEffects.None, 0.0f);            
         }
 
         private void DrawGameOverScreeen(GameTime gameTime)
@@ -493,10 +504,20 @@ namespace PulseGame
             spriteBatch.DrawString(font1, "High Scores", new Vector2(windowWidth / 2, windowHeight / 2 - 30), Color.White, 0.0f, Vector2.Zero, 1.25f, SpriteEffects.None, 0);
             for (int i = 0; i < scores.Length; i++)
             {
-                spriteBatch.DrawString(font1, (i+1).ToString() +  "    " + scores[i].playerName + "    " + scores[i].score, 
+                int horizSpace = 50;
+                spriteBatch.DrawString(font1, (i+1).ToString(), 
                     new Vector2(windowWidth / 2, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font1, scores[i].playerName,
+                    new Vector2(windowWidth / 2 + horizSpace, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font1, scores[i].score.ToString(),
+                    new Vector2(windowWidth / 2 + horizSpace * 3, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
             }
             //dismissButton.Draw();
+        }
+
+        private void DrawOptionsScreen(GameTime gameTime)
+        {
+            spriteBatch.DrawString(font1, "Options", new Vector2(windowWidth / 2 - 115, windowHeight / 2 - 100), Color.White, 0.0f, Vector2.Zero, 2.00f, SpriteEffects.None, 0);
         }
 
         private void DrawUI()

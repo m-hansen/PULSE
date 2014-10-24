@@ -56,7 +56,7 @@ namespace PulseGame
             Array.Sort(highScores, (s1, s2) => s2.score.CompareTo(s1.score));
         }
 
-        public void WriteToFile()
+        private void WriteToFile()
         {
             // Create the file if it doesn't exist
             if (!File.Exists(root + PATH))
