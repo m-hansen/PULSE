@@ -48,12 +48,16 @@ namespace PulseGame
         private Texture2D playTexture;
         private Texture2D optionsTexture;
         private Texture2D exitTexture;
+        private Texture2D playAgainTexture;
+        private Texture2D backTexture;
 
         // Menu Button
-        Button[] menuButtons;
-        Button playButton;
-        Button optionsButton;
-        Button exitButton;
+        private Button[] menuButtons;
+        private Button playButton;
+        private Button optionsButton;
+        private Button exitButton;
+        private Button playAgainButton;
+        private Button backButton;
 
         // Button
         private Texture2D btnNormalLeftTexture;
@@ -73,6 +77,7 @@ namespace PulseGame
 
         private bool songStart = false;
         private bool titleExpanding = false;
+        private bool countdownTimerSoundReady = false;
 
         private float scaleSize = 1.0f;
 
@@ -143,50 +148,52 @@ namespace PulseGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // load in the title music
-            titleMusic = Content.Load<Song>("Audio\\voxis_shattered");
+            titleMusic = Content.Load<Song>("Audio/voxis_shattered");
             MediaPlayer.IsRepeating = false;    // everything is set up for sound to loop - just change this value
 
             // load in the background music
-            backgroundMusic = Content.Load<Song>("Audio\\voxis_pour_elle");
+            backgroundMusic = Content.Load<Song>("Audio/voxis_pour_elle");
             MediaPlayer.IsRepeating = false;    // everything is set up for sound to loop - just change this value
 
             // loading the player's image
-            player.LoadContent(this.Content, "Images\\ship1", new Rectangle(0, 0, 38, 41), 8);
+            player.LoadContent(this.Content, "Images/ship1", new Rectangle(0, 0, 38, 41), 8);
 
             // loading the font to display text on the screen
-            font1 = Content.Load<SpriteFont>("fonts\\Font1");
+            font1 = Content.Load<SpriteFont>("fonts/Font1");
 
             // load sounds
-            playerHitSound = Content.Load<SoundEffect>("Audio\\player_hit");
-            countdownSound = Content.Load<SoundEffect>("Audio\\beep");
-            menuHoverSound = Content.Load<SoundEffect>("Audio\\menu_hover");
-            berserkerSound = Content.Load<SoundEffect>("Audio\\whistle-flute-1");
+            playerHitSound = Content.Load<SoundEffect>("Audio/player_hit");
+            countdownSound = Content.Load<SoundEffect>("Audio/beep");
+            menuHoverSound = Content.Load<SoundEffect>("Audio/menu_hover");
+            berserkerSound = Content.Load<SoundEffect>("Audio/whistle-flute-1");
 
             // load menu textures
-            playTexture = Content.Load<Texture2D>("Images\\text\\play_text");
-            optionsTexture = Content.Load<Texture2D>("Images\\text\\options_text");
-            exitTexture = Content.Load<Texture2D>("Images\\text\\exit_text");
+            playTexture = Content.Load<Texture2D>("Images/text/play_text");
+            optionsTexture = Content.Load<Texture2D>("Images/text/options_text");
+            exitTexture = Content.Load<Texture2D>("Images/text/exit_text");
+            playAgainTexture = Content.Load<Texture2D>("Images/gui/buttons/play_again_button");
+            backTexture = Content.Load<Texture2D>("Images/gui/buttons/back_button");
 
             // load button textures
-            btnNormalLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalLeft");
-            btnNormalMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalMiddle");
-            btnNormalRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonNormalRight");
-            btnHoverLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverLeft");
-            btnHoverMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverMiddle");
-            btnHoverRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonHoverRight");
-            btnPushedLeftTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedLeft");
-            btnPushedMiddleTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedMiddle");
-            btnPushedRightTexture = Content.Load<Texture2D>("Images\\gui\\ButtonPushedRight");
+            btnNormalLeftTexture = Content.Load<Texture2D>("Images/gui/ButtonNormalLeft");
+            btnNormalMiddleTexture = Content.Load<Texture2D>("Images/gui/ButtonNormalMiddle");
+            btnNormalRightTexture = Content.Load<Texture2D>("Images/gui/ButtonNormalRight");
+            btnHoverLeftTexture = Content.Load<Texture2D>("Images/gui/ButtonHoverLeft");
+            btnHoverMiddleTexture = Content.Load<Texture2D>("Images/gui/ButtonHoverMiddle");
+            btnHoverRightTexture = Content.Load<Texture2D>("Images/gui/ButtonHoverRight");
+            btnPushedLeftTexture = Content.Load<Texture2D>("Images/gui/ButtonPushedLeft");
+            btnPushedMiddleTexture = Content.Load<Texture2D>("Images/gui/ButtonPushedMiddle");
+            btnPushedRightTexture = Content.Load<Texture2D>("Images/gui/ButtonPushedRight");
 
             // load the custom crosshair
-            crosshairTexture = Content.Load<Texture2D>("Images\\crosshair");
+            crosshairTexture = Content.Load<Texture2D>("Images/crosshair");
 
             // load the title texture
-            titleTexture = Content.Load<Texture2D>("Images\\PULSE");
-            subtitleTexture = Content.Load<Texture2D>("Images\\enter_to_play");
+            titleTexture = Content.Load<Texture2D>("Images/PULSE");
+            subtitleTexture = Content.Load<Texture2D>("Images/enter_to_play");
 
             // load the skill lock texture
-            skillLockTexture = Content.Load<Texture2D>("Images\\skill_lock");
+            skillLockTexture = Content.Load<Texture2D>("Images/skill_lock");
 
             levelInfo.LoadLevel(0, this.Content, windowWidth, windowHeight);
 
@@ -371,6 +378,13 @@ namespace PulseGame
             levelEndText = endText;
             highScores.LoadTable();
             highScores.AddScoreToTable(player.Score);
+
+            // Create the play again and back buttons
+            playAgainButton = new Button(playAgainTexture, menuHoverSound, font1, spriteBatch);
+            playAgainButton.Location((windowWidth / 2) - 100, windowHeight / 2);
+            backButton = new Button(backTexture, menuHoverSound, font1, spriteBatch);
+            backButton.Location((windowWidth / 2) + 100, windowHeight / 2);
+
         }
 
         public void RestartGame()
@@ -501,7 +515,7 @@ namespace PulseGame
 
             // Draw high scores table
             var scores = highScores.GetHighScores();
-            spriteBatch.DrawString(font1, "High Scores", new Vector2(windowWidth / 2, windowHeight / 2 - 30), Color.White, 0.0f, Vector2.Zero, 1.25f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font1, "High Scores", new Vector2(windowWidth / 2 - 100, windowHeight / 2 - 30), Color.White, 0.0f, Vector2.Zero, 1.25f, SpriteEffects.None, 0);
             for (int i = 0; i < scores.Length; i++)
             {
                 int horizSpace = 50;
@@ -512,6 +526,11 @@ namespace PulseGame
                 spriteBatch.DrawString(font1, scores[i].score.ToString(),
                     new Vector2(windowWidth / 2 + horizSpace * 3, windowHeight / 2 + (i * 20)), Color.White, 0.0f, Vector2.Zero, 1.00f, SpriteEffects.None, 0);
             }
+
+            // Draw play again and back buttons
+            playAgainButton.Draw(spriteBatch, 0.25f);
+            backButton.Draw(spriteBatch, 0.25f);
+
             //dismissButton.Draw();
         }
 

@@ -90,7 +90,13 @@ namespace PulseGame
             previousMouseState = currentMouseState;
         }
 
+
         public void Draw(SpriteBatch sb)
+        {
+            Draw(sb, 1.0f);
+        }
+
+        public void Draw(SpriteBatch sb, float scale)
         {
             Color color = Color.White;
 
@@ -100,7 +106,7 @@ namespace PulseGame
             }
 
             //DrawingHelper.DrawRectangle(location, color, false);
-            sb.Draw(texture, new Vector2(location.X, location.Y), null, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0.0f);
+            sb.Draw(texture, new Vector2(location.X, location.Y), null, color, 0.0f, Vector2.Zero, scale, SpriteEffects.None, 0.0f);
         }
     }
 }

@@ -40,5 +40,9 @@ Content\Images\text\exit_text.xnb
 Content\Images\text\options_text.xnb
 Content\Images\text\play_text.xnb
 Content\Audio\menu_hover.xnb
+Content\Images\text\back.xnb
+Content\Images\text\play_again.xnb
+Content\Images\gui\buttons\back_button.xnb
+Content\Images\gui\buttons\play_again_button.xnb
 Content\Audio\voxis_pour_elle.wma
 Content\Audio\voxis_shattered.wma

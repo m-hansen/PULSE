@@ -381,16 +381,52 @@
       <Output>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\Audio\menu_hover.xnb</Output>
       <Time>2014-10-13T01:29:40.8141638-04:00</Time>
     </Item>
+    <Item>
+      <Source>Images\text\back.png</Source>
+      <Name>Images\text\back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\Pulse\PULSE\PULSE\bin\x86\Debug\Content\Images\text\back.xnb</Output>
+      <Time>2015-02-28T22:02:07.697411-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\text\play_again.png</Source>
+      <Name>Images\text\play_again</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\Pulse\PULSE\PULSE\bin\x86\Debug\Content\Images\text\play_again.xnb</Output>
+      <Time>2015-02-28T22:01:46.9302231-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\buttons\back_button.png</Source>
+      <Name>Images\gui\buttons\back_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\Pulse\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\buttons\back_button.xnb</Output>
+      <Time>2015-02-28T22:52:21.0897671-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Images\gui\buttons\play_again_button.png</Source>
+      <Name>Images\gui\buttons\play_again_button</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matt\git\Pulse\PULSE\PULSE\bin\x86\Debug\Content\Images\gui\buttons\play_again_button.xnb</Output>
+      <Time>2015-02-28T22:55:17.0898338-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSEContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Matt\git\PULSE\PULSE\PULSE\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Matt\git\Pulse\PULSE\PULSEContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Matt\git\Pulse\PULSE\PULSE\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Matt\git\Pulse\PULSE\PULSEContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Matt\git\Pulse\PULSE\PULSE\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

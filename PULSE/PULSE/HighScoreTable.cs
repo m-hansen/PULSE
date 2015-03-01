@@ -16,7 +16,7 @@ namespace PulseGame
         }
 
         private const int MAX_TABLE_SIZE = 10;
-        private const string PATH = "\\scores.txt";
+        private const string PATH = "/scores.txt";
         private TableEntry[] highScores;
         string root = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
